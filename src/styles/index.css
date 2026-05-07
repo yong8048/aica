@@ -1,0 +1,47 @@
+:root {
+  color-scheme: dark;
+  --bg: #0f1419;
+  --surface: #1a222c;
+  --border: #2d3a4a;
+  --text: #e8eef4;
+  --muted: #8b9cb0;
+  --accent: #3d9cf5;
+  --accent-dim: rgba(61, 156, 245, 0.14);
+  --success: #3dd68c;
+  --success-bg: rgba(61, 214, 140, 0.12);
+  --danger: #f07178;
+  --danger-bg: rgba(240, 113, 120, 0.12);
+  --radius: 12px;
+  --radius-sm: 10px;
+  --font: "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --tap-min: 48px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100dvh;
+  max-height: 100dvh;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+#root {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+}
