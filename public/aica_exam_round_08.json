@@ -1,0 +1,348 @@
+{
+  "source": "aica.json",
+  "exam_title": "AICA LEVEL 2. AIU 평가 (전체 통합 200문제)",
+  "round": 8,
+  "total": 20,
+  "questions": [
+    {
+      "round": 8,
+      "number": 1,
+      "global_question_number": 141,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "딥러닝(Deep Learning)이 기존 머신러닝 방식과 비교하여 가지는 가장 큰 기술적 특징은 무엇입니까?",
+      "passage": "",
+      "options": [
+        "데이터를 엑셀 형식으로만 처리해야 한다",
+        "사람이 직접 특징(Feature)을 추출하지 않아도 AI가 스스로 데이터의 특징을 학습한다",
+        "모든 계산 과정이 인간에게 투명하게 공개되어 설명 가능하다",
+        "인터넷 연결 없이도 대규모 언어 모델을 학습할 수 있다"
+      ],
+      "answer": 2,
+      "explanation": "딥러닝은 인공신경망을 통해 데이터에서 고차원적 특징을 스스로 추출하고 학습하는 자동화된 특징 학습(Feature Learning)이 핵심입니다."
+    },
+    {
+      "round": 8,
+      "number": 2,
+      "global_question_number": 142,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "AI에게 답변 형식을 가이드하기 위해 몇 가지 예시를 제공하는 프롬프트 기법을 무엇이라 합니까?",
+      "passage": "",
+      "options": [
+        "Zero-shot Prompting",
+        "Few-shot Prompting",
+        "Chain of Thought",
+        "Negative Prompting"
+      ],
+      "answer": 2,
+      "explanation": "Few-shot 프롬프팅은 AI에게 몇 개의 예시(Few shots)를 제공하여 원하는 결과물 형식을 학습시키는 기법입니다."
+    },
+    {
+      "round": 8,
+      "number": 3,
+      "global_question_number": 143,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "기업 내에서 생성형 AI를 사용할 때 민감한 내부 정보를 입력창에 직접 넣는 행위가 위험한 가장 큰 이유는 무엇입니까?",
+      "passage": "",
+      "options": [
+        "AI의 답변 속도가 느려지기 때문",
+        "입력된 데이터가 모델의 학습 데이터로 재사용되어 외부로 유출될 가능성이 있기 때문",
+        "AI가 데이터를 이해하지 못해 에러가 발생하기 때문",
+        "입력 데이터의 용량이 커서 추가 비용이 발생하기 때문"
+      ],
+      "answer": 2,
+      "explanation": "공용 생성형 AI의 경우, 입력된 데이터가 서비스 제공업체의 모델 학습에 활용될 수 있어 기업 기밀 유출의 위험이 존재합니다."
+    },
+    {
+      "round": 8,
+      "number": 4,
+      "global_question_number": 144,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "AI가 존재하지 않는 사실을 마치 사실인 것처럼 그럴듯하게 답변하는 현상을 무엇이라 합니까?",
+      "passage": "",
+      "options": [
+        "Bias (편향)",
+        "Overfitting (과적합)",
+        "Hallucination (환각)",
+        "Tokenization (토큰화)"
+      ],
+      "answer": 3,
+      "explanation": "환각 현상은 AI가 확률적으로 가장 그럴듯한 문장을 생성하는 과정에서 사실이 아닌 정보를 생성하는 오류를 의미합니다."
+    },
+    {
+      "round": 8,
+      "number": 5,
+      "global_question_number": 145,
+      "category": "영업(Sales)",
+      "type": "4choice",
+      "question": "영업팀에서 AI를 활용하여 잠재 고객의 이탈 가능성을 예측하고자 할 때, 가장 먼저 확보해야 할 데이터는 무엇입니까?",
+      "passage": "",
+      "options": [
+        "회사의 연간 예산 계획",
+        "과거 고객의 구매 패턴 및 서비스 이용 로그",
+        "경쟁사의 주식 가격 변동",
+        "전 세계 인구 통계 데이터"
+      ],
+      "answer": 2,
+      "explanation": "이탈 예측 모델의 정확도를 높이기 위해서는 고객의 과거 행동 데이터(구매 주기, 상담 내역 등)가 핵심 학습 데이터가 됩니다."
+    },
+    {
+      "round": 8,
+      "number": 6,
+      "global_question_number": 146,
+      "category": "개발(Dev)",
+      "type": "4choice",
+      "question": "AI 코딩 도구(예: GitHub Copilot)를 사용하여 작성된 코드를 실무에 적용할 때 가장 권장되는 절차는 무엇입니까?",
+      "passage": "",
+      "options": [
+        "AI가 작성한 코드이므로 검토 없이 즉시 배포한다",
+        "코드가 작동만 한다면 보안 취약점은 무시한다",
+        "보안 취약점 및 라이선스 위반 여부를 반드시 사람이 검토(Code Review)한다",
+        "동일한 코드를 다른 AI에게 물어보고 동일하면 사용한다"
+      ],
+      "answer": 3,
+      "explanation": "AI 생성 코드는 보안 취약점이나 오픈소스 라이선스 충돌 문제를 일으킬 수 있으므로 반드시 전문가의 검토가 필요합니다."
+    },
+    {
+      "round": 8,
+      "number": 7,
+      "global_question_number": 147,
+      "category": "인사(HR)",
+      "type": "4choice",
+      "question": "AI를 활용한 채용 서류 필터링 시스템 도입 시 '편향성' 문제를 방지하기 위한 가장 적절한 조치는 무엇입니까?",
+      "passage": "",
+      "options": [
+        "특정 대학 출신 가산점을 AI에게 미리 학습시킨다",
+        "학습 데이터에서 성별, 지역, 나이 등 편견을 유발할 수 있는 요소를 정제한다",
+        "가장 최신의 유료 AI 모델을 사용하기만 하면 된다",
+        "사람의 개입을 완전히 배제하고 AI의 판단에 100% 의존한다"
+      ],
+      "answer": 2,
+      "explanation": "AI는 학습 데이터에 포함된 인간의 편견을 그대로 학습하므로, 데이터 정제 및 공정성 지표 관리가 필수적입니다."
+    },
+    {
+      "round": 8,
+      "number": 8,
+      "global_question_number": 148,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "대규모 언어 모델(LLM)이 문장을 처리하는 최소 단위로, 단어나 문자의 뭉치를 의미하는 용어는?",
+      "passage": "",
+      "options": [
+        "Bit",
+        "Pixel",
+        "Token",
+        "Kernel"
+      ],
+      "answer": 3,
+      "explanation": "토큰은 LLM이 텍스트를 처리하고 이해하는 기본 단위입니다."
+    },
+    {
+      "round": 8,
+      "number": 9,
+      "global_question_number": 149,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "복잡한 수학 문제나 논리적 추론이 필요한 작업을 시킬 때, '단계별로 생각해보자'라고 요청하는 기법은?",
+      "passage": "",
+      "options": [
+        "Role Prompting",
+        "Chain of Thought (CoT)",
+        "Zero-shot Learning",
+        "Multimodal Prompting"
+      ],
+      "answer": 2,
+      "explanation": "Chain of Thought(사고의 사슬) 기법은 AI가 중간 추론 과정을 명시적으로 생성하게 하여 복잡한 문제 해결 능력을 높입니다."
+    },
+    {
+      "round": 8,
+      "number": 10,
+      "global_question_number": 150,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "AI가 생성한 이미지나 텍스트 결과물에 대한 저작권 귀속에 관한 현재의 일반적인 법적 추세로 옳은 것은?",
+      "passage": "",
+      "options": [
+        "AI가 창작했으므로 AI 모델에게 저작권이 부여된다",
+        "전 세계 어디서든 무조건 인간이 만든 것과 동일하게 보호받는다",
+        "국가마다 차이가 있으나, 대개 인간의 창의적 기여가 없는 AI 단독 생성물은 저작권 인정이 어렵다",
+        "AI 서비스를 결제하기만 하면 저작권은 자동으로 사용자에게 영구 귀속된다"
+      ],
+      "answer": 3,
+      "explanation": "대부분의 사법 체계는 인간의 창작적 기여를 저작권 성립의 요건으로 보며, AI 단독 저작물에 대해서는 보수적인 입장을 취하고 있습니다."
+    },
+    {
+      "round": 8,
+      "number": 11,
+      "global_question_number": 151,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "AI가 생성한 시장 보고서의 데이터가 최신 정보를 반영하고 있는지 확인하기 위한 가장 적절한 방법은?",
+      "passage": "",
+      "options": [
+        "AI가 자신 있게 말했으므로 그대로 믿는다",
+        "보고서 내에 언급된 수치나 사건을 신뢰할 수 있는 외부 출처와 교차 검증(Cross-check)한다",
+        "문장이 매끄럽고 문법적으로 완벽한지 확인한다",
+        "가장 비싼 AI 유료 버전을 사용했는지 확인한다"
+      ],
+      "answer": 2,
+      "explanation": "AI는 최신 정보에 접근하지 못하거나 가공된 정보를 제공할 수 있으므로, 핵심 데이터에 대한 교차 검증은 필수입니다."
+    },
+    {
+      "round": 8,
+      "number": 12,
+      "global_question_number": 152,
+      "category": "생산/제조(Production)",
+      "type": "4choice",
+      "question": "스마트 팩토리에서 AI를 활용해 장비의 고장을 미리 예측하고 점검하는 기술을 무엇이라 합니까?",
+      "passage": "",
+      "options": [
+        "사후 보전",
+        "예지 보전 (Predictive Maintenance)",
+        "무작위 점검",
+        "대량 생산"
+      ],
+      "answer": 2,
+      "explanation": "예지 보전은 센서 데이터를 AI로 분석하여 고장이 발생하기 전 징후를 포착하고 미리 정비하는 기술입니다."
+    },
+    {
+      "round": 8,
+      "number": 13,
+      "global_question_number": 153,
+      "category": "품질(Quality)",
+      "type": "4choice",
+      "question": "품질 검사 공정에서 AI 기반 비전 검사(Vision Inspection) 시스템 도입의 가장 큰 기대 효과는?",
+      "passage": "",
+      "options": [
+        "검사 인력을 100% 대체하여 공장을 무인화하는 것",
+        "사람이 육안으로 놓치기 쉬운 미세 결함을 높은 속도와 정확도로 판별하는 것",
+        "제품의 원재료 단가를 낮추는 것",
+        "홍보 문구를 자동으로 작성하는 것"
+      ],
+      "answer": 2,
+      "explanation": "AI 비전 검사는 대량의 제품 이미지 데이터를 학습하여 미세한 불량을 신속하고 일관성 있게 판별해냅니다."
+    },
+    {
+      "round": 8,
+      "number": 14,
+      "global_question_number": 154,
+      "category": "재무/재경(Finance)",
+      "type": "4choice",
+      "question": "재무팀에서 AI를 도입하여 법인카드 부정 사용을 탐지하려고 할 때, AI의 역할로 가장 적절한 것은?",
+      "passage": "",
+      "options": [
+        "모든 직원의 카드 사용을 무조건 차단한다",
+        "카드 영수증의 글씨체를 분석하여 성격을 파악한다",
+        "정상적인 소비 패턴에서 벗어난 이상 거래(Anomaly)를 탐지하여 리포트한다",
+        "직원들의 개인적인 소비 성향을 분석해 순위를 매긴다"
+      ],
+      "answer": 3,
+      "explanation": "AI는 방대한 거래 데이터 중 패턴에서 벗어난 이상치를 빠르게 찾아내어 부정 거래를 탐지하는 데 탁월합니다."
+    },
+    {
+      "round": 8,
+      "number": 15,
+      "global_question_number": 155,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "텍스트뿐만 아니라 이미지, 소리, 영상 등 다양한 형태의 데이터를 동시에 이해하고 처리하는 AI를 무엇이라 합니까?",
+      "passage": "",
+      "options": [
+        "Mono-modal AI",
+        "Multi-modality AI",
+        "Static AI",
+        "Hard AI"
+      ],
+      "answer": 2,
+      "explanation": "멀티모달 AI는 여러 가지 양식(Modal)의 데이터를 통합적으로 처리하는 인공지능을 의미합니다."
+    },
+    {
+      "round": 8,
+      "number": 16,
+      "global_question_number": 156,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "프롬프트 작성 시 AI에게 '너는 전문 마케팅 컨설턴트야'라고 역할을 부여하는 것은 어떤 효과가 있습니까?",
+      "passage": "",
+      "options": [
+        "AI의 계산 속도가 빨라진다",
+        "AI의 전문 지식이 실시간으로 인터넷에서 업데이트된다",
+        "AI가 해당 역할에 적합한 어조와 문맥으로 답변할 확률이 높아진다",
+        "AI의 서버 비용이 절감된다"
+      ],
+      "answer": 3,
+      "explanation": "역할 부여(Persona)는 AI가 답변의 톤과 매너, 전문성 수준을 특정 문맥에 맞게 조정하도록 돕습니다."
+    },
+    {
+      "round": 8,
+      "number": 17,
+      "global_question_number": 157,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "회사 공식 승인 없이 직원이 개인적으로 생성형 AI 툴을 업무에 사용하는 현상을 가리키는 용어는?",
+      "passage": "",
+      "options": [
+        "Open AI",
+        "Shadow AI",
+        "Cloud AI",
+        "White AI"
+      ],
+      "answer": 2,
+      "explanation": "그림자(Shadow) AI는 보안 정책을 우회하여 IT 부서 모르게 업무에 사용되는 AI 서비스들을 뜻하며 보안 리스크를 초래합니다."
+    },
+    {
+      "round": 8,
+      "number": 18,
+      "global_question_number": 158,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "AI가 내린 의사결정의 근거를 인간이 이해할 수 있도록 설명해주는 기술 분야를 무엇이라 합니까?",
+      "passage": "",
+      "options": [
+        "Explainable AI (XAI)",
+        "Generative AI",
+        "Black Box AI",
+        "Quantum AI"
+      ],
+      "answer": 1,
+      "explanation": "설명 가능한 AI(XAI)는 결과의 도출 과정을 인간이 이해할 수 있게 하여 신뢰성을 높이는 기술입니다."
+    },
+    {
+      "round": 8,
+      "number": 19,
+      "global_question_number": 159,
+      "category": "기획/지원(Planning/Support)",
+      "type": "4choice",
+      "question": "기획팀에서 신사업 전략을 수립할 때 생성형 AI를 가장 올바르게 활용하는 방법은?",
+      "passage": "",
+      "options": [
+        "AI가 작성한 전략 리포트를 검토 없이 경영진에게 보고한다",
+        "기존에 생각하지 못한 아이디어를 확장(Ideation)하고 초안을 구성하는 보조 도구로 사용한다",
+        "경쟁사의 비공개 기밀 정보를 AI에게 찾아오라고 시킨다",
+        "AI에게 내년도 매출 목표를 정하게 하고 그 수치를 확정한다"
+      ],
+      "answer": 2,
+      "explanation": "기획 단계에서 AI는 창의적 아이디어 브레인스토밍이나 자료 요약 등 의사결정 보조 도구로서 가장 효과적입니다."
+    },
+    {
+      "round": 8,
+      "number": 20,
+      "global_question_number": 160,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "생성형 AI 서비스 사용 시 데이터 수집 거부(Opt-out) 설정을 하는 목적은 무엇입니까?",
+      "passage": "",
+      "options": [
+        "AI 모델의 속도를 높이기 위해",
+        "유료 결제를 취소하기 위해",
+        "내가 입력한 데이터가 모델의 학습에 사용되지 않도록 보호하기 위해",
+        "AI의 답변이 더 창의적으로 나오게 하기 위해"
+      ],
+      "answer": 3,
+      "explanation": "Opt-out 설정은 사용자가 입력한 데이터가 AI 기업의 모델 개선이나 재학습에 활용되는 것을 방지하는 보안 조치입니다."
+    }
+  ]
+}

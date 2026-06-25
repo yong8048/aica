@@ -1,0 +1,348 @@
+{
+  "source": "aica.json",
+  "exam_title": "AICA LEVEL 2. AIU 평가 (전체 통합 200문제)",
+  "round": 1,
+  "total": 20,
+  "questions": [
+    {
+      "round": 1,
+      "number": 1,
+      "global_question_number": 1,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "대규모 언어 모델(LLM)이 문맥을 파악하고 단어 간의 관계를 이해하기 위해 사용하는 핵심 메커니즘은 무엇입니까?",
+      "passage": "",
+      "options": [
+        "데이터 압축(Compression)",
+        "어텐션(Attention)",
+        "오류 역전파(Backpropagation)",
+        "의사결정 트리(Decision Tree)"
+      ],
+      "answer": 2,
+      "explanation": "어텐션 메커니즘은 모델이 입력 데이터의 특정 부분에 집중하여 문맥의 의미를 파악하게 해주는 LLM의 핵심 기술입니다."
+    },
+    {
+      "round": 1,
+      "number": 2,
+      "global_question_number": 2,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "재경팀에서 복잡한 정산 수식을 AI에게 설명하고 결과를 도출하려 할 때, 단계별 사고 과정을 유도하여 정확도를 높이는 기법은?",
+      "passage": "",
+      "options": [
+        "Zero-shot Prompting",
+        "Chain of Thought (CoT)",
+        "Negative Prompting",
+        "Few-shot Prompting"
+      ],
+      "answer": 2,
+      "explanation": "Chain of Thought는 모델이 복잡한 문제를 단계별 추론하도록 유도하여 논리적 오류를 줄이는 기법입니다."
+    },
+    {
+      "round": 1,
+      "number": 3,
+      "global_question_number": 3,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "인사팀에서 AI를 활용해 서류 전형을 자동화할 때 발생할 수 있는 '알고리즘 편향성'의 주요 원인은 무엇입니까?",
+      "passage": "",
+      "options": [
+        "학습 데이터에 존재하는 기존의 편견",
+        "AI 모델의 지나치게 높은 연산 속도",
+        "최신 GPU 하드웨어의 사용",
+        "직무 기술서의 구체적인 작성"
+      ],
+      "answer": 1,
+      "explanation": "AI 모델은 학습 데이터에 포함된 과거의 차별이나 편견을 그대로 학습하여 편향된 결과를 낼 수 있습니다."
+    },
+    {
+      "round": 1,
+      "number": 4,
+      "global_question_number": 4,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "생산본부에서 AI가 생성한 주간 가동률을 보고서의 내용이 평소보다 지나치게 높게 나왔을 때, 가장 먼저 취해야 할 조치는?",
+      "passage": "",
+      "options": [
+        "즉시 상급자에게 보고하고 공유한다.",
+        "AI의 성능이 향상된 것으로 그대로 믿는다.",
+        "기초 원천 데이터(Raw Data)와 대조하여 진위 여부를 확인한다.",
+        "보고서 양식을 더 화려하게 수정한다."
+      ],
+      "answer": 3,
+      "explanation": "AI는 허구의 사실을 진실처럼 말하는 '환각(Hallucination)' 현상이 발생할 수 있으므로 항상 원천 데이터 확인이 필요합니다."
+    },
+    {
+      "round": 1,
+      "number": 5,
+      "global_question_number": 5,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "영업부서에서 고객의 거정 의사에 대응하는 이메일을 작성할 때, AI에게 특정 전문가의 입장에서 답변하도록 지시하는 기법은?",
+      "passage": "",
+      "options": [
+        "페르소나 설정(Persona Prompting)",
+        "포맷 지정(Formatting)",
+        "데이터 주입(Data Injection)",
+        "반복 제한(Stop Sequences)"
+      ],
+      "answer": 1,
+      "explanation": "페르소나 설정은 시에게 특정 역할이나 전문가적 정체성을 부여하여 답변의 톤과 메뉴를 최적화하는 기법입니다."
+    },
+    {
+      "round": 1,
+      "number": 6,
+      "global_question_number": 6,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "정보기술(IT) 개발팀에서 외부 AI 도구를 사용하여 코드를 작성할 때 보안을 위해 반드시 지켜야 할 사항은?",
+      "passage": "",
+      "options": [
+        "모든 내부 소스코드를 AI에게 학습시킨다.",
+        "유료 버전을 사용하면 모든 보안 문제가 해결된다고 믿는다.",
+        "API 키나 개인정보와 포함된 코드를 프롬프트에 입력하지 않는다.",
+        "가금적 복잡한 로직은 설명하지 않는다."
+      ],
+      "answer": 3,
+      "explanation": "공개 AI 도구에 입력된 데이터는 모델 학습에 활용될 수 있기 때문에 기업의 기밀이나 개인정보 유출 위험이 있습니다."
+    },
+    {
+      "round": 1,
+      "number": 7,
+      "global_question_number": 7,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "사내 지식베이스(KM)에 저장된 수많은 문서를 AI가 실시간으로 참조하여 답변하도록 하는 기술적 접근 방식은?",
+      "passage": "",
+      "options": [
+        "파인 튜닝(Fine-tuning)",
+        "검색 증강 생성(RAG)",
+        "강화 학습(RLHF)",
+        "지도 학습(Supervised Learning)"
+      ],
+      "answer": 2,
+      "explanation": "RAG(Retrieval-Augmented Generation)는 외부 지식 베이스에서 관련 정보를 검색하여 생성 모델의 답변에 활용하는 방식입니다."
+    },
+    {
+      "round": 1,
+      "number": 8,
+      "global_question_number": 8,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "기획팀에서 AI로 시장 트렌드 분석 보고서를 작성할 때, AI가 제시한 수치 데이터의 신뢰성을 확보하는 방법으로 부적절한 것은?",
+      "passage": "",
+      "options": [
+        "출처가 명시되었는지 확인하고 원본을 교차 검증한다.",
+        "최신 데이터가 반영되었는지 학습 것으로 시점을 확인한다.",
+        "AI가 '확신한다'는 표현을 쓰으로 검증 없이 수용한다.",
+        "유사한 주제의 다른 통계 자료와 비교 분석한다."
+      ],
+      "answer": 3,
+      "explanation": "AI의 확신 있는 어조와 실제 데이터의 정확성은 별개이며, 항상 위험 검증이 필요합니다."
+    },
+    {
+      "round": 1,
+      "number": 9,
+      "global_question_number": 9,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "품질관리팀에서 불량 유형별 조치 방법을 AI에게 학습시키기 위해 2~3개의 예시를 프롬프트에 포함하는 방식은?",
+      "passage": "",
+      "options": [
+        "Zero-shot",
+        "One-shot",
+        "Few-shot",
+        "Multi-modal"
+      ],
+      "answer": 3,
+      "explanation": "Few-shot은 소량의 예시(Example)를 제공하여 시가 원하는 출력 패턴을 학습하도록 돕는 방식입니다."
+    },
+    {
+      "round": 1,
+      "number": 10,
+      "global_question_number": 10,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "법무팀에서 계약서를 AI로 검토할 때, 생성된 결과물에 대한 최종 책임은 누구에게 있습니까?",
+      "passage": "",
+      "options": [
+        "AI 모델 개발사",
+        "사내 IT 부서",
+        "해당 작업을 수행하고 승인한 담당자",
+        "AI 서비스 제공 플랫폼"
+      ],
+      "answer": 3,
+      "explanation": "AI는 업무 도구이며, 그 결과물을 활용하여 의사결정을 내린 인간 사용자에게 최종 책임이 있습니다."
+    },
+    {
+      "round": 1,
+      "number": 11,
+      "global_question_number": 11,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "AI 모델이 한 번에 처리할 수 있는 데이터의 양을 의미하며, 길어질수록 이전 내용을 더 많이 기억할 수 있는 요소는?",
+      "passage": "",
+      "options": [
+        "파라미터(Parameter)",
+        "컨텍스트 윈도우(Context Window)",
+        "에포크(Epoch)",
+        "러닝 레이트(Learning Rate)"
+      ],
+      "answer": 2,
+      "explanation": "컨텍스트 윈도우는 모델이 한 번에 처리할 기억할 수 있는 토큰의 범위를 의미합니다."
+    },
+    {
+      "round": 1,
+      "number": 12,
+      "global_question_number": 12,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "홍보팀에서 AI가 생성한 이미지를 상업적 광고에 사용하려 할 때 가장 먼저 검토해야 할 법적 문제는?",
+      "passage": "",
+      "options": [
+        "이미지의 해상도가 충분한지 여부",
+        "저작권 및 초상권 침해 가능성",
+        "이미지 생성에 걸린 시간",
+        "사용된 프롬프트의 창의성"
+      ],
+      "answer": 2,
+      "explanation": "AI 생성물은 기존 학습 데이터의 저작권 침해나 실은 인물의 초상권 침해 소지가 있으므로 법적 검토가 필수입니다."
+    },
+    {
+      "round": 1,
+      "number": 13,
+      "global_question_number": 13,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "전략기획팀에서 보고서의 형식을 JSON이나 마크다운(Markdown) 형태로 출력하도록 강제하고 싶을 때 사용해야 하는 지시는?",
+      "passage": "",
+      "options": [
+        "출력 형식 지정(Output Formatting)",
+        "톤 앤매 설정(Tone setting)",
+        "제약 조건 부과(Constraint Setting)",
+        "멀티샷 구성(Multi-shot)"
+      ],
+      "answer": 1,
+      "explanation": "원하는 데이터 구조를 명시하여 결과물을 받는 것을 출력 형식 지정이라 합니다."
+    },
+    {
+      "round": 1,
+      "number": 14,
+      "global_question_number": 14,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "충무팀에서 AI를 이용해 사내 시설 예약 관리 챗봇을 만들 때, 사용자의 사적인 정보 포함되지 않도록 하는 보안 조치는?",
+      "passage": "",
+      "options": [
+        "대화 로그를 모두 공개 게시판에 올린다.",
+        "개인 식별 정보(PII) 마스킹 처리",
+        "모든 사용자의 이름을 데이터베이스에 저장",
+        "보안 조치 없이 빠른 서비스 우선"
+      ],
+      "answer": 2,
+      "explanation": "개인정보 보호를 위해 이름, 전화번호 등 개인 식별 정보는 마스킹하거나 제거해야 합니다."
+    },
+    {
+      "round": 1,
+      "number": 15,
+      "global_question_number": 15,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "인공지능이 인간의 피드백을 통해 가치관이나 윤리적 가이드라인에 맞게 정렬되도록 학습하는 과정은?",
+      "passage": "",
+      "options": [
+        "GAN",
+        "RLHF",
+        "CNN",
+        "RNN"
+      ],
+      "answer": 2,
+      "explanation": "RLHF(Reinforcement Learning from Human Feedback)는 인간의 피드백을 통해 모델을 정렬(Alignment)하는 기법입니다."
+    },
+    {
+      "round": 1,
+      "number": 16,
+      "global_question_number": 16,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "고객지원팀에서 챗봇의 답변이 지나치게 길어지는 것을 방지하기 위해 '답변은 3문장 이내로 하라'고 지시하는 것은 어떤 프롬프트 구성 요소에 해당합니까?",
+      "passage": "",
+      "options": [
+        "지시(Instruction)",
+        "맥락(Context)",
+        "제약 사항(Constraints)",
+        "입력 데이터(Input Data)"
+      ],
+      "answer": 3,
+      "explanation": "제약 사항은 출력물이 길이, 형식, 금지어 등을 설정하여 결과의 범위를 제한하는 요소입니다."
+    },
+    {
+      "round": 1,
+      "number": 17,
+      "global_question_number": 17,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "재무팀에서 AI를 활용해 내년도 매출을 예측했으나, 과거 데이터와 판이하여 수정한다면 어떻게 해야 하는가?",
+      "passage": "",
+      "options": [
+        "AI의 예측력이 인간보다 뛰어나므로 수용한다.",
+        "과거 데이터가 잘못되었다고 판단하여 수정한다.",
+        "예측 모델의 변수 설정과 데이터 왜곡 가능성을 재검토한다.",
+        "결과가 마음에 들지 않으므로 AI 사용을 중단한다."
+      ],
+      "answer": 3,
+      "explanation": "AI 결과가 예상과 크게 다르면 모델의 입력값, 파라미터, 데이터 편향 등을 비판적으로 검토해야 합니다."
+    },
+    {
+      "round": 1,
+      "number": 18,
+      "global_question_number": 18,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "기업 보안 AI 서비스(Enterprise AI)와 일반 공개용 AI 서비스의 가장 큰 차이점은?",
+      "passage": "",
+      "options": [
+        "답변의 속도 차이",
+        "입력 데이터의 모델 학습 활용 여부(보안성)",
+        "사용 가능한 언어의 개수",
+        "사용자 인터페이스의 색상"
+      ],
+      "answer": 2,
+      "explanation": "엔터프라이즈 버전은 입력된 사용자의 입력 데이터를 모델 학습에 재활용하지 않아 기업 보안이 적합합니다."
+    },
+    {
+      "round": 1,
+      "number": 19,
+      "global_question_number": 19,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "AI가 텍스트를 처리하기 위해 단어 단위나 문자 단위로 조건 최소 의미 단위를 무엇이라고 합니까?",
+      "passage": "",
+      "options": [
+        "비트(Bit)",
+        "토큰(Token)",
+        "노드(Node)",
+        "레이어(Layer)"
+      ],
+      "answer": 2,
+      "explanation": "토큰은 모델이 텍스트를 이해하고 생성할 때 사용하는 기본적인 처리 단위입니다."
+    },
+    {
+      "round": 1,
+      "number": 20,
+      "global_question_number": 20,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "구매팀에서 AI를 통해 공금업체 리스트를 추천받았을 때, 해당 리스트에 실춘하지 않는 업체가 포함되어 있을 가능성을 뜻하는 용어는?",
+      "passage": "",
+      "options": [
+        "과적합(Overfitting)",
+        "할루시네이션(Hallucination)",
+        "언더피팅(Underfitting)",
+        "데이터 드리프트(Data Drift)"
+      ],
+      "answer": 2,
+      "explanation": "할루시네이션(환각)은 AI가 사실이 아닌 정보를 그럴듯하게 지어내어 제공하는 현상을 말합니다."
+    }
+  ]
+}

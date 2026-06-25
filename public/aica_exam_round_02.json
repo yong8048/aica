@@ -1,0 +1,348 @@
+{
+  "source": "aica.json",
+  "exam_title": "AICA LEVEL 2. AIU 평가 (전체 통합 200문제)",
+  "round": 2,
+  "total": 20,
+  "questions": [
+    {
+      "round": 2,
+      "number": 1,
+      "global_question_number": 21,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "거대언어모델(LLM)이 학습하지 않은 최신 정보나 기업 내부 데이터를 검색하여 답변의 정확도를 높이는 기술로, 인사팀 매뉴얼 검색 등에 활용되는 방식은?",
+      "passage": "",
+      "options": [
+        "Fine-tuning (미세 조정)",
+        "RAG (Retrieval-Augmented Generation)",
+        "Reinforcement Learning (강화 학습)",
+        "Zero-shot Learning (제로샷 학습)"
+      ],
+      "answer": 2,
+      "explanation": "RAG는 외부 지식 베이스를 검색하여 생성형 AI의 답변 근거로 활용하는 기술로, 실시간 정보 반영이나 내부 문서 기반 Q&A에 필수적입니다."
+    },
+    {
+      "round": 2,
+      "number": 2,
+      "global_question_number": 22,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "영업 부서에서 고객 대응 메일을 작성할 때, AI에게 몇 가지 답변 예시를 제공하여 결과물의 형식을 고정시키는 기법은 무엇입니까?",
+      "passage": "",
+      "options": [
+        "Zero-shot Prompting",
+        "One-shot Prompting",
+        "Few-shot Prompting",
+        "Chain of Thought Prompting"
+      ],
+      "answer": 3,
+      "explanation": "Few-shot Prompting은 몇 가지 구체적인 예시를 제공함으로써 시가 원하는 출력 형식과 스타일을 학습하도록 돕는 효과적인 방법입니다."
+    },
+    {
+      "round": 2,
+      "number": 3,
+      "global_question_number": 23,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "재경팀 직원이 월간 실적 분석을 위해 회사의 미공개 재무제표 데이터를 외부 생성형 AI 서비스(Public)에 그대로 업로드하여 분석을 요청했을 때 발생할 수 있는 가장 큰 위험은?",
+      "passage": "",
+      "options": [
+        "할루시네이션(환각) 현상 발생",
+        "학습 데이터의 활용 및 기업 기밀 유출",
+        "API 호출 비용의 과다 발생",
+        "담변 속도 저하에 따른 효율 감소"
+      ],
+      "answer": 2,
+      "explanation": "공개 AI 서비스에 입력한 데이터는 모델 학습에 활용될 수 있으며, 이는 기업의 기밀이나 영업 비밀이 외부에 유출될 수 있는 중대한 보안 리스크를 초래합니다."
+    },
+    {
+      "round": 2,
+      "number": 4,
+      "global_question_number": 24,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "마케팅팀에서 AI가 추천한 시장 트렌드 보고서를 검토할 때, 가장 먼저 확인해야 할 사항으로 적절하지 않은 것은?",
+      "passage": "",
+      "options": [
+        "보고서 내 인용된 통계 자료의 출처가 실존하는가?",
+        "AI가 생성한 텍스트의 문법적 완성도가 완벽한가?",
+        "보고서의 내용이 최신 시장 상황과 일치하는가?",
+        "수치 데이터에 계산 오류나 논리적 모순이 없는가?"
+      ],
+      "answer": 2,
+      "explanation": "AI 리터러시에서 중요한 것은 문법적 완성도가 아닌 내용의 사실성, 정확성, 논리적 일관성입니다."
+    },
+    {
+      "round": 2,
+      "number": 5,
+      "global_question_number": 25,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "인사 부서에서 AI 면접 평가 도구를 도입할 때, 특정 성별이나 연령대 지원자에게 불리한 결과가 나오지 않도록 관리해야 하는 요소는?",
+      "passage": "",
+      "options": [
+        "모델의 답변 속도(Latency)",
+        "알고리즘의 편향성(Bias)",
+        "토큰당 비용(Token Cost)",
+        "UI/UX 디자인의 완려함"
+      ],
+      "answer": 2,
+      "explanation": "AI는 학습 데이터에 포함된 인간의 편견을 그대로 습득할 수 있으므로, 공정한 평가를 위해 알고리즘의 편향성을 점검하고 완화하는 노력이 필수합니다."
+    },
+    {
+      "round": 2,
+      "number": 6,
+      "global_question_number": 26,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "개발팀에서 복잡한 로직의 코드를 생성할 때, '단계별로 생각해서 작성해줄'라고 요청하여 AI의 논리적 오류를 줄이는 기법은?",
+      "passage": "",
+      "options": [
+        "Negative Prompting",
+        "Chain of Thought (CoT)",
+        "Role Playing",
+        "Context Window Expansion"
+      ],
+      "answer": 2,
+      "explanation": "Chain of Thought(사고의 사슬) 방식은 시가 문제를 단계별로 추론하도록 유도하여 복잡한 추론 과정에서 논리적 오류를 줄이는 기법입니다."
+    },
+    {
+      "round": 2,
+      "number": 7,
+      "global_question_number": 27,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "품질 관리 부서에서 수천 개의 제품 이미지 중 불량품을 자동으로 감지하기 위해 주로 사용되는 AI 기술 분야는?",
+      "passage": "",
+      "options": [
+        "Natural Language Processing (NLP)",
+        "Computer Vision",
+        "Audio Processing",
+        "Reinforcement Learning"
+      ],
+      "answer": 2,
+      "explanation": "이미지나 영상을 분석하여 특정 객체를 인식하고 분류하는 기술은 컴퓨터 비전(Computer Vision) 영역에 해당합니다."
+    },
+    {
+      "round": 2,
+      "number": 8,
+      "global_question_number": 28,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "전략기획팀에서 5년 후 시장 점유율을 예측하기 위해 AI 모델을 사용했습니다. 결과 해석 시 주의할 점으로 가장 올은 것은?",
+      "passage": "",
+      "options": [
+        "AI의 예측은 수학적 기반이므로 인간의 직관보다 항상 정확하다.",
+        "예측 결과의 신뢰 구간과 변동 가능성을 함께 고려해야 한다.",
+        "가장 높은 확률로 제시된 하나의 시나리오만 채택한다.",
+        "과거 데이터 기반이므로 미래 전략 수립에는 전혀 가치가 없다."
+      ],
+      "answer": 2,
+      "explanation": "AI의 예측은 과거 데이터의 패턴을 기반으로 한 확률적 결과이므로, 불확실성과 함께 고려하여 여러 시나리오를 검토해야 합니다."
+    },
+    {
+      "round": 2,
+      "number": 9,
+      "global_question_number": 29,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "총무팀에서 렘사 안내 문구를 작성하기 위해 사내 직원의 성명, 연락처, 주소가 포함된 명단을 AI에 입력했습니다. 이는 어떤 규정 위반 가능성이 높습니까?",
+      "passage": "",
+      "options": [
+        "저작권법 위반",
+        "개인정보 보호법 위반",
+        "부정경쟁방지법 위반",
+        "공정거래법 위반"
+      ],
+      "answer": 2,
+      "explanation": "이름, 연락처 등 특정 개인을 식별할 수 있는 정보를 외부 AI에 입력하는 행위는 외부에 개인정보 보호법 위반의 소지가 큽니다."
+    },
+    {
+      "round": 2,
+      "number": 10,
+      "global_question_number": 30,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "생산 관리자가 AI에게 일일 작업 지시서를 작성하도록 요청할 때, 더 정확한 결과를 얻기 위한 방법으로 가장 부적절한 것은?",
+      "passage": "",
+      "options": [
+        "구체적인 마감 시간과 목표 수량을 명시한다.",
+        "작업 지시서의 타깃 독자(현장 작업자)를 지정한다.",
+        "질문을 최대한 짧고 추상적으로 작성한다.",
+        "출력 형식을 '표' 리스트' 형태로 지정한다."
+      ],
+      "answer": 3,
+      "explanation": "프롬프트가 추상적이고 명확하지 않으면 AI의 이해도가 낮아져 원하지 않는 결과가 생성될 가능성이 높습니다. 구체적인 배경 정보와 지시가 중요합니다."
+    },
+    {
+      "round": 2,
+      "number": 11,
+      "global_question_number": 31,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "LLM이 실제로는 존재하지 않은 사실을 마치 진실인 것처럼 단정하는 현상을 무엇이라고 합니까?",
+      "passage": "",
+      "options": [
+        "Overfitting (과적합)",
+        "Hallucination (환각)",
+        "Backpropagation (역전파)",
+        "Data Poisoning (데이터 오염)"
+      ],
+      "answer": 2,
+      "explanation": "Hallucination(환각)은 생성형 시가 학습 데이터의 확률적 결합에 의해 정보를 생성하는 대표적 안전제점입니다."
+    },
+    {
+      "round": 2,
+      "number": 12,
+      "global_question_number": 32,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "홍보팀에서 AI로 이미지를 생성하여 사보에 사용하려 합니다. 저작권 리스크를 최소화하기 위한 방법으로 올은 것은?",
+      "passage": "",
+      "options": [
+        "인터넷에 있는 유명 작가의 화풍을 똑같이 따라하도록 요청한다.",
+        "상업적 이용이 허용된 유료 AI 툴을 사용하고 라이선스 규정을 확인한다.",
+        "생성된 이미지는 시가 만든 것이므로 저작권 없이 무조건 사용 가능하다.",
+        "유명 연예인의 얼굴과 유사한 이미지를 생성하여 주목도를 높인다."
+      ],
+      "answer": 2,
+      "explanation": "AI 생성물은 원천의 저작권은 설혜 법칙으로 정립 중인 단계이나, 유료 도의 라이선스 규정을 확인하고 준수하는 타인의 저작재산권 침해를 피해야 합니다."
+    },
+    {
+      "round": 2,
+      "number": 13,
+      "global_question_number": 33,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "재무 보고서를 요약할 때 '전문적인 재무 분석가의 관점에서 분석해줄'라고 요청하는 프롬프트 전략은 무엇입니까?",
+      "passage": "",
+      "options": [
+        "Negative Prompting",
+        "Persona Setting (역할 부여)",
+        "One-shot Learning",
+        "Temperature Control"
+      ],
+      "answer": 2,
+      "explanation": "Persona Setting은 AI에게 특정 역할이나 전문가적 정체성을 부여하여 답변의 전문성과 톤메너를 조정하는 기법입니다."
+    },
+    {
+      "round": 2,
+      "number": 14,
+      "global_question_number": 34,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "구매팀에서 공급업체 선정을 위해 시가 분석한 '내년도 시장 트렌드 보고서'를 전달받았다면, 이를 실무에 적용하기 전 수행해야 할 가장 바람직한 태도는?",
+      "passage": "",
+      "options": [
+        "가장 접수가 높은 업체와 즉시 계약을 체결한다.",
+        "AI 점수가 낮게 나온 업체를 별도의 소명 기회 없이 탈락시킨다.",
+        "AI가 점수를 산출한 근거와 데이터 소스를 확인하고 실사 결과를 병행 검증한다.",
+        "AI 점수가 담당자의 생각과 다르면 모두 내용을 무시하한다."
+      ],
+      "answer": 3,
+      "explanation": "AI의 결과물은 의사결정의 보조 도구일 뿐이며, 최종 판단은 인간이 담당하며 전문 지식과 정보 관점에서 검토해야 합니다(Human-in-the-loop)."
+    },
+    {
+      "round": 2,
+      "number": 15,
+      "global_question_number": 35,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "생산 라인의 센서 데이터를 분석하여 기기 고장이 발생하기 전 정후를 포착하고 유지보수 시점을 알려주는 기술은?",
+      "passage": "",
+      "options": [
+        "GenAI (생성형 AI)",
+        "Predictive Maintenance (예지 보전)",
+        "Robotic Process Automation (RPA)",
+        "Style Transfer"
+      ],
+      "answer": 2,
+      "explanation": "예지 보전은 데이터를 활용해 기계의 상태를 모니터링하고 고장을 예측하여 정비 효율을 극대화하는 AI 활용 분야입니다."
+    },
+    {
+      "round": 2,
+      "number": 16,
+      "global_question_number": 36,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "AI가 생성한 마케팅 문구 중 '이 제품은 암을 100% 완치합니다'라는 문구가 포함되어 있습니다. 이를 그대로 사용했을 때 발생할 문제는?",
+      "passage": "",
+      "options": [
+        "제품 판매량이 폭발적으로 증가하여 긍정적이다.",
+        "허위/과대 광고로 인한 법적 처벌 및 기업 신뢰도 하락",
+        "경정사들에게 벤치마킹 사례로 활용됨",
+        "AI의 창의성이 높게 평가되어 브랜드 가치가 올라감"
+      ],
+      "answer": 2,
+      "explanation": "AI는 도덕적 판단이 필요한 의료, 법률, 금융 등의 분야에서 거짓되거나 위험한 정보를 확신 있게 제시할 수 있으므로, 사용 전 법적/윤리적 검토는 필수입니다."
+    },
+    {
+      "round": 2,
+      "number": 17,
+      "global_question_number": 37,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "다음 중 AI로더 더 나은 결과를 얻기 위한 '구조적 프롬프트'의 요소가 아닌 것은?",
+      "passage": "",
+      "options": [
+        "Context (배경 상황)",
+        "Objective (수행 목직)",
+        "Format (출력 형식)",
+        "Password (로그인 암호)"
+      ],
+      "answer": 4,
+      "explanation": "프롬프트 구성 요소에는 배경(Context), 임무(Task), 제약사항(Constraint), 형식(Format) 등이 포함되지만, 제정 암호는 포함되지 않습니다."
+    },
+    {
+      "round": 2,
+      "number": 18,
+      "global_question_number": 38,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "사내 AI 도입 시 '투명성(Transparency)' 원칙을 준수한다는 것의 의미는?",
+      "passage": "",
+      "options": [
+        "모든 직원의 PC 화면을 투명하게 공개하는 것",
+        "AI가 내린 결정의 이유와 작동 방식에 대해 설명 가능하도록 하는 것",
+        "AI 도입 비용 전 직원에게 공개하는 것",
+        "AI 서버를 투명한 유리 케이스에 보관하는 것"
+      ],
+      "answer": 2,
+      "explanation": "투명성은 AI의 의사결정 과정이 불명확하지 않고, 사용자가 그 과정과 근거를 이해할 수 있도록 명시하고 설명 가능하도록 하는 XAI(설명가능한 AI)를 의미합니다."
+    },
+    {
+      "round": 2,
+      "number": 19,
+      "global_question_number": 39,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "영업팀에서 수만 명의 고객에게 각각 맞춤 상품을 추천하기 위해 사용하는 AI의 핵심 기능은?",
+      "passage": "",
+      "options": [
+        "Image Segmentation",
+        "Personalization & Recommendation (개인화 추천)",
+        "Sentiment Analysis (감성 분석)",
+        "Speech-to-Text (STT)"
+      ],
+      "answer": 2,
+      "explanation": "고객의 구매 이력과 선호도를 분석하여 개인별 맞춤 상품을 제안하는 것은 텍스트 추천 알고리즘의 핵심 기능입니다."
+    },
+    {
+      "round": 2,
+      "number": 20,
+      "global_question_number": 40,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "다음 중 보안이 충분히 않은 공개 AI 모델에 입력해도 비교적 안전한 데이터는?",
+      "passage": "",
+      "options": [
+        "신제품 출시 일정 및 기술 사양",
+        "개인정보가 삭제된 일반적인 비즈니스 이메일 작성 요청",
+        "사내 인사 고과 평가 기준",
+        "고객사의 미공개 프로젝트 명칭"
+      ],
+      "answer": 2,
+      "explanation": "미각 보호(개인정보, 기밀 미공개 전략 등)가 포함되지 않은 일반적인 업무 지원 요청은 공개 AI 서비스 이용 시 상대적으로 안전합니다."
+    }
+  ]
+}

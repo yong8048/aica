@@ -1,0 +1,348 @@
+{
+  "source": "aica.json",
+  "exam_title": "AICA LEVEL 2. AIU 평가 (전체 통합 200문제)",
+  "round": 3,
+  "total": 20,
+  "questions": [
+    {
+      "round": 3,
+      "number": 1,
+      "global_question_number": 41,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "거대언어모델(LLM)이 문맥상 통계적으로 가장 확률이 높은 단어를 선택하여 답변을 생성하는 과정에서, 사실이 아닌 내용을 마치 사실인 것처럼 그럴듯하게 구며내는 현상을 무엇이라고 합니까?",
+      "passage": "",
+      "options": [
+        "데이터 드리프트(Data Drift)",
+        "할루시네이션(Hallucination)",
+        "과적합(Overfitting)",
+        "전이 학습(Transfer Learning)"
+      ],
+      "answer": 2,
+      "explanation": "할루시네이션(환각) 현상은 LLM이 정보를 생성할 때 학습 데이터의 확률적 결합에 의해 거짓된 정보를 그럴듯하게 만들어내는 특징입니다."
+    },
+    {
+      "round": 3,
+      "number": 2,
+      "global_question_number": 42,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "영업 부서에서 고객에게 보낼 맞춤형 제안서 초안을 작성하고 한다. AI에게 단 순히 '제안서 작성해줄'라고 하는 것보다, 구체적인 예시(Example)를 1~2개 포함하여 답변의 형식을 가이드하는 기법은?",
+      "passage": "",
+      "options": [
+        "Zero-shot Prompting",
+        "Few-shot Prompting",
+        "Chain-of-Thought",
+        "Negative Prompting"
+      ],
+      "answer": 2,
+      "explanation": "Few-shot Prompting은 모델에게 몇 개의 입출력 예시를 제공함으로써 원하는 결과의 형식과 스타일을 명확히 이해하도록 돕는 기법입니다."
+    },
+    {
+      "round": 3,
+      "number": 3,
+      "global_question_number": 43,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "재경팀 직원이 정산 업무 효율을 높기 위해 기업 내부의 기밀 자금 흐름 데이터가 포함된 엑셀 파일을 외부 생성형 AI 서비스의 대화장에 업로드하여 분석을 요청했을 때. 이때 발생할 수 있는 가장 큰 보안 리스크는?",
+      "passage": "",
+      "options": [
+        "AI 모델의 성능 저하",
+        "데이터 학습을 통한 기업 내부 기밀 유출",
+        "담변 생성 속도의 지연",
+        "API 호출 비용의 과다 발생"
+      ],
+      "answer": 2,
+      "explanation": "공개 AI 서비스에 입력된 데이터는 모델 학습에 활용될 수 있어, 기업의 기밀이나 영업 비밀이 외부에 유출될 수 있으므로 기업 보안 AI 도입이 필요합니다."
+    },
+    {
+      "round": 3,
+      "number": 4,
+      "global_question_number": 44,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "품질 관리 부서에서 AI가 분석한 블랙 원인 보고서를 받았다. 이때 담당자가 취해야 할 올바른 비판적 사고 태도는?",
+      "passage": "",
+      "options": [
+        "AI의 분석 결과이므로 별도의 검증 없이 신뢰하고 조치한다.",
+        "보고서에 인용된 데이터의 출처와 분석 논리가 타당한지 교차 검증한다.",
+        "AI가 작성한 문장의 문법적 오류가 있으면 확인된 것으로 시점을 확인한다.",
+        "결과가 마음에 들지 않으므로 동일한 프롬프트를 계속 반복한다."
+      ],
+      "answer": 2,
+      "explanation": "AI의 결과가 예상과 크게 다르면 모델의 입력값, 파라미터, 데이터 편향 등을 비판적으로 검토해야 합니다."
+    },
+    {
+      "round": 3,
+      "number": 5,
+      "global_question_number": 45,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "개발 부서에서 복잡한 비즈니스 로직을 코드로 구현하기 전, AI에게 단계별로 사고 과정을 나누어 설명하도록 유도하여 논리적 오류를 줄이는 기법은?",
+      "passage": "",
+      "options": [
+        "Role Prompting",
+        "Chain-of-Thought (CoT)",
+        "Iterative Prompting",
+        "Context Injection"
+      ],
+      "answer": 2,
+      "explanation": "Chain-of-Thought는 모델이 복잡한 문제를 단계별로 추론하게 함으로써 논리적 정확도를 높이는 기법입니다."
+    },
+    {
+      "round": 3,
+      "number": 6,
+      "global_question_number": 46,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "인사팀에서 AI를 활용해 서류 전형을 자동화하고자 합니다. 이때 텍스트뿐만 아니라 이미지, 음성, 영상 등 다양한 형태의 데이터를 통시에 처리하고 이해하는 AI 기술의 특징을 무엇이라 하는가?",
+      "passage": "",
+      "options": [
+        "멀티모달(Multimodal)",
+        "하이퍼파라미터(Hyperparameter)",
+        "지도 학습(Supervised Learning)",
+        "토큰화(Tokenization)"
+      ],
+      "answer": 1,
+      "explanation": "멀티모달 AI는 텍스트, 이미지 등 여러 유형의 데이터를 통합적으로 처리할 수 있는 AI를 의미합니다."
+    },
+    {
+      "round": 3,
+      "number": 7,
+      "global_question_number": 47,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "마케팅 부서에서 AI 이미지 생성 도구를 사용하여 광고 이미지를 제작했다. 이때 저작권과 관련하여 가장 주의해야 할 점은?",
+      "passage": "",
+      "options": [
+        "생성된 이미지의 해상도가 충분한지 여부",
+        "AI 서비스의 이용약관상 생성물의 상업적 이용 권한 및 저작권 귀속 규정",
+        "이미지 파일의 확장자가 JPG인지 확인",
+        "최대한 많은 색상이 사용되었는지 확인"
+      ],
+      "answer": 2,
+      "explanation": "AI 생성물의 저작권은 설혜 법칙으로 정립 중이며, 상업적 이용 권한과 저작권 귀속이 명확한지 확인하고 법적 분쟁을 방지해야 합니다."
+    },
+    {
+      "round": 3,
+      "number": 8,
+      "global_question_number": 48,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "기획팀에서 시장 트렌드 분석을 위해 AI를 활용했더니, AI가 특정 산업에 대해 지나치게 긍정적인 전망만 내놓는 것을 발견했습니다. 이 현상의 원인으로 가장 가능성이 높은 것은?",
+      "passage": "",
+      "options": [
+        "컴퓨터의 연산 속도가 너무 빠르기 때문",
+        "학습 데이터에 특정 편향(Bias)이 존재하기 때문",
+        "프롬프트에 마침표를 찍지 않았기 때문",
+        "AI 모델의 버전이 최신이 아니기 때문"
+      ],
+      "answer": 2,
+      "explanation": "AI는 학습 데이터에 포함된 편향성을 그대로 반영하므로, 결과가 편향되었을 가능성을 창상 인지해야 합니다."
+    },
+    {
+      "round": 3,
+      "number": 9,
+      "global_question_number": 49,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "지원 부서(충문)에서 사내 행사 안내 문구를 작성할 때, AI에게 '당신은 10년 차 베테랑 사내 아나운서입니다'라고 역할을 부여하는 기법은?",
+      "passage": "",
+      "options": [
+        "Few-shot Prompting",
+        "Role Prompting",
+        "Negative Prompting",
+        "Zero-shot Prompting"
+      ],
+      "answer": 2,
+      "explanation": "Role Prompting은 AI에게 특정한 페르소나나 역할을 부여하여 답변의 전문성과 톤을 조정하는 기법입니다."
+    },
+    {
+      "round": 3,
+      "number": 10,
+      "global_question_number": 50,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "생산 부서에서 공정 최적화를 위해 AI 모델을 도입할 때, 개인정보 보호를 위해 성명, 주민번호 등을 식별할 수 있는 과정을 무엇이라 하는가?",
+      "passage": "",
+      "options": [
+        "데이터 인코딩",
+        "데이터 비식별화(De-identification)",
+        "데이터 라벨링",
+        "데이터 증강"
+      ],
+      "answer": 2,
+      "explanation": "개인정보 보호를 위해 특정 개인을 식별할 수 있는 정보를 삭제하거나 대체하는 과정을 데이터 비식별화라고 합니다."
+    },
+    {
+      "round": 3,
+      "number": 11,
+      "global_question_number": 51,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "AI 모델이 텍스트를 처리할 때 단어 혹은 조개 문자 단위로 조개 최소 의미 단위를 무엇이라 합니까?",
+      "passage": "",
+      "options": [
+        "비트(Bit)",
+        "토큰(Token)",
+        "노드(Node)",
+        "레이어(Layer)"
+      ],
+      "answer": 2,
+      "explanation": "토큰은 AI 모델이 텍스트를 이해하고 처리하는 기본적인 단위이며, 토큰 수에 따라 비용이 산정되기도 합니다."
+    },
+    {
+      "round": 3,
+      "number": 12,
+      "global_question_number": 52,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "재무팀에서 AI의 예측 모델을 사용해 내년도 매출을 추정했다. AI가 산출한 수치가 예상보다 훨씬 높게 나왔을 때 올바른 대응은?",
+      "passage": "",
+      "options": [
+        "AI의 계산은 인간보다 정확하므로 즉시 보고서에 반영한다.",
+        "예측이 근거가 되는 변수와 가정을 검토하고 과거 데이터와 비교 분석한다.",
+        "높은 수치가 나왔으므로 프롬프트를 수정하여 낮은 수치를 도출한다.",
+        "AI 결과를 무시하고 직식 데이터와 동일한 데이터를 추가 학습시킨다."
+      ],
+      "answer": 2,
+      "explanation": "AI 결과가 예상과 크게 다르면 모델의 입력값, 파라미터, 데이터 편향 등을 비판적으로 검토해야 합니다."
+    },
+    {
+      "round": 3,
+      "number": 13,
+      "global_question_number": 53,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "품질 관리 매뉴얼을 작성할 때 AI가 '요약할 때 전문 용어는 사용하고, 5문장 이내로 작성해'와 같은 제약 조건을 주는 것은 어떤 원칙에 해당하는가?",
+      "passage": "",
+      "options": [
+        "명확성 및 구체성",
+        "모호한 표현 사용",
+        "단담형 질문",
+        "비공식적 어조"
+      ],
+      "answer": 1,
+      "explanation": "요과적인 프롬프트 작성은 목표, 제약 조건, 형식 등을 명확하고 구체적으로 지정하는 것이 필수입니다."
+    },
+    {
+      "round": 3,
+      "number": 14,
+      "global_question_number": 54,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "인사팀에서 AI 채용 시스템을 도입했는데, 특정 성별에게 불리한 결과가 반복적으로 도출되었다. 이 문제를 해결하기 위한 가장 근본적인 조치는?",
+      "passage": "",
+      "options": [
+        "AI 모델의 처리 속도를 높인다.",
+        "학습 데이터의 성별 균형을 검정하고 편향을 제거한다.",
+        "성별 정보를 아예 입력하지 못하도록 시스템을 차단한다.",
+        "더 많은 양의 동일한 데이터를 추가 학습시킨다."
+      ],
+      "answer": 2,
+      "explanation": "데이터 편향 문제는 학습 데이터의 불균형에서 비롯되므로, 데이터의 다양성과 균형을 확보하는 것이 필수입니다."
+    },
+    {
+      "round": 3,
+      "number": 15,
+      "global_question_number": 55,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "기업 내에서 RAG(Retrieval-Augmented Generation, 검색 증강 생성) 기술을 도입하는 주요 목적은 무엇입니까?",
+      "passage": "",
+      "options": [
+        "AI 모델의 파라미터 수를 획기적으로 줄이기 위해",
+        "이미지 데이터를 텍스트로 변환하는 성능을 강화하기 위해",
+        "AI가 기업 내부의 최신 문서나 데이터베이스를 참조하여 더 정확한 답변을 하도록 하기 위해",
+        "AI에게 감정을 부여하여 고객 응대 시 공감 능력을 높이기 위해"
+      ],
+      "answer": 3,
+      "explanation": "RAG는 외부 지식 베이스나 기업 내부 데이터베이스를 검색하여 LLM이 그 정보를 참조해 더 정확하고 최신의 답변을 제공하는 기술입니다."
+    },
+    {
+      "round": 3,
+      "number": 16,
+      "global_question_number": 56,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "인사팀(HR)에서 채용 공고문을 작성할 때, AI에게 '친절하면서도 전문적인 어조로 작성해줄'라고 요청하는 것은 프롬프트의 구성 요소 중 무엇에 해당하는가?",
+      "passage": "",
+      "options": [
+        "지시(Instruction)",
+        "맥락(Context)",
+        "페르소나(Persona) / 어조(Tone)",
+        "출력 형식(Output Format)"
+      ],
+      "answer": 3,
+      "explanation": "답변의 성격이나 태도를 정의하는 것은 페르소나 설정 또는 어조(Tone) 지정에 해당합니다."
+    },
+    {
+      "round": 3,
+      "number": 17,
+      "global_question_number": 57,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "AI를 사용하여 작성한 보고서를 대외적으로 발표할 때, 투명성 확보를 위해 지켜야 할 원칙은?",
+      "passage": "",
+      "options": [
+        "AI가 작성했다는 사실을 숨기고 인간이 작성한 것으로 표시한다.",
+        "AI 활용 여부 및 참고 방식에 대해 설명 가능하도록 하는 것",
+        "AI가 생성한 내용을 그대로 모두 공개하면 된다.",
+        "사용한 모든 프롬프트를 공개해야 한다."
+      ],
+      "answer": 2,
+      "explanation": "AI 사용 시 투명성은 AI를 활용했음을 명시하고 그 도출 과정을 설명 가능하게 하는 것을 의미합니다."
+    },
+    {
+      "round": 3,
+      "number": 18,
+      "global_question_number": 58,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "영업 전략 수립을 위해 시가 추천한 타깃 고객 리스트가 실제 시장과 동떨어져 보일 때, 가장 먼저 확인해야 할 사항은?",
+      "passage": "",
+      "options": [
+        "AI 모델의 개발사 주가",
+        "입력한 프롬프트의 오타 유무",
+        "질문에 제공된 시장 데이터의 최신성 및 정확성",
+        "컴퓨터 모니터의 해상도"
+      ],
+      "answer": 3,
+      "explanation": "AI의 결과물이 현실과 맞지 않으면, 입력 데이터의 품질, 최신성, 정확성을 검토하고 그 근거를 확인해야 합니다."
+    },
+    {
+      "round": 3,
+      "number": 19,
+      "global_question_number": 59,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "림러리 모델의 내부 작동 원리가 너무 복잡하여 인간이 그 판단 근거를 논리적으로 이해하기 어려운 상황을 무엇이라 하는가?",
+      "passage": "",
+      "options": [
+        "블랙박스(Black Box)",
+        "화이트박스(White Box)",
+        "오픈소스(Open Source)",
+        "샌드박스(Sandbox)"
+      ],
+      "answer": 1,
+      "explanation": "인공지능의 블랙박스 현상은 AI의 의사결정 과정이 불명확하고 설명하기 어려운 상태를 의미합니다."
+    },
+    {
+      "round": 3,
+      "number": 20,
+      "global_question_number": 60,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "개발자가 코드 리뷰를 요청하면서 '성능 최적화 관점에서 수정하고, 보안 취약점은 제외해'라고 지시했다. 여기서 '보안 취약점은 제외해'는 어떤 프롬프트 기법인가?",
+      "passage": "",
+      "options": [
+        "Positive Prompting",
+        "Negative Prompting",
+        "Few-shot Prompting",
+        "Zero-shot Prompting"
+      ],
+      "answer": 2,
+      "explanation": "Negative Prompting은 원하지 않는 결과를 명시적으로 제외하도록 지시하는 방법입니다."
+    }
+  ]
+}

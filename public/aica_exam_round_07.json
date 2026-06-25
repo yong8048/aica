@@ -1,0 +1,348 @@
+{
+  "source": "aica.json",
+  "exam_title": "AICA LEVEL 2. AIU 평가 (전체 통합 200문제)",
+  "round": 7,
+  "total": 20,
+  "questions": [
+    {
+      "round": 7,
+      "number": 1,
+      "global_question_number": 121,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "생성형 AI 모델에서 발생하는 '할루시네이션(Hallucination)' 현상에 대한 설명으로 가장 적절한 것은?",
+      "passage": "",
+      "options": [
+        "AI가 학습한 데이터가 부족하여 답변을 거부하는 현상",
+        "AI가 사실이 아닌 정보를 마치 사실인 것처럼 그럴듯하게 생성하는 현상",
+        "AI가 사용자의 프롬프트를 이해하지 못해 엉뚱한 언어로 답하는 현상",
+        "AI가 보안 규정을 준수하기 위해 민감 정보를 가리는 현상"
+      ],
+      "answer": 2,
+      "explanation": "할루시네이션은 AI가 데이터의 확률적 결합을 통해 존재하지 않는 사실을 마치 사실인 것처럼 생성하는 '환각' 현상을 의미하며, 실무 활용 시 반드시 팩트 체크가 필요합니다."
+    },
+    {
+      "round": 7,
+      "number": 2,
+      "global_question_number": 122,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "영업 부서의 김 대리는 고객사별 맞춤형 제안 메일을 작성하려 합니다. AI에게 특정 페르소나를 부여하여 답변의 품질을 높이는 기법은?",
+      "passage": "",
+      "options": [
+        "Zero-shot Prompting",
+        "Few-shot Prompting",
+        "Role Prompting",
+        "Chain of Thought"
+      ],
+      "answer": 3,
+      "explanation": "Role Prompting은 AI에게 '숙련된 영업 전문가'와 같은 역할을 부여하여 해당 맥락에 적합한 어조와 내용을 생성하도록 유도하는 기법입니다."
+    },
+    {
+      "round": 7,
+      "number": 3,
+      "global_question_number": 123,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "인사팀에서 AI를 활용해 신입사원 채용 서류를 검토할 때 가장 유의해야 할 윤리적 문제는?",
+      "passage": "",
+      "options": [
+        "데이터 처리 속도 저하",
+        "학습 데이터에 포함된 편향성으로 인한 차별",
+        "AI 모델의 높은 운영 비용",
+        "텍스트 요약 성능의 한계"
+      ],
+      "answer": 2,
+      "explanation": "AI는 학습 데이터 내에 존재하는 성별, 연령, 출신지 등의 편향성을 그대로 학습하여 차별적인 결과를 내놓을 수 있으므로 공정성 확보가 중요합니다."
+    },
+    {
+      "round": 7,
+      "number": 4,
+      "global_question_number": 124,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "기획팀에서 AI가 생성한 '내년도 시장 전망 보고서'를 검토할 때 취해야 할 태도로 가장 적절하지 않은 것은?",
+      "passage": "",
+      "options": [
+        "AI가 인용한 통계 수치의 실제 출처를 확인한다.",
+        "보고서에 포함된 논리적 인과관계가 타당한지 분석한다.",
+        "AI의 성능을 신뢰하여 별도의 검증 없이 경영진에게 보고한다.",
+        "최신 시장 트렌드가 반영되었는지 사내 최신 데이터와 비교한다."
+      ],
+      "answer": 3,
+      "explanation": "AI 생성물은 항상 오류의 가능성이 있으므로 인간 전문가의 검증 과정(Human-in-the-loop)이 반드시 필요합니다."
+    },
+    {
+      "round": 7,
+      "number": 5,
+      "global_question_number": 125,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "사내의 방대한 매뉴얼과 규정 데이터를 AI가 참조하여 답변하게 함으로써 정보의 정확성을 높이는 기술은?",
+      "passage": "",
+      "options": [
+        "Fine-tuning (미세 조정)",
+        "RAG (검색 증강 생성)",
+        "RLHF (강화 학습)",
+        "Tokenization (토큰화)"
+      ],
+      "answer": 2,
+      "explanation": "RAG(Retrieval-Augmented Generation)는 외부 지식 베이스에서 관련 정보를 검색한 후 이를 바탕으로 답변을 생성하여 할루시네이션을 줄이는 기술입니다."
+    },
+    {
+      "round": 7,
+      "number": 6,
+      "global_question_number": 126,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "품질 관리팀에서 복잡한 공정 불량 원인을 분석할 때, AI가 단계별로 사고하여 논리적인 결론에 도달하게 하는 프롬프트 기법은?",
+      "passage": "",
+      "options": [
+        "Negative Prompting",
+        "Chain of Thought (CoT)",
+        "Simple Prompting",
+        "Few-shot Prompting"
+      ],
+      "answer": 2,
+      "explanation": "Chain of Thought는 '단계별로 생각해보자'와 같이 논리적 추론 과정을 명시하도록 하여 복잡한 문제 해결 능력을 높이는 기법입니다."
+    },
+    {
+      "round": 7,
+      "number": 7,
+      "global_question_number": 127,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "재경팀 직원이 AI를 사용하여 재무 제표를 분석할 때 보안 사고를 예방하기 위한 올바른 행동은?",
+      "passage": "",
+      "options": [
+        "공개용 ChatGPT에 기업 기밀인 상세 결산 내역을 그대로 입력한다.",
+        "민감한 수치나 고객 식별 정보는 비식별화 처리 후 입력한다.",
+        "보안을 위해 AI 사용을 전면 중단하고 수작업만 고수한다.",
+        "개인 계정을 사용하여 사내 데이터를 자유롭게 분석한다."
+      ],
+      "answer": 2,
+      "explanation": "기업의 민감 정보나 개인정보는 외부 모델 학습에 활용될 수 있으므로 반드시 비식별화하거나 사내 보안 API를 사용해야 합니다."
+    },
+    {
+      "round": 7,
+      "number": 8,
+      "global_question_number": 128,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "개발팀에서 AI가 생성한 코드를 사내 시스템에 적용하기 전 수행해야 할 가장 중요한 단계는?",
+      "passage": "",
+      "options": [
+        "코드의 가독성만 확인하고 바로 배포한다.",
+        "AI가 생성했으므로 버그가 없을 것이라 가정한다.",
+        "보안 취약점 점검 및 사내 코딩 컨벤션 준수 여부를 검토한다.",
+        "코드의 실행 속도만 측정한다."
+      ],
+      "answer": 3,
+      "explanation": "AI 생성 코드에는 보안 취약점이 포함될 수 있으며 시스템 환경에 따라 오류가 발생할 수 있으므로 철저한 코드 리뷰와 테스트가 필수입니다."
+    },
+    {
+      "round": 7,
+      "number": 9,
+      "global_question_number": 129,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "텍스트뿐만 아니라 이미지, 오디오, 비디오 등 다양한 형태의 데이터를 동시에 이해하고 처리하는 AI 모델을 무엇이라 하는가?",
+      "passage": "",
+      "options": [
+        "Unimodal AI",
+        "Multimodal AI",
+        "Narrow AI",
+        "Super AI"
+      ],
+      "answer": 2,
+      "explanation": "멀티모달(Multimodal) AI는 여러 유형의 입력 양식을 동시에 처리할 수 있는 모델을 의미합니다."
+    },
+    {
+      "round": 7,
+      "number": 10,
+      "global_question_number": 130,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "홍보팀에서 보도자료를 작성할 때, AI에게 몇 가지 예시 문장을 제공하여 원하는 문체로 답변을 유도하는 방식은?",
+      "passage": "",
+      "options": [
+        "Zero-shot Prompting",
+        "One-shot Prompting",
+        "Few-shot Prompting",
+        "Multi-prompting"
+      ],
+      "answer": 3,
+      "explanation": "Few-shot Prompting은 몇 가지 예시(Few samples)를 제공하여 AI가 사용자의 의도와 패턴을 명확히 이해하도록 돕는 방식입니다."
+    },
+    {
+      "round": 7,
+      "number": 11,
+      "global_question_number": 131,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "AI가 생성한 이미지나 텍스트를 상업적 목적으로 사용할 때 가장 먼저 확인해야 할 법적 사항은?",
+      "passage": "",
+      "options": [
+        "AI 모델의 개발사 국가",
+        "저작권(Copyright) 및 이용 약관",
+        "AI 모델의 파라미터 수",
+        "답변 생성에 걸린 시간"
+      ],
+      "answer": 2,
+      "explanation": "AI 생성물의 저작권 귀속 여부와 상업적 이용 가능 범위는 서비스마다 다르므로 약관 확인이 필수적입니다."
+    },
+    {
+      "round": 7,
+      "number": 12,
+      "global_question_number": 132,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "생산팀에서 AI 기반 수요 예측 결과를 보고받았을 때, 예측치가 전년 대비 지나치게 높다면 어떻게 대응해야 하는가?",
+      "passage": "",
+      "options": [
+        "AI의 분석이므로 무조건 신뢰하고 생산량을 늘린다.",
+        "예측의 근거가 된 데이터 원천과 변수 설정을 재검토한다.",
+        "AI 모델을 즉시 폐기하고 수동 예측으로 전환한다.",
+        "결과값을 임의로 수정하여 예년과 맞춘다."
+      ],
+      "answer": 2,
+      "explanation": "비정상적인 결과에 대해서는 입력 데이터의 오류나 외부 변수(이벤트 등) 반영 여부를 비판적으로 검토해야 합니다."
+    },
+    {
+      "round": 7,
+      "number": 13,
+      "global_question_number": 133,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "LLM(거대언어모델)이 텍스트를 처리하는 최소 단위로, 단어나 문자 혹은 그 일부분을 의미하는 용어는?",
+      "passage": "",
+      "options": [
+        "Bit",
+        "Node",
+        "Token",
+        "Pixel"
+      ],
+      "answer": 3,
+      "explanation": "토큰(Token)은 AI 모델이 텍스트를 이해하고 생성하는 기본 단위이며, 토큰 수에 따라 비용과 처리 속도가 결정되기도 합니다."
+    },
+    {
+      "round": 7,
+      "number": 14,
+      "global_question_number": 134,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "총무팀에서 복지 규정을 요약할 때, 결과물을 '표(Table)' 형태로 출력하도록 지정하는 것은 프롬프트의 어느 구성 요소에 해당하는가?",
+      "passage": "",
+      "options": [
+        "Context (맥락)",
+        "Input Data (입력 데이터)",
+        "Output Indicator (출력 형식 지시)",
+        "Persona (페르소나)"
+      ],
+      "answer": 3,
+      "explanation": "원하는 형태(표, 리스트, JSON 등)를 지정하는 것은 출력 형식을 정의하는 프롬프트 엔지니어링의 핵심 요소입니다."
+    },
+    {
+      "round": 7,
+      "number": 15,
+      "global_question_number": 135,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "회사의 미승인 AI 도구를 직원이 임의로 사용하는 현상을 뜻하며 보안 사각지대를 발생시키는 용어는?",
+      "passage": "",
+      "options": [
+        "Open AI",
+        "Shadow AI",
+        "Dark Web",
+        "Hybrid AI"
+      ],
+      "answer": 2,
+      "explanation": "Shadow AI는 IT 부서의 승인 없이 개인적으로 사용하는 AI 도구로, 기업 데이터 유출의 주요 경로가 될 수 있습니다."
+    },
+    {
+      "round": 7,
+      "number": 16,
+      "global_question_number": 136,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "영업팀에서 AI를 활용해 경쟁사 분석 보고서를 작성했다. 내용 중 경쟁사의 최신 출시 제품 정보가 누락되었다면 그 원인으로 가장 가능성이 높은 것은?",
+      "passage": "",
+      "options": [
+        "AI의 한국어 이해 능력 부족",
+        "AI 모델의 학습 데이터 컷오프(Cut-off) 시점 한계",
+        "프롬프트에 페르소나를 설정하지 않음",
+        "AI의 하드웨어 성능 저하"
+      ],
+      "answer": 2,
+      "explanation": "AI 모델은 학습된 시점(Knowledge Cut-off)까지의 데이터만 알고 있으므로, 실시간 정보가 필요한 경우 검색 기능(Browsing)이나 RAG가 필요합니다."
+    },
+    {
+      "round": 7,
+      "number": 17,
+      "global_question_number": 137,
+      "category": "AI 기초 지식",
+      "type": "4choice",
+      "question": "이미 학습된 대규모 모델을 특정 도메인(예: 법률, 의료)에 특화시키기 위해 소량의 데이터를 추가 학습시키는 과정은?",
+      "passage": "",
+      "options": [
+        "Pre-training",
+        "Fine-tuning",
+        "Prompting",
+        "Encoding"
+      ],
+      "answer": 2,
+      "explanation": "미세 조정(Fine-tuning)은 범용 모델을 특정 목적에 맞게 정교하게 조정하는 과정입니다."
+    },
+    {
+      "round": 7,
+      "number": 18,
+      "global_question_number": 138,
+      "category": "프롬프트 엔지니어링",
+      "type": "4choice",
+      "question": "AI에게 질문할 때 '모르는 내용에 대해서는 추측하지 말고 모른다고 답해줘'라고 지시하는 목적은?",
+      "passage": "",
+      "options": [
+        "답변의 길이를 길게 만들기 위해",
+        "AI의 연산 속도를 높이기 위해",
+        "할루시네이션(환각)을 방지하기 위해",
+        "질문의 난이도를 낮추기 위해"
+      ],
+      "answer": 3,
+      "explanation": "제약 조건을 명확히 함으로써 AI가 불확실한 정보를 사실처럼 꾸며내는 것을 방지할 수 있습니다."
+    },
+    {
+      "round": 7,
+      "number": 19,
+      "global_question_number": 139,
+      "category": "윤리 및 보안",
+      "type": "4choice",
+      "question": "사내 AI 챗봇 도입 시 사용자들에게 '이 답변은 AI에 의해 생성되었습니다'라고 고지해야 하는 이유는 무엇인가?",
+      "passage": "",
+      "options": [
+        "AI의 성능을 자랑하기 위해",
+        "투명성(Transparency) 확보 및 오해 방지",
+        "서버 비용을 절감하기 위해",
+        "답변의 저작권을 회사로 귀속시키기 위해"
+      ],
+      "answer": 2,
+      "explanation": "사용자가 인간과 대화하는 것으로 오해하지 않도록 하고 결과물의 한계를 인지시키는 투명성 원칙은 AI 윤리의 핵심입니다."
+    },
+    {
+      "round": 7,
+      "number": 20,
+      "global_question_number": 140,
+      "category": "비판적 사고",
+      "type": "4choice",
+      "question": "마케팅팀에서 AI가 제안한 광고 카피가 기존 사내 캠페인 문구와 매우 유사하다면 어떤 조치를 취해야 하는가?",
+      "passage": "",
+      "options": [
+        "AI가 만든 것이므로 그대로 사용한다.",
+        "표절 및 저작권 침해 가능성을 검토하고 수정한다.",
+        "가장 먼저 제안했으므로 우선권을 주장한다.",
+        "유사도가 높을수록 좋은 카피라고 판단한다."
+      ],
+      "answer": 2,
+      "explanation": "AI는 기존 데이터를 학습하여 답변하므로 기존 저작물과의 유사성이 발생할 수 있으며, 이에 대한 법적/윤리적 검증은 사용자의 책임입니다."
+    }
+  ]
+}
