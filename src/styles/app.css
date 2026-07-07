@@ -175,6 +175,19 @@
   letter-spacing: -0.02em;
 }
 
+.passage {
+  margin: 0 0 0.55rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: clamp(0.8rem, min(2.6vw, 2.2vh), 0.95rem);
+  line-height: 1.55;
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 .options {
   list-style: none;
   margin: 0;
@@ -182,6 +195,56 @@
   display: flex;
   flex-direction: column;
   gap: 0.28rem;
+}
+
+.short-answer-form {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.short-answer-input {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: clamp(0.85rem, min(2.8vw, 2.4vh), 1rem);
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  min-height: min(44px, max(40px, 8.5vh));
+}
+
+.short-answer-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.short-answer-input:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.short-answer-input.is-correct {
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
+.short-answer-input.is-wrong {
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.short-answer-submit {
+  flex: 0 0 auto;
+  min-width: 4.5rem;
+}
+
+.correct-answer {
+  margin: 0 0 0.3rem;
+  font-size: clamp(0.8rem, 2.4vw, 0.92rem);
+  font-weight: 600;
+  color: var(--text);
 }
 
 .option-li {
