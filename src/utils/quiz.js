@@ -11,6 +11,20 @@ export function correctIndex(answer) {
   return Number(answer) - 1;
 }
 
+export function normalizeAnswerText(text) {
+  return String(text ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[.,·ㆍ\-_/]/g, "");
+}
+
+export function isShortAnswerCorrect(input, expectedAnswer) {
+  const candidates = String(expectedAnswer ?? "").split(/또는|\/|,/);
+  const normalizedInput = normalizeAnswerText(input);
+  return candidates.some((candidate) => normalizeAnswerText(candidate) === normalizedInput);
+}
+
 export function buildQuestionId(source, raw) {
   const round = raw.round ?? null;
   if (source === "exam-round" && round != null) {
