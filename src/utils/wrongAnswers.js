@@ -41,6 +41,15 @@ async function clearWrongOnCloud(userId) {
   await supabase.from("wrong_questions").delete().eq("user_id", userId);
 }
 
+async function removeManyWrongOnCloud(userId, questionIds) {
+  if (!supabase || !questionIds.length) return;
+  await supabase
+    .from("wrong_questions")
+    .delete()
+    .eq("user_id", userId)
+    .in("question_id", questionIds);
+}
+
 export async function syncWrongAnswers() {
   if (!isSupabaseConfigured || !supabase) return loadWrongIds().size;
 
@@ -117,4 +126,16 @@ export async function clearWrongIds() {
 
   const userId = await getUserId();
   if (userId) await clearWrongOnCloud(userId);
+}
+
+// examMode(aica/jeongcheogi) 별로 오답 기록만 선택적으로 삭제한다.
+export async function clearWrongIdsMatching(predicate) {
+  const ids = loadWrongIds();
+  const toRemove = [...ids].filter(predicate);
+  if (!toRemove.length) return;
+  const remaining = new Set([...ids].filter((id) => !predicate(id)));
+  saveWrongIds(remaining);
+
+  const userId = await getUserId();
+  if (userId) await removeManyWrongOnCloud(userId, toRemove);
 }

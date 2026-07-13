@@ -1,7 +1,15 @@
 export const OPTION_KEYS = ["A", "B", "C", "D", "E", "F"];
 export const ROUND_COUNT = 10;
 
-export { clearWrongIds, loadWrongIds, markCorrect, markWrong, WRONG_STORAGE_KEY } from "./wrongAnswers.js";
+export {
+  clearWrongIds,
+  clearWrongIdsMatching,
+  loadWrongIds,
+  markCorrect,
+  markWrong,
+  WRONG_STORAGE_KEY,
+} from "./wrongAnswers.js";
+import { loadWrongIds as getWrongIds } from "./wrongAnswers.js";
 
 export function optionLabel(idx) {
   return OPTION_KEYS[idx] ?? String(idx + 1);
@@ -23,6 +31,10 @@ export function isShortAnswerCorrect(input, expectedAnswer) {
   const candidates = String(expectedAnswer ?? "").split(/또는|\/|,/);
   const normalizedInput = normalizeAnswerText(input);
   return candidates.some((candidate) => normalizeAnswerText(candidate) === normalizedInput);
+}
+
+export function countAicaWrong() {
+  return [...getWrongIds()].filter((id) => !id.startsWith("jeongcheogi-")).length;
 }
 
 export function buildQuestionId(source, raw) {

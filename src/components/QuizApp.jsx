@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import "../styles/app.css";
 import HomeScreen from "./HomeScreen.jsx";
+import JeongcheogiHomeScreen from "./JeongcheogiHomeScreen.jsx";
 import SyncAuth from "./SyncAuth.jsx";
 import {
-  clearWrongIds,
-  correctIndex,
+  clearWrongIdsMatching,
+  countAicaWrong,
   loadFullExam,
   loadExamRound,
   loadRound,
-  loadWrongIds,
   loadWrongQuestions,
   isShortAnswerCorrect,
   markCorrect,
@@ -16,8 +16,23 @@ import {
   optionLabel,
   questionId,
 } from "../utils/quiz.js";
+import {
+  correctIndicesOf,
+  countJeongcheogiWrong,
+  isSelectionCorrect,
+  loadFullJeongcheogiExam,
+  loadJeongcheogiRound,
+  loadWrongJeongcheogiQuestions,
+  roundLabel,
+} from "../utils/jeongcheogi.js";
+
+const EXAM_MODES = {
+  aica: { key: "aica", label: "AICA" },
+  jeongcheogi: { key: "jeongcheogi", label: "정보처리기사" },
+};
 
 export default function QuizApp() {
+  const [examMode, setExamMode] = useState("aica");
   const [view, setView] = useState("home");
   const [examTitle, setExamTitle] = useState("");
   const [questions, setQuestions] = useState([]);
@@ -28,13 +43,29 @@ export default function QuizApp() {
   const [shortAnswerCorrect, setShortAnswerCorrect] = useState(false);
   const [loadError, setLoadError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [wrongCount, setWrongCount] = useState(() => loadWrongIds().size);
+  const [wrongCount, setWrongCount] = useState(() => countAicaWrong());
   const [sessionStats, setSessionStats] = useState({ correct: 0, wrong: 0 });
   const [finished, setFinished] = useState(false);
 
-  const refreshWrongCount = useCallback(() => {
-    setWrongCount(loadWrongIds().size);
-  }, []);
+  const refreshWrongCount = useCallback(
+    (mode = examMode) => {
+      setWrongCount(mode === "jeongcheogi" ? countJeongcheogiWrong() : countAicaWrong());
+    },
+    [examMode]
+  );
+
+  const handleSwitchMode = useCallback(
+    (mode) => {
+      if (mode === examMode) return;
+      setExamMode(mode);
+      setView("home");
+      setLoadError(null);
+      setFinished(false);
+      setQuestions([]);
+      setWrongCount(mode === "jeongcheogi" ? countJeongcheogiWrong() : countAicaWrong());
+    },
+    [examMode]
+  );
 
   const resetQuizState = useCallback(() => {
     setCurrentIndex(0);
@@ -99,11 +130,32 @@ export default function QuizApp() {
     [startQuiz]
   );
 
+  const handleStartJeongcheogiFull = useCallback(
+    () => startQuiz(loadFullJeongcheogiExam),
+    [startQuiz]
+  );
+  const handleStartJeongcheogiRound = useCallback(
+    (slug) => startQuiz(() => loadJeongcheogiRound(slug)),
+    [startQuiz]
+  );
+  const handleStartJeongcheogiWrong = useCallback(
+    () =>
+      startQuiz(async () => {
+        const result = await loadWrongJeongcheogiQuestions();
+        if (!result.questions.length) {
+          throw new Error("저장된 오답이 없습니다.");
+        }
+        return result;
+      }),
+    [startQuiz]
+  );
+
   const handleClearWrong = useCallback(async () => {
-    if (!window.confirm("저장된 모든 오답 기록을 삭제할까요? (로그인 중이면 클라우드도 삭제됩니다)")) return;
-    await clearWrongIds();
+    if (!window.confirm("저장된 오답 기록을 삭제할까요? (로그인 중이면 클라우드도 삭제됩니다)")) return;
+    const isJeongcheogiId = (id) => id.startsWith("jeongcheogi-");
+    await clearWrongIdsMatching(examMode === "jeongcheogi" ? isJeongcheogiId : (id) => !isJeongcheogiId(id));
     refreshWrongCount();
-  }, [refreshWrongCount]);
+  }, [refreshWrongCount, examMode]);
 
   useEffect(() => {
     if (view === "home") refreshWrongCount();
@@ -121,9 +173,8 @@ export default function QuizApp() {
       setSelectedIndex(idx);
       setRevealed(true);
 
-      const correct = correctIndex(q.answer);
       const id = questionId(q);
-      if (idx === correct) {
+      if (isSelectionCorrect(idx, q.answer)) {
         setSessionStats((s) => ({ ...s, correct: s.correct + 1 }));
         markCorrect(id);
         refreshWrongCount();
@@ -177,17 +228,41 @@ export default function QuizApp() {
     setShortAnswerCorrect(false);
   }, [isLast, total]);
 
-  const correct = q && !isShortAnswer ? correctIndex(q.answer) : -1;
-  const isCorrect = isShortAnswer ? shortAnswerCorrect : revealed && selectedIndex === correct;
+  const correctIndices = q && !isShortAnswer ? correctIndicesOf(q.answer) : [];
+  const isCorrect = isShortAnswer
+    ? shortAnswerCorrect
+    : revealed && selectedIndex != null && correctIndices.includes(selectedIndex);
+
+  const modeTabs = (
+    <div className="mode-tabs" role="tablist" aria-label="시험 종류 선택">
+      {Object.values(EXAM_MODES).map((mode) => (
+        <button
+          key={mode.key}
+          type="button"
+          role="tab"
+          aria-selected={examMode === mode.key}
+          className={`mode-tab-btn ${examMode === mode.key ? "is-active" : ""}`}
+          onClick={() => handleSwitchMode(mode.key)}
+        >
+          {mode.label}
+        </button>
+      ))}
+    </div>
+  );
 
   if (view === "home") {
     return (
       <div className="layout layout-home">
         <header className="header">
           <div className="brand-row">
-            <h1 className="title">AICA 연습</h1>
+            <h1 className="title">{EXAM_MODES[examMode].label} 연습</h1>
           </div>
-          <p className="home-tagline">전체 · 통합시험 회차 · 연습 회차 · 오답 복습</p>
+          {modeTabs}
+          <p className="home-tagline">
+            {examMode === "jeongcheogi"
+              ? "전체 · 회차별(100문제) · 오답 복습"
+              : "전체 · 통합시험 회차 · 연습 회차 · 오답 복습"}
+          </p>
           <SyncAuth onSync={refreshWrongCount} />
         </header>
         <main className="main main-home">
@@ -197,14 +272,25 @@ export default function QuizApp() {
               {loadError}
             </p>
           )}
-          {!loading && <HomeScreen
-            wrongCount={wrongCount}
-            onStartFull={handleStartFull}
-            onStartExamRound={handleStartExamRound}
-            onStartRound={handleStartRound}
-            onStartWrong={handleStartWrong}
-            onClearWrong={handleClearWrong}
-          />}
+          {!loading && examMode === "jeongcheogi" && (
+            <JeongcheogiHomeScreen
+              wrongCount={wrongCount}
+              onStartFull={handleStartJeongcheogiFull}
+              onStartRound={handleStartJeongcheogiRound}
+              onStartWrong={handleStartJeongcheogiWrong}
+              onClearWrong={handleClearWrong}
+            />
+          )}
+          {!loading && examMode === "aica" && (
+            <HomeScreen
+              wrongCount={wrongCount}
+              onStartFull={handleStartFull}
+              onStartExamRound={handleStartExamRound}
+              onStartRound={handleStartRound}
+              onStartWrong={handleStartWrong}
+              onClearWrong={handleClearWrong}
+            />
+          )}
         </main>
       </div>
     );
@@ -217,7 +303,7 @@ export default function QuizApp() {
           <button type="button" className="back-btn" onClick={goHome} aria-label="메뉴로 돌아가기">
             ←
           </button>
-          <h1 className="title">AICA 연습</h1>
+          <h1 className="title">{EXAM_MODES[examMode].label} 연습</h1>
           <span className="title-sep" aria-hidden="true">
             ·
           </span>
@@ -261,7 +347,11 @@ export default function QuizApp() {
                 메뉴로
               </button>
               {wrongCount > 0 && (
-                <button type="button" className="btn btn-primary" onClick={handleStartWrong}>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={examMode === "jeongcheogi" ? handleStartJeongcheogiWrong : handleStartWrong}
+                >
                   틀린 문제 복습 ({wrongCount})
                 </button>
               )}
@@ -276,7 +366,13 @@ export default function QuizApp() {
               <span className="qnum">
                 {q.source === "exam-round" && q.round != null ? `통합시험 ${q.round}회차 ` : ""}
                 {q.source === "round" && q.round != null ? `연습 ${q.round}회차 ` : ""}
-                {q.source !== "exam-round" && q.source !== "round" && q.round != null
+                {q.source === "jeongcheogi" && q.round != null
+                  ? `${roundLabel(q.round)} `
+                  : ""}
+                {q.source !== "exam-round" &&
+                q.source !== "round" &&
+                q.source !== "jeongcheogi" &&
+                q.round != null
                   ? `${q.round}회차 `
                   : ""}
                 문제 {q.global_question_number ?? q.number ?? currentIndex + 1}
@@ -284,6 +380,14 @@ export default function QuizApp() {
             </div>
             <div className="card-body">
               <h2 className="question">{q.question}</h2>
+              {q.image && (
+                <img
+                  className="question-image"
+                  src={`${import.meta.env.BASE_URL}${q.image}`}
+                  alt={`문제 ${q.number} 첨부 이미지`}
+                  loading="lazy"
+                />
+              )}
               {q.passage && <p className="passage">{q.passage}</p>}
               {isShortAnswer ? (
                 <form
@@ -321,7 +425,7 @@ export default function QuizApp() {
                   {(q.options ?? []).map((text, idx) => {
                     let stateClass = "";
                     if (revealed) {
-                      if (idx === correct) stateClass = "is-correct";
+                      if (correctIndices.includes(idx)) stateClass = "is-correct";
                       else if (idx === selectedIndex) stateClass = "is-wrong";
                     }
                     return (
