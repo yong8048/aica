@@ -574,6 +574,28 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 0.35rem 0.25rem;
+}
+
+.round-btn.has-progress {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+}
+
+.round-btn-label {
+  line-height: 1.2;
+}
+
+.round-btn-progress {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1.1;
 }
 
 .round-btn:hover {

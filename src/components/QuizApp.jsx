@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "../styles/app.css";
 import HomeScreen from "./HomeScreen.jsx";
 import JeongcheogiHomeScreen from "./JeongcheogiHomeScreen.jsx";
@@ -25,6 +25,15 @@ import {
   loadWrongJeongcheogiQuestions,
   roundLabel,
 } from "../utils/jeongcheogi.js";
+import {
+  clearJeongcheogiFullProgress,
+  clearJeongcheogiRoundProgress,
+  getJeongcheogiAllRoundProgress,
+  getJeongcheogiFullProgress,
+  getJeongcheogiRoundProgress,
+  saveJeongcheogiFullProgress,
+  saveJeongcheogiRoundProgress,
+} from "../utils/practiceProgress.js";
 
 const EXAM_MODES = {
   aica: { key: "aica", label: "AICA" },
@@ -46,6 +55,18 @@ export default function QuizApp() {
   const [wrongCount, setWrongCount] = useState(() => countAicaWrong());
   const [sessionStats, setSessionStats] = useState({ correct: 0, wrong: 0 });
   const [finished, setFinished] = useState(false);
+  const [jeongcheogiProgress, setJeongcheogiProgress] = useState(() => ({
+    full: getJeongcheogiFullProgress(),
+    rounds: getJeongcheogiAllRoundProgress(),
+  }));
+  const jeongcheogiSessionRef = useRef(null);
+
+  const refreshJeongcheogiProgress = useCallback(() => {
+    setJeongcheogiProgress({
+      full: getJeongcheogiFullProgress(),
+      rounds: getJeongcheogiAllRoundProgress(),
+    });
+  }, []);
 
   const refreshWrongCount = useCallback(
     (mode = examMode) => {
@@ -77,6 +98,89 @@ export default function QuizApp() {
     setFinished(false);
   }, []);
 
+  const saveJeongcheogiSessionProgress = useCallback(
+    (index, stats, total) => {
+      const session = jeongcheogiSessionRef.current;
+      if (!session || session.type === "wrong") return;
+      if (session.type === "full") {
+        saveJeongcheogiFullProgress(index, stats, total);
+      } else if (session.type === "round" && session.slug) {
+        saveJeongcheogiRoundProgress(session.slug, index, stats, total);
+      }
+    },
+    []
+  );
+
+  const clearJeongcheogiSessionProgress = useCallback(() => {
+    const session = jeongcheogiSessionRef.current;
+    if (!session || session.type === "wrong") return;
+    if (session.type === "full") {
+      clearJeongcheogiFullProgress();
+    } else if (session.type === "round" && session.slug) {
+      clearJeongcheogiRoundProgress(session.slug);
+    }
+  }, []);
+
+  const startJeongcheogiQuiz = useCallback(
+    async (loader, sessionType, roundSlug = null, resume = false) => {
+      setLoading(true);
+      setLoadError(null);
+      jeongcheogiSessionRef.current = { type: sessionType, slug: roundSlug };
+
+      if (resume) {
+        setRevealed(false);
+        setSelectedIndex(null);
+        setShortAnswerInput("");
+        setShortAnswerCorrect(false);
+        setFinished(false);
+      } else {
+        resetQuizState();
+        if (sessionType === "full") {
+          clearJeongcheogiFullProgress();
+        } else if (sessionType === "round" && roundSlug) {
+          clearJeongcheogiRoundProgress(roundSlug);
+        }
+      }
+
+      try {
+        const { title, questions: list } = await loader();
+        if (!list.length) {
+          setLoadError("풀 수 있는 문제가 없습니다.");
+          setQuestions([]);
+          setView("home");
+          jeongcheogiSessionRef.current = null;
+          return;
+        }
+
+        const saved =
+          resume &&
+          (sessionType === "full"
+            ? getJeongcheogiFullProgress()
+            : roundSlug
+              ? getJeongcheogiRoundProgress(roundSlug)
+              : null);
+
+        setExamTitle(title);
+        setQuestions(list);
+        if (saved && saved.currentIndex < list.length) {
+          setCurrentIndex(saved.currentIndex);
+          setSessionStats(saved.sessionStats ?? { correct: 0, wrong: 0 });
+        } else if (resume) {
+          resetQuizState();
+        }
+        setView("quiz");
+      } catch (e) {
+        console.error(e);
+        setLoadError("문제 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.");
+        setView("home");
+        jeongcheogiSessionRef.current = null;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [resetQuizState]
+  );
+
   const startQuiz = useCallback(
     async (loader) => {
       setLoading(true);
@@ -105,12 +209,33 @@ export default function QuizApp() {
   );
 
   const goHome = useCallback(() => {
+    if (
+      view === "quiz" &&
+      examMode === "jeongcheogi" &&
+      !finished &&
+      questions.length > 0 &&
+      jeongcheogiSessionRef.current?.type !== "wrong"
+    ) {
+      saveJeongcheogiSessionProgress(currentIndex, sessionStats, questions.length);
+    }
+    jeongcheogiSessionRef.current = null;
     setView("home");
     setLoadError(null);
     setFinished(false);
     resetQuizState();
     setQuestions([]);
-  }, [resetQuizState]);
+    refreshJeongcheogiProgress();
+  }, [
+    view,
+    examMode,
+    finished,
+    questions.length,
+    currentIndex,
+    sessionStats,
+    resetQuizState,
+    saveJeongcheogiSessionProgress,
+    refreshJeongcheogiProgress,
+  ]);
 
   const handleStartFull = useCallback(() => startQuiz(loadFullExam), [startQuiz]);
   const handleStartExamRound = useCallback(
@@ -131,24 +256,43 @@ export default function QuizApp() {
   );
 
   const handleStartJeongcheogiFull = useCallback(
-    () => startQuiz(loadFullJeongcheogiExam),
-    [startQuiz]
+    () => startJeongcheogiQuiz(loadFullJeongcheogiExam, "full"),
+    [startJeongcheogiQuiz]
+  );
+  const handleResumeJeongcheogiFull = useCallback(
+    () => startJeongcheogiQuiz(loadFullJeongcheogiExam, "full", null, true),
+    [startJeongcheogiQuiz]
   );
   const handleStartJeongcheogiRound = useCallback(
-    (slug) => startQuiz(() => loadJeongcheogiRound(slug)),
-    [startQuiz]
+    (slug) => startJeongcheogiQuiz(() => loadJeongcheogiRound(slug), "round", slug),
+    [startJeongcheogiQuiz]
   );
-  const handleStartJeongcheogiWrong = useCallback(
-    () =>
-      startQuiz(async () => {
-        const result = await loadWrongJeongcheogiQuestions();
-        if (!result.questions.length) {
-          throw new Error("저장된 오답이 없습니다.");
-        }
-        return result;
-      }),
-    [startQuiz]
+  const handleResumeJeongcheogiRound = useCallback(
+    (slug) => startJeongcheogiQuiz(() => loadJeongcheogiRound(slug), "round", slug, true),
+    [startJeongcheogiQuiz]
   );
+  const handleStartJeongcheogiWrong = useCallback(async () => {
+    setLoading(true);
+    setLoadError(null);
+    resetQuizState();
+    jeongcheogiSessionRef.current = { type: "wrong", slug: null };
+    try {
+      const result = await loadWrongJeongcheogiQuestions();
+      if (!result.questions.length) {
+        throw new Error("저장된 오답이 없습니다.");
+      }
+      setExamTitle(result.title);
+      setQuestions(result.questions);
+      setView("quiz");
+    } catch (e) {
+      console.error(e);
+      setLoadError(e.message === "저장된 오답이 없습니다." ? e.message : "문제 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.");
+      setView("home");
+      jeongcheogiSessionRef.current = null;
+    } finally {
+      setLoading(false);
+    }
+  }, [resetQuizState]);
 
   const handleClearWrong = useCallback(async () => {
     if (!window.confirm("저장된 오답 기록을 삭제할까요? (로그인 중이면 클라우드도 삭제됩니다)")) return;
@@ -158,8 +302,25 @@ export default function QuizApp() {
   }, [refreshWrongCount, examMode]);
 
   useEffect(() => {
-    if (view === "home") refreshWrongCount();
-  }, [view, refreshWrongCount]);
+    if (view === "home") {
+      refreshWrongCount();
+      if (examMode === "jeongcheogi") refreshJeongcheogiProgress();
+    }
+  }, [view, examMode, refreshWrongCount, refreshJeongcheogiProgress]);
+
+  useEffect(() => {
+    if (view !== "quiz" || examMode !== "jeongcheogi" || finished || !questions.length) return;
+    if (jeongcheogiSessionRef.current?.type === "wrong") return;
+    saveJeongcheogiSessionProgress(currentIndex, sessionStats, questions.length);
+  }, [
+    view,
+    examMode,
+    finished,
+    questions.length,
+    currentIndex,
+    sessionStats,
+    saveJeongcheogiSessionProgress,
+  ]);
 
   const q = questions[currentIndex];
   const total = questions.length;
@@ -218,6 +379,8 @@ export default function QuizApp() {
 
   const goNext = useCallback(() => {
     if (isLast) {
+      clearJeongcheogiSessionProgress();
+      refreshJeongcheogiProgress();
       setFinished(true);
       return;
     }
@@ -226,7 +389,7 @@ export default function QuizApp() {
     setSelectedIndex(null);
     setShortAnswerInput("");
     setShortAnswerCorrect(false);
-  }, [isLast, total]);
+  }, [isLast, total, clearJeongcheogiSessionProgress, refreshJeongcheogiProgress]);
 
   const correctIndices = q && !isShortAnswer ? correctIndicesOf(q.answer) : [];
   const isCorrect = isShortAnswer
@@ -275,8 +438,12 @@ export default function QuizApp() {
           {!loading && examMode === "jeongcheogi" && (
             <JeongcheogiHomeScreen
               wrongCount={wrongCount}
+              fullProgress={jeongcheogiProgress.full}
+              roundProgress={jeongcheogiProgress.rounds}
               onStartFull={handleStartJeongcheogiFull}
+              onResumeFull={handleResumeJeongcheogiFull}
               onStartRound={handleStartJeongcheogiRound}
+              onResumeRound={handleResumeJeongcheogiRound}
               onStartWrong={handleStartJeongcheogiWrong}
               onClearWrong={handleClearWrong}
             />
