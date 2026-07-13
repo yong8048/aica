@@ -470,6 +470,47 @@
   color: var(--muted);
 }
 
+.mode-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.mode-tab-btn {
+  flex: 1;
+  min-height: 38px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mode-tab-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.mode-tab-btn.is-active {
+  color: #0a0e12;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.question-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0.3rem 0 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
 .home {
   display: flex;
   flex-direction: column;

@@ -5,3 +5,5 @@ dist
 .env
 /aica_round_*.json
 /aica_exam_round_*.json
+__pycache__/
+*.pyc
