@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "../styles/app.css";
 import HomeScreen from "./HomeScreen.jsx";
 import JeongcheogiHomeScreen from "./JeongcheogiHomeScreen.jsx";
+import RichContent from "./RichContent.jsx";
 import SyncAuth from "./SyncAuth.jsx";
 import {
   clearWrongIdsMatching,
@@ -40,6 +41,34 @@ const EXAM_MODES = {
   jeongcheogi: { key: "jeongcheogi", label: "정보처리기사" },
 };
 
+const TEST_MODE_KEY = "aica-test-mode";
+
+function readTestModePref() {
+  try {
+    return localStorage.getItem(TEST_MODE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function isAnswered(question, given) {
+  return question?.type === "short_answer"
+    ? String(given ?? "").trim().length > 0
+    : Number.isInteger(given);
+}
+
+function isAnswerCorrect(question, given) {
+  if (!isAnswered(question, given)) return false;
+  return question.type === "short_answer"
+    ? isShortAnswerCorrect(String(given), question.answer)
+    : isSelectionCorrect(given, question.answer);
+}
+
+function correctAnswerLabel(question) {
+  if (question.type === "short_answer") return String(question.answer ?? "");
+  return correctIndicesOf(question.answer).map(optionLabel).join(", ");
+}
+
 export default function QuizApp() {
   const [examMode, setExamMode] = useState("aica");
   const [view, setView] = useState("home");
@@ -55,6 +84,10 @@ export default function QuizApp() {
   const [wrongCount, setWrongCount] = useState(() => countAicaWrong());
   const [sessionStats, setSessionStats] = useState({ correct: 0, wrong: 0 });
   const [finished, setFinished] = useState(false);
+  const [testMode, setTestModeState] = useState(readTestModePref);
+  const [answers, setAnswers] = useState({});
+  const [graded, setGraded] = useState(null);
+  const [openResultIndex, setOpenResultIndex] = useState(null);
   const [jeongcheogiProgress, setJeongcheogiProgress] = useState(() => ({
     full: getJeongcheogiFullProgress(),
     rounds: getJeongcheogiAllRoundProgress(),
@@ -66,6 +99,15 @@ export default function QuizApp() {
       full: getJeongcheogiFullProgress(),
       rounds: getJeongcheogiAllRoundProgress(),
     });
+  }, []);
+
+  const setTestMode = useCallback((value) => {
+    setTestModeState(value);
+    try {
+      localStorage.setItem(TEST_MODE_KEY, value ? "1" : "0");
+    } catch {
+      /* 저장 실패해도 이번 세션에는 적용된다 */
+    }
   }, []);
 
   const refreshWrongCount = useCallback(
@@ -96,20 +138,20 @@ export default function QuizApp() {
     setShortAnswerCorrect(false);
     setSessionStats({ correct: 0, wrong: 0 });
     setFinished(false);
+    setAnswers({});
+    setGraded(null);
+    setOpenResultIndex(null);
   }, []);
 
-  const saveJeongcheogiSessionProgress = useCallback(
-    (index, stats, total) => {
-      const session = jeongcheogiSessionRef.current;
-      if (!session || session.type === "wrong") return;
-      if (session.type === "full") {
-        saveJeongcheogiFullProgress(index, stats, total);
-      } else if (session.type === "round" && session.slug) {
-        saveJeongcheogiRoundProgress(session.slug, index, stats, total);
-      }
-    },
-    []
-  );
+  const saveJeongcheogiSessionProgress = useCallback((state) => {
+    const session = jeongcheogiSessionRef.current;
+    if (!session || session.type === "wrong") return;
+    if (session.type === "full") {
+      saveJeongcheogiFullProgress(state);
+    } else if (session.type === "round" && session.slug) {
+      saveJeongcheogiRoundProgress(session.slug, state);
+    }
+  }, []);
 
   const clearJeongcheogiSessionProgress = useCallback(() => {
     const session = jeongcheogiSessionRef.current;
@@ -165,6 +207,10 @@ export default function QuizApp() {
         if (saved && saved.currentIndex < list.length) {
           setCurrentIndex(saved.currentIndex);
           setSessionStats(saved.sessionStats ?? { correct: 0, wrong: 0 });
+          setAnswers(saved.answers ?? {});
+          setGraded(null);
+          setOpenResultIndex(null);
+          if (typeof saved.testMode === "boolean") setTestMode(saved.testMode);
         } else if (resume) {
           resetQuizState();
         }
@@ -178,7 +224,7 @@ export default function QuizApp() {
         setLoading(false);
       }
     },
-    [resetQuizState]
+    [resetQuizState, setTestMode]
   );
 
   const startQuiz = useCallback(
@@ -216,7 +262,13 @@ export default function QuizApp() {
       questions.length > 0 &&
       jeongcheogiSessionRef.current?.type !== "wrong"
     ) {
-      saveJeongcheogiSessionProgress(currentIndex, sessionStats, questions.length);
+      saveJeongcheogiSessionProgress({
+        currentIndex,
+        sessionStats,
+        totalQuestions: questions.length,
+        answers,
+        testMode,
+      });
     }
     jeongcheogiSessionRef.current = null;
     setView("home");
@@ -232,6 +284,8 @@ export default function QuizApp() {
     questions.length,
     currentIndex,
     sessionStats,
+    answers,
+    testMode,
     resetQuizState,
     saveJeongcheogiSessionProgress,
     refreshJeongcheogiProgress,
@@ -311,7 +365,13 @@ export default function QuizApp() {
   useEffect(() => {
     if (view !== "quiz" || examMode !== "jeongcheogi" || finished || !questions.length) return;
     if (jeongcheogiSessionRef.current?.type === "wrong") return;
-    saveJeongcheogiSessionProgress(currentIndex, sessionStats, questions.length);
+    saveJeongcheogiSessionProgress({
+      currentIndex,
+      sessionStats,
+      totalQuestions: questions.length,
+      answers,
+      testMode,
+    });
   }, [
     view,
     examMode,
@@ -319,6 +379,8 @@ export default function QuizApp() {
     questions.length,
     currentIndex,
     sessionStats,
+    answers,
+    testMode,
     saveJeongcheogiSessionProgress,
   ]);
 
@@ -327,10 +389,21 @@ export default function QuizApp() {
   const progressPct = total ? ((currentIndex + 1) / total) * 100 : 0;
   const isLast = currentIndex >= total - 1;
   const isShortAnswer = q?.type === "short_answer";
+  const answeredCount = questions.reduce(
+    (n, question, index) => (isAnswered(question, answers[index]) ? n + 1 : n),
+    0
+  );
 
   const handleOption = useCallback(
     (idx) => {
-      if (revealed || !q) return;
+      if (!q) return;
+
+      if (testMode) {
+        setAnswers((prev) => ({ ...prev, [currentIndex]: idx }));
+        return;
+      }
+
+      if (revealed) return;
       setSelectedIndex(idx);
       setRevealed(true);
 
@@ -338,14 +411,13 @@ export default function QuizApp() {
       if (isSelectionCorrect(idx, q.answer)) {
         setSessionStats((s) => ({ ...s, correct: s.correct + 1 }));
         markCorrect(id);
-        refreshWrongCount();
       } else {
         setSessionStats((s) => ({ ...s, wrong: s.wrong + 1 }));
         markWrong(id);
-        refreshWrongCount();
       }
+      refreshWrongCount();
     },
-    [q, revealed, refreshWrongCount]
+    [q, revealed, testMode, currentIndex, refreshWrongCount]
   );
 
   const handleShortAnswerSubmit = useCallback(() => {
@@ -368,30 +440,97 @@ export default function QuizApp() {
     refreshWrongCount();
   }, [q, revealed, shortAnswerInput, refreshWrongCount]);
 
+  // 시험 모드는 마지막에 한 번에 채점하고, 틀린 문항만 오답 목록에 넣는다.
+  const gradeExam = useCallback(() => {
+    const items = questions.map((question, index) => {
+      const given = answers[index];
+      return {
+        index,
+        question,
+        given,
+        answered: isAnswered(question, given),
+        correct: isAnswerCorrect(question, given),
+      };
+    });
+
+    items.forEach((item) => {
+      const id = questionId(item.question);
+      if (item.correct) markCorrect(id);
+      else markWrong(id);
+    });
+
+    const correctCount = items.filter((item) => item.correct).length;
+    setGraded({
+      items,
+      correctCount,
+      wrongCount: items.length - correctCount,
+      unansweredCount: items.filter((item) => !item.answered).length,
+    });
+    setSessionStats({ correct: correctCount, wrong: items.length - correctCount });
+    setOpenResultIndex(null);
+    clearJeongcheogiSessionProgress();
+    refreshJeongcheogiProgress();
+    refreshWrongCount();
+    setFinished(true);
+  }, [
+    questions,
+    answers,
+    clearJeongcheogiSessionProgress,
+    refreshJeongcheogiProgress,
+    refreshWrongCount,
+  ]);
+
+  const handleSubmitExam = useCallback(() => {
+    const remaining = total - answeredCount;
+    if (
+      remaining > 0 &&
+      !window.confirm(`아직 답하지 않은 문제가 ${remaining}개 있습니다. 지금 제출할까요?`)
+    ) {
+      return;
+    }
+    gradeExam();
+  }, [total, answeredCount, gradeExam]);
+
   const goPrev = useCallback(() => {
     setCurrentIndex((i) => Math.max(0, i - 1));
+    setFinished(false);
+    if (testMode) return;
     setRevealed(false);
     setSelectedIndex(null);
     setShortAnswerInput("");
     setShortAnswerCorrect(false);
-    setFinished(false);
-  }, []);
+  }, [testMode]);
 
   const goNext = useCallback(() => {
     if (isLast) {
+      if (testMode) {
+        handleSubmitExam();
+        return;
+      }
       clearJeongcheogiSessionProgress();
       refreshJeongcheogiProgress();
       setFinished(true);
       return;
     }
     setCurrentIndex((i) => Math.min(total - 1, i + 1));
+    if (testMode) return;
     setRevealed(false);
     setSelectedIndex(null);
     setShortAnswerInput("");
     setShortAnswerCorrect(false);
-  }, [isLast, total, clearJeongcheogiSessionProgress, refreshJeongcheogiProgress]);
+  }, [
+    isLast,
+    total,
+    testMode,
+    handleSubmitExam,
+    clearJeongcheogiSessionProgress,
+    refreshJeongcheogiProgress,
+  ]);
 
   const correctIndices = q && !isShortAnswer ? correctIndicesOf(q.answer) : [];
+  const currentAnswer = answers[currentIndex];
+  const pickedIndex = testMode ? (Number.isInteger(currentAnswer) ? currentAnswer : null) : selectedIndex;
+  const shortAnswerValue = testMode ? String(currentAnswer ?? "") : shortAnswerInput;
   const isCorrect = isShortAnswer
     ? shortAnswerCorrect
     : revealed && selectedIndex != null && correctIndices.includes(selectedIndex);
@@ -426,6 +565,20 @@ export default function QuizApp() {
               ? "전체 · 회차별(100문제) · 오답 복습"
               : "전체 · 통합시험 회차 · 연습 회차 · 오답 복습"}
           </p>
+          <label className={`test-mode-toggle ${testMode ? "is-on" : ""}`}>
+            <input
+              type="checkbox"
+              checked={testMode}
+              onChange={(e) => setTestMode(e.target.checked)}
+            />
+            <span className="test-mode-copy">
+              <strong>실전 시험 모드</strong>
+              <span className="test-mode-desc">
+                정답을 바로 보지 않고 끝까지 푼 뒤 한 번에 채점합니다. 틀린 문제는 그대로 오답
+                목록에 저장돼요.
+              </span>
+            </span>
+          </label>
           <SyncAuth onSync={refreshWrongCount} />
         </header>
         <main className="main main-home">
@@ -477,6 +630,11 @@ export default function QuizApp() {
           <p className="subtitle" title={loadError ? undefined : examTitle}>
             {loadError ? "로드 오류" : examTitle}
           </p>
+          {testMode && (
+            <span className="test-mode-badge" title="실전 시험 모드">
+              시험
+            </span>
+          )}
         </div>
         {!loadError && total > 0 && !finished && (
           <div className="progress-wrap" aria-label={`진행 ${currentIndex + 1}번째 문제, 전체 ${total}문제`}>
@@ -488,6 +646,9 @@ export default function QuizApp() {
                 {currentIndex + 1} / {total}
               </span>
             </div>
+            {testMode && (
+              <p className="progress-answered">응답 {answeredCount} / {total}</p>
+            )}
           </div>
         )}
       </header>
@@ -499,7 +660,121 @@ export default function QuizApp() {
           </p>
         )}
 
-        {finished && (
+        {finished && graded && (
+          <article className="card exam-result">
+            <header className="exam-result-head">
+              <h2 className="summary-title">채점 결과</h2>
+              <p className="exam-score">
+                <strong>{graded.correctCount}</strong>
+                <span className="exam-score-total"> / {graded.items.length}</span>
+                <span className="exam-score-pct">
+                  {Math.round((graded.correctCount / Math.max(1, graded.items.length)) * 100)}%
+                </span>
+              </p>
+              <p className="exam-score-sub muted">
+                정답 {graded.correctCount} · 오답 {graded.wrongCount}
+                {graded.unansweredCount > 0 ? ` (미응답 ${graded.unansweredCount})` : ""}
+              </p>
+            </header>
+
+            <div className="exam-wrong-list">
+              {graded.wrongCount === 0 ? (
+                <p className="muted center">전부 맞혔습니다.</p>
+              ) : (
+                <>
+                  <h3 className="exam-wrong-title">틀린 문제 {graded.wrongCount}개</h3>
+                  <ul className="exam-wrong-items" role="list">
+                    {graded.items
+                      .filter((item) => !item.correct)
+                      .map((item) => {
+                        const open = openResultIndex === item.index;
+                        const answerIndices = correctIndicesOf(item.question.answer);
+                        return (
+                          <li key={item.index} className="exam-wrong-item">
+                            <button
+                              type="button"
+                              className="exam-wrong-row"
+                              onClick={() => setOpenResultIndex(open ? null : item.index)}
+                              aria-expanded={open}
+                            >
+                              <span className="exam-wrong-no">{item.index + 1}번</span>
+                              <span className="exam-wrong-ans">
+                                내 답{" "}
+                                <em className="no">
+                                  {item.answered
+                                    ? item.question.type === "short_answer"
+                                      ? String(item.given)
+                                      : optionLabel(item.given)
+                                    : "미응답"}
+                                </em>{" "}
+                                · 정답 <em className="ok">{correctAnswerLabel(item.question)}</em>
+                              </span>
+                              <span className="exam-wrong-caret" aria-hidden>
+                                {open ? "−" : "+"}
+                              </span>
+                            </button>
+                            {open && (
+                              <div className="exam-wrong-detail">
+                                <RichContent
+                                  text={item.question.question}
+                                  className="exam-detail-question"
+                                />
+                                {item.question.type !== "short_answer" && (
+                                  <ul className="options" role="list">
+                                    {(item.question.options ?? []).map((text, idx) => {
+                                      let stateClass = "";
+                                      if (answerIndices.includes(idx)) stateClass = "is-correct";
+                                      else if (idx === item.given) stateClass = "is-wrong";
+                                      return (
+                                        <li key={idx} className="option-li">
+                                          <div className={`option-btn is-static ${stateClass}`}>
+                                            <span className="key" aria-hidden>
+                                              {optionLabel(idx)}
+                                            </span>
+                                            <RichContent
+                                              text={String(text)}
+                                              className="option-text"
+                                            />
+                                          </div>
+                                        </li>
+                                      );
+                                    })}
+                                  </ul>
+                                )}
+                                <RichContent
+                                  text={item.question.explanation || "해설이 없습니다."}
+                                  className="explanation"
+                                />
+                              </div>
+                            )}
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </>
+              )}
+            </div>
+
+            <div className="summary-actions">
+              <button type="button" className="btn btn-ghost" onClick={goHome}>
+                메뉴로
+              </button>
+              {wrongCount > 0 && (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={
+                    examMode === "jeongcheogi" ? handleStartJeongcheogiWrong : handleStartWrong
+                  }
+                >
+                  틀린 문제 복습 ({wrongCount})
+                </button>
+              )}
+            </div>
+          </article>
+        )}
+
+        {finished && !graded && (
           <article className="card summary-card">
             <h2 className="summary-title">풀이 완료</h2>
             <p className="summary-score">
@@ -546,7 +821,9 @@ export default function QuizApp() {
               </span>
             </div>
             <div className="card-body">
-              <h2 className="question">{q.question}</h2>
+              <h2 className="question">
+                <RichContent text={q.question} />
+              </h2>
               {q.image && (
                 <img
                   className="question-image"
@@ -555,13 +832,13 @@ export default function QuizApp() {
                   loading="lazy"
                 />
               )}
-              {q.passage && <p className="passage">{q.passage}</p>}
+              {q.passage && <RichContent text={q.passage} className="passage" />}
               {isShortAnswer ? (
                 <form
                   className="short-answer-form"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    handleShortAnswerSubmit();
+                    if (!testMode) handleShortAnswerSubmit();
                   }}
                 >
                   <input
@@ -569,29 +846,37 @@ export default function QuizApp() {
                     className={`short-answer-input ${
                       revealed ? (isCorrect ? "is-correct" : "is-wrong") : ""
                     }`}
-                    value={shortAnswerInput}
-                    onChange={(e) => setShortAnswerInput(e.target.value)}
+                    value={shortAnswerValue}
+                    onChange={(e) => {
+                      const { value } = e.target;
+                      if (testMode) setAnswers((prev) => ({ ...prev, [currentIndex]: value }));
+                      else setShortAnswerInput(value);
+                    }}
                     placeholder="정답을 입력하세요"
-                    disabled={revealed}
+                    disabled={!testMode && revealed}
                     autoComplete="off"
                     autoCapitalize="off"
                     autoCorrect="off"
                     spellCheck={false}
                     aria-label="주관식 답안 입력"
                   />
-                  <button
-                    type="submit"
-                    className="btn btn-primary short-answer-submit"
-                    disabled={revealed || !shortAnswerInput.trim()}
-                  >
-                    제출
-                  </button>
+                  {!testMode && (
+                    <button
+                      type="submit"
+                      className="btn btn-primary short-answer-submit"
+                      disabled={revealed || !shortAnswerInput.trim()}
+                    >
+                      제출
+                    </button>
+                  )}
                 </form>
               ) : (
                 <ul className="options" role="list">
                   {(q.options ?? []).map((text, idx) => {
                     let stateClass = "";
-                    if (revealed) {
+                    if (testMode) {
+                      if (idx === pickedIndex) stateClass = "is-picked";
+                    } else if (revealed) {
                       if (correctIndices.includes(idx)) stateClass = "is-correct";
                       else if (idx === selectedIndex) stateClass = "is-wrong";
                     }
@@ -601,20 +886,20 @@ export default function QuizApp() {
                           type="button"
                           className={`option-btn ${stateClass}`}
                           onClick={() => handleOption(idx)}
-                          disabled={revealed}
-                          aria-pressed={revealed && idx === selectedIndex}
+                          disabled={!testMode && revealed}
+                          aria-pressed={idx === pickedIndex}
                         >
                           <span className="key" aria-hidden>
                             {optionLabel(idx)}
                           </span>
-                          <span className="option-text">{text}</span>
+                          <RichContent text={String(text)} className="option-text" />
                         </button>
                       </li>
                     );
                   })}
                 </ul>
               )}
-              {revealed && (
+              {!testMode && revealed && (
                 <section className="result" aria-live="polite">
                   <p className={`result-title ${isCorrect ? "ok" : "no"}`}>
                     {isCorrect ? "정답입니다." : "오답입니다."}
@@ -622,7 +907,10 @@ export default function QuizApp() {
                   {isShortAnswer && !isCorrect && (
                     <p className="correct-answer">정답: {q.answer}</p>
                   )}
-                  <p className="explanation">{q.explanation || "해설이 없습니다."}</p>
+                  <RichContent
+                    text={q.explanation || "해설이 없습니다."}
+                    className="explanation"
+                  />
                 </section>
               )}
             </div>
@@ -639,13 +927,18 @@ export default function QuizApp() {
           <button type="button" className="btn btn-ghost" onClick={goPrev} disabled={currentIndex <= 0}>
             이전
           </button>
+          {testMode && !isLast && (
+            <button type="button" className="btn btn-ghost btn-submit" onClick={handleSubmitExam}>
+              제출
+            </button>
+          )}
           <button
             type="button"
             className="btn btn-primary"
             onClick={goNext}
-            disabled={!revealed}
+            disabled={!testMode && !revealed}
           >
-            {isLast ? "결과 보기" : "다음 문제"}
+            {isLast ? (testMode ? "제출하고 채점" : "결과 보기") : "다음 문제"}
           </button>
         </footer>
       )}

@@ -30,25 +30,15 @@ export function getJeongcheogiAllRoundProgress() {
   return loadAll().rounds;
 }
 
-export function saveJeongcheogiFullProgress(currentIndex, sessionStats, totalQuestions) {
+export function saveJeongcheogiFullProgress(state) {
   const data = loadAll();
-  data.full = {
-    currentIndex,
-    sessionStats,
-    totalQuestions,
-    updatedAt: Date.now(),
-  };
+  data.full = { ...state, updatedAt: Date.now() };
   saveAll(data);
 }
 
-export function saveJeongcheogiRoundProgress(slug, currentIndex, sessionStats, totalQuestions) {
+export function saveJeongcheogiRoundProgress(slug, state) {
   const data = loadAll();
-  data.rounds[slug] = {
-    currentIndex,
-    sessionStats,
-    totalQuestions,
-    updatedAt: Date.now(),
-  };
+  data.rounds[slug] = { ...state, updatedAt: Date.now() };
   saveAll(data);
 }
 
