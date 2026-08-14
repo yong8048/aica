@@ -1,4 +1,5 @@
--- Supabase SQL Editor에서 한 번 실행하세요.
+-- 선택 사항: 오답은 로그인 계정의 user_metadata에도 저장됩니다.
+-- 테이블이 있으면 함께 동기화되므로, 가능하면 SQL Editor에서 한 번 실행하세요.
 
 create table if not exists public.wrong_questions (
   user_id uuid not null references auth.users (id) on delete cascade,

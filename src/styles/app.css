@@ -1043,6 +1043,20 @@
   color: var(--accent);
 }
 
+.sync-paste {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-end;
+  margin-top: 0.5rem;
+}
+
+.sync-paste-input {
+  flex: 1;
+  min-height: 2.6rem;
+  resize: vertical;
+  line-height: 1.35;
+}
+
 @media (min-width: 480px) {
   .sync-actions {
     flex-direction: row;
