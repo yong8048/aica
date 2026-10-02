@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "../styles/app.css";
 import HomeScreen from "./HomeScreen.jsx";
 import JeongcheogiHomeScreen from "./JeongcheogiHomeScreen.jsx";
+import SilgiHomeScreen from "./SilgiHomeScreen.jsx";
+import SilgiQuiz from "./SilgiQuiz.jsx";
 import RichContent from "./RichContent.jsx";
 import SyncAuth from "./SyncAuth.jsx";
 import {
@@ -35,11 +37,30 @@ import {
   saveJeongcheogiFullProgress,
   saveJeongcheogiRoundProgress,
 } from "../utils/practiceProgress.js";
+import {
+  countSilgiWrong,
+  isSilgiId,
+  loadSilgiSample,
+  loadWrongSilgiQuestions,
+} from "../utils/jeongcheogiSilgi.js";
 
 const EXAM_MODES = {
   aica: { key: "aica", label: "AICA" },
   jeongcheogi: { key: "jeongcheogi", label: "정보처리기사" },
+  silgi: { key: "silgi", label: "정보처리기사 실기" },
 };
+
+function countWrong(mode) {
+  if (mode === "jeongcheogi") return countJeongcheogiWrong();
+  if (mode === "silgi") return countSilgiWrong();
+  return countAicaWrong();
+}
+
+function homeTagline(mode) {
+  if (mode === "jeongcheogi") return "전체 · 회차별(100문제) · 오답 복습";
+  if (mode === "silgi") return "정답 확인 후 스스로 채점 · 오답 복습";
+  return "전체 · 통합시험 회차 · 연습 회차 · 오답 복습";
+}
 
 const TEST_MODE_KEY = "aica-test-mode";
 
@@ -88,6 +109,7 @@ export default function QuizApp() {
   const [answers, setAnswers] = useState({});
   const [graded, setGraded] = useState(null);
   const [openResultIndex, setOpenResultIndex] = useState(null);
+  const [silgiSession, setSilgiSession] = useState(0);
   const [jeongcheogiProgress, setJeongcheogiProgress] = useState(() => ({
     full: getJeongcheogiFullProgress(),
     rounds: getJeongcheogiAllRoundProgress(),
@@ -112,7 +134,7 @@ export default function QuizApp() {
 
   const refreshWrongCount = useCallback(
     (mode = examMode) => {
-      setWrongCount(mode === "jeongcheogi" ? countJeongcheogiWrong() : countAicaWrong());
+      setWrongCount(countWrong(mode));
     },
     [examMode]
   );
@@ -125,7 +147,7 @@ export default function QuizApp() {
       setLoadError(null);
       setFinished(false);
       setQuestions([]);
-      setWrongCount(mode === "jeongcheogi" ? countJeongcheogiWrong() : countAicaWrong());
+      setWrongCount(countWrong(mode));
     },
     [examMode]
   );
@@ -348,10 +370,32 @@ export default function QuizApp() {
     }
   }, [resetQuizState]);
 
+  const handleStartSilgi = useCallback(() => {
+    setSilgiSession((n) => n + 1);
+    return startQuiz(loadSilgiSample);
+  }, [startQuiz]);
+
+  const handleStartSilgiWrong = useCallback(() => {
+    setSilgiSession((n) => n + 1);
+    return startQuiz(async () => {
+      const result = await loadWrongSilgiQuestions();
+      if (!result.questions.length) {
+        throw new Error("저장된 오답이 없습니다.");
+      }
+      return result;
+    });
+  }, [startQuiz]);
+
   const handleClearWrong = useCallback(async () => {
     if (!window.confirm("저장된 오답 기록을 삭제할까요? (로그인 중이면 클라우드도 삭제됩니다)")) return;
     const isJeongcheogiId = (id) => id.startsWith("jeongcheogi-");
-    await clearWrongIdsMatching(examMode === "jeongcheogi" ? isJeongcheogiId : (id) => !isJeongcheogiId(id));
+    const predicate =
+      examMode === "jeongcheogi"
+        ? isJeongcheogiId
+        : examMode === "silgi"
+          ? isSilgiId
+          : (id) => !isJeongcheogiId(id) && !isSilgiId(id);
+    await clearWrongIdsMatching(predicate);
     refreshWrongCount();
   }, [refreshWrongCount, examMode]);
 
@@ -560,25 +604,23 @@ export default function QuizApp() {
             <h1 className="title">{EXAM_MODES[examMode].label} 연습</h1>
           </div>
           {modeTabs}
-          <p className="home-tagline">
-            {examMode === "jeongcheogi"
-              ? "전체 · 회차별(100문제) · 오답 복습"
-              : "전체 · 통합시험 회차 · 연습 회차 · 오답 복습"}
-          </p>
-          <label className={`test-mode-toggle ${testMode ? "is-on" : ""}`}>
-            <input
-              type="checkbox"
-              checked={testMode}
-              onChange={(e) => setTestMode(e.target.checked)}
-            />
-            <span className="test-mode-copy">
-              <strong>실전 시험 모드</strong>
-              <span className="test-mode-desc">
-                정답을 바로 보지 않고 끝까지 푼 뒤 한 번에 채점합니다. 틀린 문제는 그대로 오답
-                목록에 저장돼요.
+          <p className="home-tagline">{homeTagline(examMode)}</p>
+          {examMode !== "silgi" && (
+            <label className={`test-mode-toggle ${testMode ? "is-on" : ""}`}>
+              <input
+                type="checkbox"
+                checked={testMode}
+                onChange={(e) => setTestMode(e.target.checked)}
+              />
+              <span className="test-mode-copy">
+                <strong>실전 시험 모드</strong>
+                <span className="test-mode-desc">
+                  정답을 바로 보지 않고 끝까지 푼 뒤 한 번에 채점합니다. 틀린 문제는 그대로 오답
+                  목록에 저장돼요.
+                </span>
               </span>
-            </span>
-          </label>
+            </label>
+          )}
           <SyncAuth onSync={refreshWrongCount} />
         </header>
         <main className="main main-home">
@@ -601,6 +643,14 @@ export default function QuizApp() {
               onClearWrong={handleClearWrong}
             />
           )}
+          {!loading && examMode === "silgi" && (
+            <SilgiHomeScreen
+              wrongCount={wrongCount}
+              onStart={handleStartSilgi}
+              onStartWrong={handleStartSilgiWrong}
+              onClearWrong={handleClearWrong}
+            />
+          )}
           {!loading && examMode === "aica" && (
             <HomeScreen
               wrongCount={wrongCount}
@@ -613,6 +663,45 @@ export default function QuizApp() {
           )}
         </main>
       </div>
+    );
+  }
+
+  if (view === "quiz" && examMode === "silgi") {
+    if (loading || questions.length === 0) {
+      return (
+        <div className="layout">
+          <header className="header">
+            <div className="brand-row">
+              <button type="button" className="back-btn" onClick={goHome} aria-label="메뉴로 돌아가기">
+                ←
+              </button>
+              <h1 className="title">{EXAM_MODES.silgi.label} 연습</h1>
+            </div>
+          </header>
+          <main className="main">
+            {loadError ? (
+              <p className="error" role="alert">
+                {loadError}
+              </p>
+            ) : (
+              <p className="muted center">문제를 불러오는 중…</p>
+            )}
+          </main>
+        </div>
+      );
+    }
+
+    return (
+      <SilgiQuiz
+        key={silgiSession}
+        heading={`${EXAM_MODES.silgi.label} 연습`}
+        examTitle={examTitle}
+        questions={questions}
+        wrongCount={wrongCount}
+        onHome={goHome}
+        onReviewWrong={handleStartSilgiWrong}
+        onMarked={() => refreshWrongCount("silgi")}
+      />
     );
   }
 

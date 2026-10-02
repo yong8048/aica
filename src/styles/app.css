@@ -536,13 +536,15 @@
   flex: 1;
   min-height: 38px;
   font-family: inherit;
-  font-size: 0.85rem;
+  font-size: clamp(0.72rem, 2.5vw, 0.85rem);
   font-weight: 600;
+  line-height: 1.25;
   color: var(--muted);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   cursor: pointer;
+  padding: 0.35rem 0.3rem;
   transition: border-color 0.15s, background 0.15s, color 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
@@ -1055,6 +1057,91 @@
   min-height: 2.6rem;
   resize: vertical;
   line-height: 1.35;
+}
+
+.reveal-answer-btn {
+  width: 100%;
+  margin-top: 0.7rem;
+}
+
+.silgi-answer {
+  margin-top: 0.7rem;
+  padding: 0.75rem 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.silgi-answer-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.silgi-answer-label + .explanation {
+  margin-bottom: 0.15rem;
+}
+
+.silgi-answer-text {
+  margin: 0 0 0.75rem;
+  font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.silgi-grade {
+  display: flex;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.silgi-grade-btn {
+  flex: 1;
+  min-height: 42px;
+  font-family: inherit;
+  font-size: clamp(0.82rem, 2.4vw, 0.95rem);
+  font-weight: 700;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.silgi-grade-btn:hover {
+  border-color: var(--muted);
+}
+
+.silgi-grade-btn.is-correct {
+  color: var(--success);
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
+.silgi-grade-btn.is-wrong {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.silgi-grade-note {
+  margin: 0.55rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.silgi-grade-note.ok {
+  color: var(--success);
+}
+
+.silgi-grade-note.no {
+  color: var(--danger);
 }
 
 @media (min-width: 480px) {

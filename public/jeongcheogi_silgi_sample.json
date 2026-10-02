@@ -1,0 +1,28 @@
+{
+  "source": "예시",
+  "slug": "sample",
+  "total": 3,
+  "questions": [
+    {
+      "number": 1,
+      "category": "소프트웨어 공학",
+      "question": "다음 설명에 해당하는 테스트 기법을 쓰시오.\n\n- 프로그램 내부 구조와 소스 코드를 기준으로 테스트 케이스를 작성한다.\n- 문장 커버리지, 분기 커버리지, 조건 커버리지 등으로 수행 정도를 측정한다.",
+      "answer": "화이트박스 테스트 (White Box Test, 구조 기반 테스트)",
+      "explanation": "내부 논리 구조를 알고 수행하는 테스트이다. 명세만 보고 입력과 출력으로 확인하는 기법은 블랙박스 테스트이다."
+    },
+    {
+      "number": 2,
+      "category": "SQL",
+      "question": "다음 SQL에서 학과별 학생 수가 3명 이상인 학과만 조회하기 위해 사용한 절의 이름을 쓰시오.\n\nSELECT 학과, COUNT(*) AS 학생수\nFROM 학생\nGROUP BY 학과\nHAVING COUNT(*) >= 3;",
+      "answer": "HAVING",
+      "explanation": "GROUP BY로 묶은 결과에 조건을 줄 때는 WHERE가 아니라 HAVING을 쓴다. WHERE는 그룹으로 묶기 전 행을 거를 때 사용한다."
+    },
+    {
+      "number": 3,
+      "category": "데이터베이스",
+      "question": "트랜잭션이 만족해야 하는 ACID 특성 가운데, 동시에 수행되는 트랜잭션이 서로 간섭하지 않아야 한다는 특성의 이름을 쓰시오.",
+      "answer": "격리성 (고립성, Isolation)",
+      "explanation": "ACID는 원자성(Atomicity), 일관성(Consistency), 격리성(Isolation), 지속성(Durability)이다. 격리성은 함께 실행 중인 트랜잭션이 서로 영향을 주지 않도록 보장한다."
+    }
+  ]
+}

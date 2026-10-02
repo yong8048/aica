@@ -10,6 +10,7 @@ export {
   WRONG_STORAGE_KEY,
 } from "./wrongAnswers.js";
 import { loadWrongIds as getWrongIds } from "./wrongAnswers.js";
+import { isSilgiId } from "./jeongcheogiSilgi.js";
 
 export function optionLabel(idx) {
   return OPTION_KEYS[idx] ?? String(idx + 1);
@@ -34,7 +35,7 @@ export function isShortAnswerCorrect(input, expectedAnswer) {
 }
 
 export function countAicaWrong() {
-  return [...getWrongIds()].filter((id) => !id.startsWith("jeongcheogi-")).length;
+  return [...getWrongIds()].filter((id) => !id.startsWith("jeongcheogi-") && !isSilgiId(id)).length;
 }
 
 export function buildQuestionId(source, raw) {
