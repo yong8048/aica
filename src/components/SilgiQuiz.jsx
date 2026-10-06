@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import RichContent from "./RichContent.jsx";
 import { markCorrect, markWrong } from "../utils/quiz.js";
+import { silgiRoundLabel } from "../utils/jeongcheogiSilgi.js";
 
 export default function SilgiQuiz({
   heading,
@@ -126,7 +127,7 @@ export default function SilgiQuiz({
             <div className="meta">
               <span className="badge">{q.category || "—"}</span>
               <span className="qnum">
-                {q.round === "sample" ? "예시 " : ""}
+                {q.round ? `${silgiRoundLabel(q.round)} ` : ""}
                 문제 {q.number ?? currentIndex + 1}
               </span>
             </div>
@@ -134,6 +135,13 @@ export default function SilgiQuiz({
               <h2 className="question">
                 <RichContent text={q.question} />
               </h2>
+              {q.image ? (
+                <img
+                  className="question-image"
+                  src={`${import.meta.env.BASE_URL}${q.image}`}
+                  alt={`문제 ${q.number ?? currentIndex + 1} 첨부`}
+                />
+              ) : null}
               {q.passage ? <RichContent text={q.passage} className="passage" /> : null}
 
               {!revealed ? (

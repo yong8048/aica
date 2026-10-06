@@ -1,13 +1,37 @@
-export default function SilgiHomeScreen({ wrongCount, onStart, onStartWrong, onClearWrong }) {
+import { SILGI_ROUNDS, silgiRoundLabel } from "../utils/jeongcheogiSilgi.js";
+
+export default function SilgiHomeScreen({
+  wrongCount,
+  onStartRound,
+  onStartSample,
+  onStartWrong,
+  onClearWrong,
+}) {
   return (
     <div className="home">
       <section className="home-section">
-        <h2 className="home-heading">예시 문제</h2>
+        <h2 className="home-heading">회차</h2>
         <p className="home-desc">
           주관식은 답을 입력하지 않습니다. 문제를 본 뒤 정답을 열고, 맞았는지 직접 표시합니다.
-          지금은 예시 3문제만 들어 있습니다.
         </p>
-        <button type="button" className="btn btn-primary home-action" onClick={onStart}>
+        <div className="home-row">
+          {SILGI_ROUNDS.map((round) => (
+            <button
+              key={round.slug}
+              type="button"
+              className="btn btn-primary home-action"
+              onClick={() => onStartRound(round.slug)}
+            >
+              {silgiRoundLabel(round.slug)} 시작
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-section">
+        <h2 className="home-heading">예시 문제</h2>
+        <p className="home-desc">동작 확인용 예시 3문제입니다.</p>
+        <button type="button" className="btn btn-ghost home-action" onClick={onStartSample}>
           예시 3문제 시작
         </button>
       </section>

@@ -40,6 +40,7 @@ import {
 import {
   countSilgiWrong,
   isSilgiId,
+  loadSilgiRound,
   loadSilgiSample,
   loadWrongSilgiQuestions,
 } from "../utils/jeongcheogiSilgi.js";
@@ -375,6 +376,14 @@ export default function QuizApp() {
     return startQuiz(loadSilgiSample);
   }, [startQuiz]);
 
+  const handleStartSilgiRound = useCallback(
+    (slug) => {
+      setSilgiSession((n) => n + 1);
+      return startQuiz(() => loadSilgiRound(slug));
+    },
+    [startQuiz]
+  );
+
   const handleStartSilgiWrong = useCallback(() => {
     setSilgiSession((n) => n + 1);
     return startQuiz(async () => {
@@ -646,7 +655,8 @@ export default function QuizApp() {
           {!loading && examMode === "silgi" && (
             <SilgiHomeScreen
               wrongCount={wrongCount}
-              onStart={handleStartSilgi}
+              onStartRound={handleStartSilgiRound}
+              onStartSample={handleStartSilgi}
               onStartWrong={handleStartSilgiWrong}
               onClearWrong={handleClearWrong}
             />
