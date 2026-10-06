@@ -1,0 +1,149 @@
+{
+  "source": "2024년 2회 복원문제",
+  "slug": "2024_02",
+  "total": 20,
+  "questions": [
+    {
+      "number": 1,
+      "category": "Java",
+      "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "NNN",
+      "passage": "class Main {\n    public static void main(String[] args) {\n        int[] a = new int[]{1, 2, 3, 4};\n        int[] b = new int[]{1, 2, 3, 4};\n        int[] c = new int[]{1, 2, 3};\n        \n        check(a, b);\n        check(a, c); \n        check(b, c); \n    }\n \n    public static void check(int[] a, int[] b) {\n        if (a==b) {\n            System.out.print(\"O\");\n        }else{\n            System.out.print(\"N\");\n        }\n        \n    }\n}"
+    },
+    {
+      "number": 2,
+      "category": "데이터베이스",
+      "question": "다음 문제에서 설명하는 용어를 작성하시오.",
+      "answer": "반정규화",
+      "passage": "데이터를 중복시켜 성능을 향상시키기 위한 기법으로 데이터를 중복 저장하거나\n\n테이블을 합치는 등으로 성능을 향상시키지만 데이터 무결성이 저하될 수 있는 기법"
+    },
+    {
+      "number": 3,
+      "category": "SQL",
+      "question": "다음은 SQL에 관한 문제이다. 아래 SQL 구문의 빈칸을 작성하시오.",
+      "answer": "① : VALUES \n② : SELECT\n③ : FROM\n④ : SET",
+      "passage": "테이블\n\n사원 [사원번호(PK), 이름, 나이, 부서]\n\n부서 [사원번호(PK), 이름, 주소, 나이]\n\n신입 사원이 들어와서 사원 테이블에 추가\n\nINSERT INTO 사원 (사원번호, 이름, 주소, 부서)   [      ①     ] (32431, '정실기', '서울', '영업');\n\n위에 신입사원을 검색하면서 부서 테이블에 추가\n\nINSERT INTO 부서 (사원번호, 이름, 나이, 부서)\n\n[    ②     ] 사원번호, 이름, 나이, 23 FROM 사원 WHERE 이름 = '정실기';\n\n전체 사원 테이블 조회\n\nSELECT  *   [    ③   ]   사원;\n\n퇴사로 인해 부서에 해당하는 값을 '퇴사'로 변경\n\nUPDATE 사원   [      ④     ]   부서  =  '퇴사'  WHERE 사원번호  = 32431;"
+    },
+    {
+      "number": 4,
+      "category": "데이터베이스",
+      "question": "다음 릴레이션의 Cardinality와 Degree를 작성하시오.",
+      "answer": "① : 5\n② : 4",
+      "passage": "Cardinality : (  ①  )\n\nDegree      : (  ②  )\n\n이름 | 나이 | A | B\n김ㅇㅇ | 23 | 1 | 5\n박ㅇㅇ | 25 | 2 | 3\n고ㅇㅇ | 42 | 3 | 8\n최ㅇㅇ | 20 | 2 | 9\n이ㅇㅇ | 25 | 1 | 2",
+      "image": "silgi/2024_02/q04.png"
+    },
+    {
+      "number": 5,
+      "category": "네트워크",
+      "question": "다음은 프로토콜에 대한 내용이다. 아래 내용을 읽고 알맞는 답을 작성하시오.",
+      "answer": "IPSec",
+      "passage": "- Network layer에서 IP패킷을 암호화하고 인증하는 등의 보안을 위한 표준이다.\n\n- 기업에서 사설 인터넷망으로 사용할 수 있는 VPN을 구현하는데 사용되는 프로토콜이다.\n- AH(Authentication Header)와 ESP(Encapsulating Security Payload)라는 두 가지 보안 프로토콜을 사용한다."
+    },
+    {
+      "number": 6,
+      "category": "Python",
+      "question": "다음은 Python에 대한 문제이다. 아래 코드를 읽고 알맞는 출력 값을 작성하시오.",
+      "answer": "ab3ca3",
+      "passage": "def fnCalculation(x,y):\n    result = 0;\n    for i in range(len(x)):\n     temp = x[i:i+len(y)] \n     if temp == y:\n       result += 1;\n    return result\n \na = \"abdcabcabca\"\np1 = \"ab\";\np2 = \"ca\";\n \nout = f\"ab{fnCalculation(a,p1)}ca{fnCalculation(a,p2)}\"\nprint(out)"
+    },
+    {
+      "number": 7,
+      "category": "정보처리",
+      "question": "아래 설명하는 내용을 확인하여 알맞는 알고리즘을 작성하시오.",
+      "answer": "AES",
+      "passage": "- 대칭키 알고리즘으로 1997년 NIST(미국 국립기술표준원)에서 DES를 대체하기 위해 생성되었다.\n- 128비트, 192비트 또는 256비트의 가변 키 크기와 128비트의 고정 블록 크기를 사용한다.\n- 높은 안전성과 효율성, 속도 등으로 인해 DES 대신 전 세계적으로 많이 사용되고 있다."
+    },
+    {
+      "number": 8,
+      "category": "정보처리",
+      "question": "패킷 교환 방식 중에 연결형과 비연결형에 해당하는 방식을 작성하시오.",
+      "answer": "① 가상회선\n② 데이터그램",
+      "passage": "① 연결형 교환 방식\n\n② 비연결형 교환 방식"
+    },
+    {
+      "number": 9,
+      "category": "정보처리",
+      "question": "아래 내용을 확인하고 보기에서 알맞는 답을 고르시오.",
+      "answer": "ㅂ. 순차적 (sequential)",
+      "passage": "실행 순서가 밀접한 관계를 갖는 기능을 모아 모듈로 구성한다.\n한 모듈 내부의 한 기능 요소에 의한 출력 자료가 다음 기능 원소의 입력 자료로서 제공되는 형태이다.\n\n보기\n\nㄱ.  기능적(functional)           ㄴ.  우연적(Coincidental)          ㄷ.  통신적(Communication)       ㄹ.  절차적(Procedural)         ㅁ.  시간적(Temporal)           ㅂ.  순차적(sequential)              ㅅ.    논리적(Logical)"
+    },
+    {
+      "number": 10,
+      "category": "운영체제",
+      "question": "아래는 디자인 패턴에 관한 설명이다. 아래 설명을 읽고 보기에서 알맞는 용어를 작성하시오.",
+      "answer": "Iterator",
+      "passage": "- 컬렉션 객체의 내부 구조를 노출하지 않고 순차적으로 접근할 수 있게 하는 패턴이다. \n- 이 패턴은 객체의 내부 표현 방식에 독립적으로 요소에 접근할 수 있도록 해준다\n- 반복 프로세스를 캡슐화하여 클라이언트 코드에서는 컬렉션의 구체적인 구현에 종속되지 않도록 한다.\n\n보기\n\n생성패턴 | 구조패턴 | 행위패턴\nSingleton | Adapter | Iterator\nFactory Method | Bridge | Visitor\nAbstract Factory | Composite | Observer"
+    },
+    {
+      "number": 11,
+      "category": "네트워크",
+      "question": "아래 그림을 바탕으로 RIP을 구성하여 최단 경로 비용을 계산하여 흐름에 맞게 작성하시오.",
+      "answer": "A → D  → C   → F",
+      "passage": "예제\n\nA  →\n\n라우터 연결 비용\nA-B 2, A-D 1, B-D 2\nD-C 2, C-E 1, C-F 5, E-F 2",
+      "image": "silgi/2024_02/q11.png"
+    },
+    {
+      "number": 12,
+      "category": "운영체제",
+      "question": "아래의 표를 확인하여 SRT 스케줄링의 평균 대기시간을 계산하여 작성하시오.",
+      "answer": "6.5",
+      "passage": "프로세스 | 도착 시간 | 서비스 시간\nA | 0 | 8\nB | 1 | 4\nC | 2 | 9\nD | 3 | 5"
+    },
+    {
+      "number": 13,
+      "category": "C언어",
+      "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "21",
+      "passage": "#include <stdio.h>\n \nint main() {\n    int arr[3][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n    int* parr[2] = {arr[1], arr[2]};\n    printf(\"%d\", parr[1][1] + *(parr[1]+2) + **parr);\n    \n    return 0;\n}"
+    },
+    {
+      "number": 14,
+      "category": "Java",
+      "question": "다음은 Java 언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "25, 20",
+      "passage": "class Main {\n    public static void main(String[] args) {\n        int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n        ODDNumber OE = new ODDNumber();\n        System.out.print(OE.sum(a, true) + \", \" + OE.sum(a, false));\n    }\n}\n \ninterface Number {\n    int sum(int[] a, boolean odd);\n}\n \nclass ODDNumber implements Number {\n    public int sum(int[] a, boolean odd) {\n        int result = 0;\n        for(int i=0; i < a.length; i++){\n            if((odd && a[i] % 2 != 0) || (!odd && a[i] % 2 == 0))\n                result += a[i];\n        }        \n        return result;\n    }    \n}"
+    },
+    {
+      "number": 15,
+      "category": "C언어",
+      "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "10",
+      "passage": "#include <stdio.h>\n#include <string.h>\n \nvoid sumFn(char* d, const char* s) {\n \n    while (*s) {\n        *d = *s;\n        d++;\n        s++;\n    }\n    *d = '\\0'; \n}\n \nint main() {\n   const char* str1 = \"first\";\n    char str2[50] = \"teststring\";  \n    int result=0;\n    sumFn(str2, str1);\n \n    for (int i = 0; str2[i] != '\\0'; i++) {\n        result += i;\n    }\n    printf(\"%d\", result);\n    \n    return 0;\n}"
+    },
+    {
+      "number": 16,
+      "category": "소프트웨어 공학",
+      "question": "아래는 소프트웨어 설계에 대한 내용이다. 내용을 읽고 괄호안에 알맞는 답을 작성하시오.",
+      "answer": "제어  or  Control",
+      "passage": "- 어떤 모듈이 다른 모듈 내부의 논리적인 흐름을 제어하기 위해, 제어를 통신하거나 제어 요소를 전달하는 결합도이다.\n- 한 모듈이 다른 모듈의 상세한 처리 절차를 알고 있어 이를 통제하는 경우나 처리 기능이 두 모듈에 분리되어 설계된 경우에 발생한다.\n\n(              ) Coupling"
+    },
+    {
+      "number": 17,
+      "category": "Java",
+      "question": "다음은 Java에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
+      "answer": "dcba",
+      "passage": "class Main {\n    public static void main(String[] args) {\n        String str = \"abacabcd\";\n        boolean[] seen = new boolean[256];\n        System.out.print(calculFn(str, str.length()-1, seen));\n    }\n \n    public static String calculFn(String str, int index, boolean[] seen) {\n        if(index < 0) return \"\";\n        char c = str.charAt(index);\n        String result = calculFn(str, index-1, seen);\n        if(!seen[c]) {\n            seen[c] = true;\n            return c + result;\n        }\n        return result;\n    }\n}"
+    },
+    {
+      "number": 18,
+      "category": "C언어",
+      "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
+      "answer": "-13",
+      "passage": "#include <stdio.h>\n \nvoid swap(int a, int b) {\n    int t = a;\n    a = b;\n    b = t;\n}\n \nint main() {\n    \n    int a = 11;\n    int b = 19;\n    swap(a, b);\n    \n    switch(a) {\n        case 1:\n            b += 1;\n        case 11:\n            b += 2;\n        default:\n            b += 3;\n        break;\n    }\n    \n    printf(\"%d\", a-b);\n}"
+    },
+    {
+      "number": 19,
+      "category": "C언어",
+      "question": "다음은 C언어의 구조체에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
+      "answer": "20",
+      "passage": "#include <stdio.h>\n \nstruct node {\n    int n1;\n    struct node *n2;\n};\n \nint main() {\n \n    struct node a = {10, NULL};\n    struct node b = {20, NULL};\n    struct node c = {30, NULL};\n \n    struct node *head = &a;\n    a.n2 = &b;\n    b.n2 = &c;\n \n    printf(\"%d\\n\", head->n2->n1);\n \n    return 0;\n}"
+    },
+    {
+      "number": 20,
+      "category": "Java",
+      "question": "다음은 Java에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
+      "answer": "S",
+      "passage": "class Main {\n    public static void main(String[] args) {\n        String str = \"ITISTESTSTRING\";\n        String[] result = str.split(\"T\");\n        System.out.print(result[3]);\n    }\n}"
+    }
+  ]
+}

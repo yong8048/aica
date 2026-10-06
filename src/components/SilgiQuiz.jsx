@@ -135,13 +135,14 @@ export default function SilgiQuiz({
               <h2 className="question">
                 <RichContent text={q.question} />
               </h2>
-              {q.image ? (
+              {[q.image, ...(q.images ?? [])].filter(Boolean).map((src) => (
                 <img
+                  key={src}
                   className="question-image"
-                  src={`${import.meta.env.BASE_URL}${q.image}`}
+                  src={`${import.meta.env.BASE_URL}${src}`}
                   alt={`문제 ${q.number ?? currentIndex + 1} 첨부`}
                 />
-              ) : null}
+              ))}
               {q.passage ? <RichContent text={q.passage} className="passage" /> : null}
 
               {!revealed ? (

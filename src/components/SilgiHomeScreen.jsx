@@ -14,15 +14,15 @@ export default function SilgiHomeScreen({
         <p className="home-desc">
           주관식은 답을 입력하지 않습니다. 문제를 본 뒤 정답을 열고, 맞았는지 직접 표시합니다.
         </p>
-        <div className="home-row">
+        <div className="round-grid" role="list">
           {SILGI_ROUNDS.map((round) => (
             <button
               key={round.slug}
               type="button"
-              className="btn btn-primary home-action"
+              className="round-btn"
               onClick={() => onStartRound(round.slug)}
             >
-              {silgiRoundLabel(round.slug)} 시작
+              <span className="round-btn-label">{silgiRoundLabel(round.slug)}</span>
             </button>
           ))}
         </div>

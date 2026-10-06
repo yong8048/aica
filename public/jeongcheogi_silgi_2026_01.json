@@ -1,0 +1,149 @@
+{
+  "source": "2026년 1회 복원문제",
+  "slug": "2026_01",
+  "total": 20,
+  "questions": [
+    {
+      "number": 1,
+      "category": "C언어",
+      "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "106.00",
+      "passage": "#include <stdio.h>\n \ndouble arr1(int p[], int len) {\n    double av = 0;\n    int i;\n    for (i = 0; i < len; i++) {\n        av += (double) p[i];\n    }\n    return av / len;\n}\n \ndouble arr2(int * p, int len) {\n    double av = 0;\n    int i;\n    for (i = 0; i < len; i++) {\n        av += (double)( * (p + i));\n    }\n    return av / len;\n}\n \nint main() {\n    int arr[10] = {\n        80,\n        20,\n        50,\n        55,\n        45,\n        95,\n        55,\n        10,\n        40,\n        80\n    };\n    int len = 10;\n \n    printf(\"%.2f\", arr1(arr, len) + arr2(arr, len));\n \n    return 0;\n}"
+    },
+    {
+      "number": 2,
+      "category": "소프트웨어 공학",
+      "question": "다음 설명에 해당하는 디자인 패턴의 유형을 괄호( ) 안에 쓰시오.",
+      "answer": "ㄱ. Bridge\nㄴ. Observer",
+      "passage": "• ( ㄱ ) 패턴은 기능의 클래스 계층과 구현의 클래스 계층을 연결\n• ( ㄴ ) 패턴은 한 객체의 상태가 바뀌면 그 객체에 의존"
+    },
+    {
+      "number": 3,
+      "category": "데이터베이스",
+      "question": "데이터베이스(DB) 설계 절차를 순서대로 나타낸 것이다. 각 빈칸에 들어갈 알맞은 용어를 쓰시오.",
+      "answer": "ㄱ.요구사항 분석\nㄴ.개념적 설계\nㄷ.논리적 설계\nㄹ.물리적 설계\nㅁ.구현",
+      "passage": "DB 설계 절차\n(ㄱ) → (ㄴ) → (ㄷ) → (ㄹ) → (ㅁ)\n[보기] 구현 / 개념적 설계 / 논리적 설계 / 요구사항 분석 / 물리적 설계",
+      "image": "silgi/2026_01/q03.png"
+    },
+    {
+      "number": 4,
+      "category": "정보보안",
+      "question": "다음은 비기능적 요구사항에 대한 설명이다. 각 항목이 의미하는 요구사항 유형을 보기에서 골라 쓰시오.\n\n1. 시스템 운영 중 로그 관리 및 모니터링 기능을 제공해야 한다.\n2. 시스템 운영 시 최소 메모리 용량을 확보해야 하며, 자원 사용량은 제한 범위 내에 있어야 한다.\n3. 사용자 요청에 대한 응답 시간은 최대 1분을 초과하지 않아야 한다.",
+      "answer": "1. 운영\n2. 자원\n3. 성능",
+      "passage": "보기\n\n신뢰성, 가용성, 운영, 유지보수성, 자원, 성능, 이식성 ,보안, 품질"
+    },
+    {
+      "number": 5,
+      "category": "정보처리",
+      "question": "다음 용어의 영문 약자를 쓰시오.",
+      "answer": "ISMS",
+      "passage": "- 정보보호 관리체계"
+    },
+    {
+      "number": 6,
+      "category": "네트워크",
+      "question": "HDLC는 비트 중심의 데이터 링크 제어 프로토콜로, 프레임 단위로 데이터를 전송하며 흐름 제어 및 오류 복구 기능을 제공한다. 다음 설명을 읽고 알맞은 용어를 쓰시오.",
+      "answer": "1. 정보\n2. 감독\n3. 비번호\n4. 비동기 균형 모드\n5. 비동기 응답 모드",
+      "passage": "HDLC 구성 요소\n\n1. HDLC 프레임의 구성 단위로, 실제 사용자 데이터를 전송하는 프레임\n\n2. 데이터 링크의 흐름을 관리하고 오류 제어 및 통신 상태를 감시하는 프레임\n\n3. 순서 번호 없이 링크 설정, 해제, 모드 설정 등 제어 기능을 수행하는 프레임\n\n4. 두 국(Station)이 동등한 위치에서 서로 명령과 응답을 주고받는 모드\n\n5. 종국(Secondary)이 주국(Primary)의 허가 없이도 자발적으로 응답을 전송할 수 있는 모드"
+    },
+    {
+      "number": 7,
+      "category": "Java",
+      "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "2",
+      "passage": "class A {\n    String f(Object x) {\n        return \"1\";\n    }\n    \n    String g() {\n        return f(\"a\"); \n    }\n}\n \nclass B extends A {\n    String f(Object x) {\n        return \"2\";\n    }\n    \n    String f(String x) {\n        return \"3\";\n    }\n}\n \npublic class Main {\n    public static void main(String[] args) {\n        A a = new B();\n        System.out.println(a.g());\n    }\n}"
+    },
+    {
+      "number": 8,
+      "category": "Python",
+      "question": "아래 파이썬 코드가 있다. 입력값으로 HumanDev를 주었을 때 출력되는 결과를 쓰시오.",
+      "answer": "veDamuH",
+      "passage": "i = input()\nx = []\n \nfor word in i.split():\n    x.append(word)\n \ny = ''.join(x)\nz = ''.join(c for c in y[::-1] if c not in 'ong')\n \nprint(z)"
+    },
+    {
+      "number": 9,
+      "category": "SQL",
+      "question": "아래 조건을 참고하여 각 SQL 구문을 실행했을 때 반환되는 행(Row)의 수를 쓰시오.\n(단, DEPT 칼럼은 학과명이다.)",
+      "answer": "1. 200\n2. 3\n3. 1",
+      "passage": "테이블 조건\n\nSTUDENT 테이블에는 다음 세 학과의 학생 정보가 저장되어 있다.\n컴퓨터과  50명  · 인터넷과  100명  · 사무자동화과  50\n\nSQL 구문\n\n1. SELECT DEPT FROM STUDENT;\n2. SELECT DISTINCT DEPT FROM STUDENT;\n3. SELECT COUNT(DISTINCT DEPT) FROM STUDENT\n    WHERE DEPT = '컴퓨터과';"
+    },
+    {
+      "number": 10,
+      "category": "SQL",
+      "question": "아래는 선수(PLAYER) 정보를 관리하는 테이블을 정의하는 SQL 문이다. 팀(TEAM) 테이블의 특정 칼럼을 참조하는 외래키 제약 조건을 추가하려 할 때, 괄호 ①~⑤에 들어갈 적절한 예약어(keyword) 또는 칼럼명을 아래 조건을 참고하여 쓰시오.",
+      "answer": "1. CONSTRAINT\n2. FOREIGN\n3. TEAM_ID\n4. REFERENCES\n5. TEAM_ID2",
+      "passage": "조건\n\n외래키 제약 조건의 이름은 TEAM_TF 로 지정한다.\nPLAYER 테이블의 TEAM_ID 칼럼이 외래키 역할을 한다.\nTEAM 테이블의 TEAM_ID2 칼럼을 참조 대상으로 한다.\n\nSQL 문\n\nCREATE TABLE PLAYER (\n  PLAYER_ID  CHAR(7)     NOT NULL,\n  PLAYER_NAME VARCHAR2(20) NOT NULL,\n  TEAM_ID   CHAR(3)     NOT NULL,\n  PRIMARY KEY (PLAYER_ID),\n  ( 1 ) TEAM_TF\n  ( 2 ) KEY ( 3 )\n  ( 4 ) TEAM ( 5 )\n);"
+    },
+    {
+      "number": 11,
+      "category": "네트워크",
+      "question": "두 호스트 a, b의 IP 주소와 서브넷 마스크가 주어졌을 때, 각 호스트가 속한 네트워크 주소를 CIDR 표기법으로 쓰시오.",
+      "answer": "a. 192.168.10.0/23\nb. 192.168.12.0/23",
+      "passage": "조건\n\n· 호스트 a의 IP 주소: 192.168.11.20\n· 호스트 b의 IP 주소: 192.168.12.200\n· 서브넷 마스크: 255.255.254.0\n\n구하는 것\n\na. 호스트 a (192.168.11.20) 가 속한 네트워크 주소\nb. 호스트 b (192.168.12.200) 가 속한 네트워크 주소"
+    },
+    {
+      "number": 12,
+      "category": "C언어",
+      "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "20",
+      "passage": "struct fns {\n    int* (*fn)(int*);\n} mine;\n \nint* dummy(int *d) {\n    return d + 1;\n}\n \nint main() {\n    struct fns mine;\n    int n[] = {16, 32};\n    mine.fn = dummy;\n    printf(\"%x\", *mine.fn(n));\n    return 0;\n}"
+    },
+    {
+      "number": 13,
+      "category": "Python",
+      "question": "다음은 파이썬에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "9A7A5A3A1A",
+      "passage": "lst = list(range(10))\nfor c in lst[::-2]:\n    print(c, end='A')\nprint()"
+    },
+    {
+      "number": 14,
+      "category": "Python",
+      "question": "아래 파이썬 코드를 실행했을 때 출력되는 값을 쓰시오.",
+      "answer": "10",
+      "passage": "def f(a):\n    m = [[x] for x in a]\n    b = m[:]\n    for i in range(len(b) - 1):\n        b[i+1] += b[i]\n    return sum(len(x) for x in m)\n \nprint(f([1, 2, 3, 4]))"
+    },
+    {
+      "number": 15,
+      "category": "정보보안",
+      "question": "다음은 특정 공격 기법에 대한 설명이다. 아래 내용을 읽고 해당하는 공격 기법을 [보기]에서 골라 쓰시오.",
+      "answer": "심볼릭링크",
+      "passage": "원본 데이터 파일은 별도로 존재하며, 공격자는 해당 파일의 경로를 가리키는 특수 파일을 생성한다. 프로그램이 임시 파일을 생성하는 순간을 틈타 해당 임시 파일을 미리 준비한 특수 파일로 교체한다. 이후 프로그램이 임시 파일의 존재를 확인하면 교체된 파일을 정상으로 인식하고 동작하게 된다.\n\n공격 절차\n\n1. 공격자는 실제 파일이 아닌, 특정 파일의 경로를 참조하는 특수 파일을 미리 준비한다.\n2. 프로그램이 임시 파일을 생성하는 시점을 노려 해당 임시 파일을 준비한 특수 파일로 교체한다.\n3. 프로그램이 임시 파일의 존재 여부를 확인할 때, 조건에 부합하면 정상으로 판단하고 동작하며 부합하지 않으면 임시 파일을 삭제한다.\n\n[보기]\n\n하드링크 / 심볼릭링크 / 소프트링크 / 정적링크 / 동적링크"
+    },
+    {
+      "number": 16,
+      "category": "정보보안",
+      "question": "다음은 특정 보안 공격 기법에 대한 설명이다. 해당하는 공격 기법의 명칭을 쓰시오.",
+      "answer": "워터링 홀 (Watering Hole)",
+      "passage": "공격자는 목표 대상이 업무 또는 관심사로 인해 자주 방문하는 합법적인 웹사이트를 사전에 파악한다.\n\n해당 사이트에 악성코드를 삽입하여 감염시켜 놓고, 피해자가 해당 사이트에 접속하는 순간 피해자의 시스템에 악성 프로그램이 자동으로 설치되도록 유도한다. 공격자는 불특정 다수를 노리는 것이 아니라 특정 조직이나 인물을 겨냥하며, 접속자의 IP나 환경 조건을 확인하여 목표 대상에게만 선택적으로 악성코드가 실행되도록 설계하는 경우도 있다.\n\n피해자는 정상적인 사이트를 방문했을 뿐이므로 감염 사실을 인지하기 어렵다는 특징이 있다."
+    },
+    {
+      "number": 17,
+      "category": "Java",
+      "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "1123",
+      "passage": "public class Main {\n    public static void main(String[] args) {\n        int x1 = 9;\n        int x2 = 2;\n        String x3 = \"3\";\n        System.out.println(x1 + x2 + \"2\" + x3);\n    }\n}"
+    },
+    {
+      "number": 18,
+      "category": "SQL",
+      "question": "다음은 SQL에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "2",
+      "passage": "SELECT COUNT(*)\nFROM employee e\nJOIN dept d ON e.dep_id = d.dept_id\nWHERE d.budget > (\n    SELECT AVG(budget) FROM dept\n);\n\n[employee]\ndep_id\n10\n20\n20\n\n[dept]\ndept_id | budget\n10 | 100\n20 | 300\n30 | 200",
+      "image": "silgi/2026_01/q18.png"
+    },
+    {
+      "number": 19,
+      "category": "소프트웨어 공학",
+      "question": "다음은 통합 테스트에서 사용되는 더미 모듈에 대한 설명이다. 괄호 안에 들어갈 알맞은 용어를 쓰시오.",
+      "answer": "1. 스텁\n2. 드라이버",
+      "passage": "( 1 ) 은/는 하위 모듈을 대신하여 단순한 결과값만 반환하도록 임시로 작성된 더미 모듈로, 하향식 통합 테스트 수행 시 필요하다.\n( 2 ) 은/는 상위 모듈을 대신하여 하위 모듈의 데이터 입력과 출력을 확인하기 위한 더미 모듈로, 상향식 통합 테스트 수행 시 필요하다."
+    },
+    {
+      "number": 20,
+      "category": "소프트웨어 공학",
+      "question": "다음은 응집도의 유형에 대한 설명이다. 괄호 안에 들어갈 알맞은 용어를 쓰시오.",
+      "answer": "1. 절차\n2. 교환\n3. 기능",
+      "passage": "( 1 ) 은/는 모듈이 다수의 관련 기능을 가질 때, 모듈 안의 구성요소들이 그 기능을 순차적으로 수행하는 경우의 응집도이다.\n( 2 ) 은/는 동일한 입력과 출력을 사용하여 서로 다른 기능을 수행하는 활동들이 모여 있는 경우의 응집도이다.\n( 3 ) 은/는 모듈 내부의 모든 기능이 단일한 목적을 위해 수행되는 경우의 응집도이다."
+    }
+  ]
+}

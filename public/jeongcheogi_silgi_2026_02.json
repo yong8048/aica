@@ -1,0 +1,154 @@
+{
+  "source": "2026년 2회 복원문제",
+  "slug": "2026_02",
+  "total": 20,
+  "questions": [
+    {
+      "number": 1,
+      "category": "소프트웨어 공학",
+      "question": "다음은 블랙박스 테스트 기법에 대한 설명이다. 괄호 (   ) 안에 들어갈 말을 보기에서 골라 쓰시오.",
+      "answer": "ㄱ. 동치분할 (Equivalence Partitioning)",
+      "passage": "(   )은 프로그램의 입력 조건을 유효한 값과 유효하지 않은 값의 영역으로 나누고, 각 영역을\n대표할 수 있는 값을 선정하여 테스트 케이스를 설계하는 명세 기반(블랙박스) 테스트 기법이다.\n\n위 표에서 테스트 값으로 60을 입력하였을 때, 예상 결과와 실제 결과가 모두 등급 D로\n일치하였다. 이는 (   ) 기법을 적용하여 각 등급 구간의 대표값을 테스트한 사례이다.\n\n보기\n\nㄱ. 동치분할 (Equivalence Partitioning)\nㄴ. 경계값분석 (Boundary Value Analysis)\nㄷ. 결정테이블 테스트 (Decision Table Testing)\nㄹ. 상태전이 테스트 (State Transition Testing)\n\n[점수별 등급 기준]\n점수 | 등급\n90~100 | A\n80~89 | B\n70~79 | C\n60~69 | D",
+      "image": "silgi/2026_02/q01.png"
+    },
+    {
+      "number": 2,
+      "category": "Java",
+      "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "10a20b",
+      "passage": "class A {\n    private int a;\n \n    public A(int a) {\n        this.a = a;\n    }\n \n    void print() {\n        System.out.print(a + \"a\");\n    }\n}\n \nclass B extends A {\n    private int b;\n \n    B(int a, int b) {\n        super(a);\n        this.b = b;\n    }\n \n    void print() {\n        super.print();\n        System.out.print(b + \"b\");\n    }\n}\n \npublic class Main {\n    public static void main(String[] args) {\n        B obj = new B(10, 20);\n        obj.print();\n    }\n}"
+    },
+    {
+      "number": 3,
+      "category": "소프트웨어 공학",
+      "question": "다음은 소프트웨어 모듈 간의 결합도(Coupling)에 대한 설명이다. 괄호 안에 들어갈 말을 보기에서 골라 기호로 쓰시오.",
+      "answer": "ㅁ. 내용결합도 (Content Coupling)",
+      "passage": "( )는 한 모듈이 다른 모듈 내부에 있는 변수나 기능을 직접 참조하거나 사용하는 경우에 발생하는 결합도로, 결합도 종류 중 결합 강도가 가장 높은 형태이다.\n\n보기\n\nㄱ. 자료결합도 (Data Coupling)\n\nㄴ. 스탬프결합도 (Stamp Coupling)\n\nㄷ. 제어결합도 (Control Coupling)\n\nㄹ. 외부결합도 (External Coupling)\n\nㅁ. 내용결합도 (Content Coupling)\n\nㅂ. 공통결합도 (Common Coupling)"
+    },
+    {
+      "number": 4,
+      "category": "네트워크",
+      "question": "다음은 라우팅 프로토콜에 대한 설명이다. 괄호 안에 들어갈 알맞은 용어를 쓰시오.\n\n( )는 링크 상태(Link State) 알고리즘을 사용하는 대표적인 내부 라우팅 프로토콜(IGP)이다. 다익스트라(Dijkstra) 알고리즘을 이용하여 최단 경로를 탐색하며, 대규모 네트워크에 적합하고 멀티캐스트를 지원한다.",
+      "answer": "OSPF (Open Shortest Path First)"
+    },
+    {
+      "number": 5,
+      "category": "Python",
+      "question": "다음은 파이썬 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "CNNLRPYT",
+      "passage": "class LocationDict:\n    locations = {\n        \"NYC\": \"New York\",\n        \"LON\": \"London\",\n        \"PAR\": \"Paris\",\n        \"TKY\": \"Tokyo\"\n    }\n \ntmpdict = LocationDict()\nstr01 = \"\"\nfor key, location in tmpdict.locations.items():\n    keyk = key[-1]\n    locationk = location[0]\n    str01 += keyk + locationk\n \nprint(str01, end=\"\")"
+    },
+    {
+      "number": 6,
+      "category": "Python",
+      "question": "다음은 파이썬 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "_THIISING",
+      "passage": "a = \"_THIS_IS_KIM_SPEAKING\"\nb = a[:4]      \nc = a[6:8]     \nd = a[18:]     \ne = b + c + d  \nprint(e)"
+    },
+    {
+      "number": 7,
+      "category": "C언어",
+      "question": "다음은 C언어 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "12",
+      "passage": "#include <stdio.h>\n \ntypedef struct N {\n    int v;\n    struct N* a;\n    struct N* b;\n} N;\n \nint c = 0;\nint ans = 0;\n \nvoid pst(N *n) {\n    if (!n) return;\n    pst(n->a);\n    pst(n->b);\n    if (++c == 3) ans = n->v;\n}\n \nint main() {\n    N ne = {35, 0, 0};\n    N nd = {64, 0, 0};\n    N nc = {53, 0, 0};\n    N nb = {12, &ne, &nc};\n    N na = {21, &nb, &nd};\n \n    pst(&na);\n    printf(\"%d\\n\", ans);\n    return 0;\n}"
+    },
+    {
+      "number": 8,
+      "category": "운영체제",
+      "question": "다음 프로세스들을 SRT(Shortest Remaining Time) 스케줄링 기법으로 처리할 때, 평균 대기시간을 구하시오. (단위: ms)",
+      "answer": "6.5ms",
+      "passage": "프로세스 | 도착시간 | 버스트시간\nP1 | 0 | 8\nP2 | 1 | 4\nP3 | 2 | 9\nP4 | 3 | 5",
+      "image": "silgi/2026_02/q08.png"
+    },
+    {
+      "number": 9,
+      "category": "C언어",
+      "question": "다음은 C언어 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "1. 50\n2. 50\n3. 2\n4. 8",
+      "passage": "#include <stdio.h>\n \nvoid fn1(int* i) { *i = 50; }\nvoid fn2(int i) { i = 60; }\n \nvoid fn34(int* p) {\n    printf(\"3. %d\\n\", *p);\n    printf(\"4. %d\\n\", *(p + 3));\n}\n \nint main() {\n    int i = 30;\n    int list[] = {2, 4, 6, 8, 10};\n \n    fn1(&i);\n    printf(\"1. %d\\n\", i);\n \n    fn2(i);\n    printf(\"2. %d\\n\", i);\n \n    fn34(list);\n \n    return 0;\n}"
+    },
+    {
+      "number": 10,
+      "category": "네트워크",
+      "question": "다음은 네트워크 A, B, C에 속한 호스트의 IP 주소 목록이다. 괄호 안에 들어갈 수 있는 IP 주소를 각각 하나씩 쓰시오.",
+      "answer": "2. 192.168.35.72\n4. 129.200.8.249\n5. 192.168.36.249",
+      "passage": "번호 | IP 주소 / 서브넷\n1 | 192.168.35.3/24\n2 | ( )\n3 | 129.200.10.72/22\n4 | ( )\n5 | ( )\n6 | 192.168.36.16/24",
+      "image": "silgi/2026_02/q10.png"
+    },
+    {
+      "number": 11,
+      "category": "소프트웨어 공학",
+      "question": "다음은 GoF(Gang of Four) 디자인 패턴에 대한 설명이다. 괄호 안에 들어갈 알맞은 용어를 쓰시오.",
+      "answer": "추상 팩토리 (Abstract Factory)",
+      "passage": "( )는 서로 관련 있는 여러 객체(제품군)를 생성하기 위한 인터페이스를 제공하는 생성 패턴으로, Kit이라고도 불린다. 이 패턴을 사용하면 구체적인 클래스를 지정하지 않고도 연관된 제품군 전체를 한 번에 변경할 수 있다."
+    },
+    {
+      "number": 12,
+      "category": "SQL",
+      "question": "다음 <학생> 테이블에서 성이 '이'씨인 학생의 정보를 조회하되, 학번을 기준으로 내림차순 정렬하여 출력하고자 한다. SQL문의 괄호 안에 들어갈 알맞은 내용을 각각 쓰시오.",
+      "answer": "1. 이%\n2. DESC",
+      "passage": "[표] <학생>\n학번 | 성명 | 학과\n2020001 | 이동룡 | 컴퓨터공학과\n2020002 | 김철수 | 전자공학과\n2020003 | 이순신 | 정보통신공학과\n2020004 | 박영희 | 컴퓨터공학과\n\n[SQL문]\nSELECT * FROM 학생\nWHERE 성명 LIKE '( 1 )'\nORDER BY 학번 ( 2 );",
+      "image": "silgi/2026_02/q12.png"
+    },
+    {
+      "number": 13,
+      "category": "SQL",
+      "question": "다음 <A>, <B> 테이블과 SQL문을 참고하여, SQL문을 실행했을 때 출력되는 RESULT 값을 구하시오.",
+      "answer": "3",
+      "passage": "[표] <A>\nid | x\n1 | 10\n2 | 20\n3 | 30\n4 | 40\n\n[표] <B>\nid | y\n1 | 5\n1 | 15\n2 | 20\n3 | 35\n5 | 50\n\n[SQL문]\nSELECT COUNT(*) AS RESULT\nFROM A\nWHERE x > (\n  SELECT AVG(y)\n  FROM B\n  WHERE B.id IN (\n    SELECT A2.id\n    FROM A AS A2\n    WHERE A2.x < A.x\n  )\n);",
+      "image": "silgi/2026_02/q13.png"
+    },
+    {
+      "number": 14,
+      "category": "SQL",
+      "question": "다음 <A>, <B> 테이블과 SQL문을 참고하여, SQL문을 실행했을 때 출력되는 결과값을 구하시오.",
+      "answer": "2",
+      "passage": "[A]\nid | v\n1 | 10\n1 | 20\n2 | 30\n\n[B]\nid | w\n1 | 100\n3 | 300\n4 | 400\n\nSELECT COUNT(*)\nFROM A\nRIGHT OUTER JOIN B ON A.id = B.id\nWHERE A.id IS NULL;",
+      "image": "silgi/2026_02/q14.png"
+    },
+    {
+      "number": 15,
+      "category": "Java",
+      "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "509",
+      "passage": "class A {\n    int a;\n    private int b;\n    protected int c;\n \n    void set(int aa, int bb, int cc) {\n        a = aa;\n        b = bb;\n        c = cc;\n    }\n \n    int hap() { return a + b + c; }\n}\n \nclass B extends A {\n    public int hap() { return a * c; }\n}\n \npublic class Main {\n    public static void main(String[] args) {\n        A aaa = new A();\n        B bbb = new B();\n \n        aaa.set(1, 5, 3);\n        bbb.set(10, 30, 50);\n \n        System.out.print(aaa.hap() + bbb.hap());\n    }\n}"
+    },
+    {
+      "number": 16,
+      "category": "네트워크",
+      "question": "다음은 IP 주소 서브네팅(Subnetting)에 대한 설명이다. 물음에 답하시오.",
+      "answer": "28",
+      "passage": "10.0.0.0/27 네트워크를 동일한 크기의 2개 서브넷으로 분할하였다.\n\n- 첫 번째 서브넷: 10.0.0.0 ~ 10.0.0.15\n\n- 두 번째 서브넷: 10.0.0.16 ~ 10.0.0.31\n\n이때 10.0.0.1이 속한 서브넷의 프리픽스 길이(비트 수)를 구하시오."
+    },
+    {
+      "number": 17,
+      "category": "정보보안",
+      "question": "다음 설명에 해당하는 보안 기술 용어를 쓰시오.",
+      "answer": "해시",
+      "passage": "입력값의 길이와 상관없이 항상 정해진 길이의 결과값을 만들어내는 암호 기술이 있다.\n\n이 기술은 단방향성을 가지고 있어 결과값만으로는 원래의 입력값을 알아낼 수 없으며, 서로 다른 두 입력값이 같은 결과값을 만들어내는 경우가 최대한 발생하지 않도록 설계되어야 한다.\n\n이러한 성질을 가진 암호 기술을 무엇이라 하는가?"
+    },
+    {
+      "number": 18,
+      "category": "C언어",
+      "question": "다음은 C언어 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
+      "answer": "1",
+      "passage": "#include <stdio.h>\n \nint c(int n) {\n    if (n <= 1) return n;\n    return c(n - 1) + c(n - 3);\n}\n \nint main() {\n    printf(\"%d\", c(5));\n    return 0;\n}"
+    },
+    {
+      "number": 19,
+      "category": "SQL",
+      "question": "다음은 SEASON이라는 도메인을 정의하면서, 입력 가능한 값을 봄/여름/가을/겨울로 제한하는 SQL문이다. 괄호 안에 들어갈 알맞은 키워드를 쓰시오",
+      "answer": "CHECK",
+      "passage": "CREATE DOMAIN SEASON AS VARCHAR(6)\n(    ) VALUE IN ('spring', 'summer', 'autumn', 'winter');",
+      "image": "silgi/2026_02/q19.png"
+    },
+    {
+      "number": 20,
+      "category": "데이터베이스",
+      "question": "아래 표에서 나타나고 있는 정규형을 작성하시오.",
+      "answer": "제 3정규형",
+      "passage": "고객아이디 | 강좌명 | 강사번호\napple | 영어회화 | P001\nbanana | 기초토익 | P002\ncarrot | 영어회화 | P001\ncarrot | 기초토익 | P004\norange | 영어회화 | P003\norange | 기초토익 | P004",
+      "image": "silgi/2026_02/q20.png"
+    }
+  ]
+}

@@ -2,7 +2,16 @@ import { loadWrongIds } from "./wrongAnswers.js";
 
 export const ID_PREFIX = "silgi";
 
-export const SILGI_ROUNDS = [{ slug: "2025_03", file: "jeongcheogi_silgi_2025_03.json" }];
+export const SILGI_ROUNDS = [
+  { slug: "2024_01", file: "jeongcheogi_silgi_2024_01.json" },
+  { slug: "2024_02", file: "jeongcheogi_silgi_2024_02.json" },
+  { slug: "2024_03", file: "jeongcheogi_silgi_2024_03.json" },
+  { slug: "2025_01", file: "jeongcheogi_silgi_2025_01.json" },
+  { slug: "2025_02", file: "jeongcheogi_silgi_2025_02.json" },
+  { slug: "2025_03", file: "jeongcheogi_silgi_2025_03.json" },
+  { slug: "2026_01", file: "jeongcheogi_silgi_2026_01.json" },
+  { slug: "2026_02", file: "jeongcheogi_silgi_2026_02.json" },
+];
 
 const SILGI_FILES = ["jeongcheogi_silgi_sample.json", ...SILGI_ROUNDS.map((round) => round.file)];
 
