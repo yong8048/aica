@@ -46,12 +46,23 @@ function formatBraceCode(src) {
   let paren = 0;
   let dataBrace = 0;
   let pending = 0;
+  let caseOpen = false;
 
   const flush = (lineDepth = depth) => {
     const text = buf.replace(/\s+/g, " ").trim();
     buf = "";
     if (!text) return false;
-    lines.push({ depth: lineDepth, text });
+    let depthForLine = lineDepth;
+    if (caseOpen && /^(?:case\b|default\b)/.test(text)) {
+      depth = Math.max(0, depth - 1);
+      caseOpen = false;
+      depthForLine = depth;
+    }
+    lines.push({ depth: depthForLine, text });
+    if (/^(?:case\b.*:|default\s*:)$/.test(text)) {
+      depth += 1;
+      caseOpen = true;
+    }
     return true;
   };
 
@@ -132,6 +143,10 @@ function formatBraceCode(src) {
         continue;
       }
       flush();
+      if (caseOpen) {
+        depth = Math.max(0, depth - 1);
+        caseOpen = false;
+      }
       depth = Math.max(0, depth - 1);
       buf = "}";
       flush();
@@ -399,6 +414,16 @@ function detectSql(text) {
   return { lang: "sql", start, end };
 }
 
+function detectPythonLoose(text) {
+  if (PY_HINT.test(text)) return null;
+  const py = /(?:^|\n)[ \t]*(?:def|class|import|from|print|for|while|if)\b/.exec(text);
+  if (!py) return null;
+  const head = text.slice(0, py.index + 80);
+  if (/[{}]/.test(head) && /;\s*$/m.test(text)) return null;
+  const start = text[py.index] === "\n" ? py.index + 1 : py.index;
+  return { lang: "python", start, end: text.length };
+}
+
 function detectCode(text) {
   const java = JAVA_START.exec(text);
   if (java) {
@@ -420,7 +445,51 @@ function detectCode(text) {
     }
   }
 
-  return detectSql(text);
+  return detectSql(text) ?? detectPythonLoose(text);
+}
+
+function codeEnd(text, found) {
+  if (found.lang !== "python") return found.end;
+  const lines = text.slice(found.start).split("\n");
+  let keep = lines.length;
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i].trim();
+    if (!line) continue;
+    const prose = /^[가-힣\[•]/.test(line) || /^\[[^\]]+\]/.test(line) || (/\|/.test(line) && /[가-힣]/.test(line));
+    if (prose && !/["']/.test(line)) {
+      keep = i;
+      break;
+    }
+  }
+  const slice = lines.slice(0, keep).join("\n");
+  return found.start + slice.length;
+}
+
+function extendStart(text, start, lang) {
+  if (lang !== "java" && lang !== "c") return start;
+  const before = text.slice(0, start);
+  const lead = before.match(/(?:^|\n)((?:[ \t]*(?:import|package|#\s*include|#\s*define|#\s*undef|typedef|using)\b[\s\S]*))$/);
+  if (!lead) return start;
+  return start - lead[1].length;
+}
+
+function presentCode(code, lang) {
+  const body = code.replace(/[ \t]+$/gm, "").replace(/^\n+|\n+$/g, "");
+  if (lang === "java" || lang === "c") return formatCode(body, lang);
+  return body;
+}
+
+/** 중괄호 코드는 들여쓰기를 다시 맞추고, 파이썬·SQL은 원문의 공백을 유지한다. */
+export function reindentCode(src) {
+  const text = String(src ?? "").replace(/\r\n?/g, "\n");
+  const found = detectCode(text);
+  if (!found || (found.lang !== "java" && found.lang !== "c")) return text.trim();
+  const start = extendStart(text, found.start, found.lang);
+  const end = codeEnd(text, found);
+  const before = text.slice(0, start).trim();
+  const code = presentCode(text.slice(start, end), found.lang);
+  const after = text.slice(end).trim();
+  return [before, code, after].filter(Boolean).join("\n\n");
 }
 
 function formatCode(code, lang) {
@@ -449,13 +518,37 @@ function decorateProse(text) {
  * 문제/보기/해설 텍스트를 텍스트 · 코드 세그먼트 배열로 변환한다.
  * @returns {Array<{type: "text" | "code", lang?: string, content: string}>}
  */
-export function parseContent(raw) {
-  const text = String(raw ?? "")
-    .replace(/\r\n?/g, "\n")
-    .replace(/[ \t\u00a0]+/g, " ");
+function keepLines(text) {
+  return text
+    .replace(/\u00a0/g, " ")
+    .replace(/[ \t]+$/gm, "")
+    .trim();
+}
 
-  if (!text.trim()) return [];
-  if (text.includes("\n")) return [{ type: "text", content: text.trim() }];
+function parseMultiline(text) {
+  const found = detectCode(text);
+  if (!found) return [{ type: "text", content: keepLines(text) }];
+
+  const start = extendStart(text, found.start, found.lang);
+  const end = codeEnd(text, found);
+  const code = presentCode(text.slice(start, end), found.lang);
+  if (code.length < CODE_MIN_LENGTH) return [{ type: "text", content: keepLines(text) }];
+
+  const segments = [];
+  const before = keepLines(text.slice(0, start));
+  const after = keepLines(text.slice(end));
+  if (before) segments.push({ type: "text", content: before });
+  segments.push({ type: "code", lang: found.lang, content: code });
+  if (after) segments.push({ type: "text", content: after });
+  return segments;
+}
+
+export function parseContent(raw) {
+  const original = String(raw ?? "").replace(/\r\n?/g, "\n");
+  if (!original.trim()) return [];
+  if (original.includes("\n")) return parseMultiline(original);
+
+  const text = original.replace(/[ \t\u00a0]+/g, " ");
 
   const found = detectCode(text);
   if (!found) return [{ type: "text", content: decorateProse(text) }];

@@ -8,14 +8,14 @@
       "category": "Java",
       "question": "다음 Java 코드에서 알맞는 출력 값을 작성하시오.",
       "answer": "4",
-      "passage": "class Connection {\n \n    private static Connection _inst = null;\n    private int count = 0;\n    \n    static public Connection get() {\n        if(_inst == null) {\n            _inst = new Connection();\n            return _inst;\n        }\n        return _inst;\n    }\n    \n    public void count() {\n         count++; \n    }\n    \n    public int getCount() {\n         return count; \n    }\n}\n \n \npublic class main {  \n \n    public static void main(String[] args) {\n \n        Connection conn1 = Connection.get();\n        conn1.count();\n \n        Connection conn2 = Connection.get();\n        conn2.count();\n \n        Connection conn3 = Connection.get();\n        conn3.count();\n        \n        conn1.count();\n        System.out.print(conn1.getCount());\n    }\n \n}"
+      "passage": "class Connection {\n  private static Connection _inst = null;\n  private int count = 0;\n  static public Connection get() {\n    if(_inst == null) {\n      _inst = new Connection();\n      return _inst;\n    }\n    return _inst;\n  }\n  public void count() {\n    count++;\n  }\n  public int getCount() {\n    return count;\n  }\n}\npublic class main {\n  public static void main(String[] args) {\n    Connection conn1 = Connection.get();\n    conn1.count();\n    Connection conn2 = Connection.get();\n    conn2.count();\n    Connection conn3 = Connection.get();\n    conn3.count();\n    conn1.count();\n    System.out.print(conn1.getCount());\n  }\n}"
     },
     {
       "number": 2,
       "category": "C언어",
       "question": "다음 C언어 코드에서 알맞는 출력 값을 작성하시오.",
       "answer": "151",
-      "passage": "#include <stdio.h>\n \nint main() {\n \n    int v1 = 0, v2 = 35, v3 = 29;\n    \n    if(v1 > v2 ? v2 : v1) {\n        v2 = v2 << 2;\n    }else{\n        v3 = v3 << 2;\n    }\n    \n    printf(\"%d\", v2+v3);\n \n}"
+      "passage": "#include <stdio.h>\nint main() {\n  int v1 = 0, v2 = 35, v3 = 29;\n  if(v1 > v2 ? v2 : v1) {\n    v2 = v2 << 2;\n  }\n  else{\n    v3 = v3 << 2;\n  }\n  printf(\"%d\", v2+v3);\n}"
     },
     {
       "number": 3,
@@ -29,7 +29,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 알맞는 출력 값을 작성하시오.",
       "answer": "GECA",
-      "passage": "#include <stdio.h>\n#include <string.h>\n \nvoid reverse(char* str){\n    int len = strlen(str);\n    char temp;\n    char*p1 = str;\n    char*p2 = str + len - 1;\n    while(p1<p2){\n        temp = *p1;\n        *p1 = *p2;\n        *p2 = temp;\n        p1++;\n        p2--;\n    }\n}\n \nint main(int argc, char* argv[]){\n    char str[100] = \"ABCDEFGH\";\n \n    reverse(str);\n \n    int len = strlen(str);\n \n    for(int i=1; i<len; i+=2){\n        printf(\"%c\",str[i]);\n    }\n \n    printf(\"\\n\");\n \n    return 0;\n \n}"
+      "passage": "#include <stdio.h>\n#include <string.h>\nvoid reverse(char* str){\n  int len = strlen(str);\n  char temp;\n  char*p1 = str;\n  char*p2 = str + len - 1;\n  while(p1<p2){\n    temp = *p1;\n    *p1 = *p2;\n    *p2 = temp;\n    p1++;\n    p2--;\n  }\n}\nint main(int argc, char* argv[]){\n  char str[100] = \"ABCDEFGH\";\n  reverse(str);\n  int len = strlen(str);\n  for(int i=1; i<len; i+=2){\n    printf(\"%c\",str[i]);\n  }\n  printf(\"\\n\");\n  return 0;\n}"
     },
     {
       "number": 5,
@@ -72,21 +72,21 @@
       "category": "Java",
       "question": "아래 JAVA언어 코드의 실행 순서를 중복 번호없이 작성하시오.",
       "answer": "6 3 1 7 2",
-      "passage": "class Parent {\n    int x, y;\n \n    Parent(int x, int y) { ①\n        this.x=x;\n        this y=y;\n    }\n \n    int getT() { ②\n        return x*y;\n    }\n}\n \n \n \n​class Child extend Parent {\n    int x;\n \n    Child (int x) { ③\n        super(x+1, x);\n        this.x=x;\n    }\n \n    int getT(int n){ ④\n        return super.getT()+n;\n    }\n}\n \n \n \nclass Main {\n    public static void main(String[] args) { ⑤\n        Parent parent = new Child(3); ⑥\n        System.out.println(parent.getT()); ⑦\n    }\n}\n\n실행 순서 : 5 → ( ) → ( ) → ( ) → ( ) → ( )"
+      "passage": "class Parent {\n  int x, y;\n  Parent(int x, int y) {\n    ①\n    this.x=x;\n    this y=y;\n  }\n  int getT() {\n    ②\n    return x*y;\n  }\n}\n​class Child extend Parent {\n  int x;\n  Child (int x) {\n    ③\n    super(x+1, x);\n    this.x=x;\n  }\n  int getT(int n){\n    ④\n    return super.getT()+n;\n  }\n}\nclass Main {\n  public static void main(String[] args) {\n    ⑤\n    Parent parent = new Child(3);\n    ⑥\n    System.out.println(parent.getT());\n    ⑦\n  }\n}\n\n실행 순서 : 5 → ( ) → ( ) → ( ) → ( ) → ( )"
     },
     {
       "number": 11,
       "category": "C언어",
       "question": "다음 C언어의 알맞는 출력값을 작성하시오.",
       "answer": "9981 and 2795.10",
-      "passage": "#include <stdio.h>\n \n \ntypedef struct{\n    int accNum;\n    double bal;\n}BankAcc;\n \n \n \ndouble sim_pow(double base, int year){\n    int i;\n    double r = 1.0;\n \n    for(i=0; i<year; i++){\n        r = r*base;\n    }\n    return r;\n} \n \n \n \nvoid initAcc(BankAcc *acc, int x, double y){\n    acc -> accNum = x;\n    acc -> bal = y;\n}\n \n \n \nvoid xxx(BankAcc *acc, double *en){\n    if (*en > 0 && *en < acc -> bal) {\n        acc -> bal = acc -> bal-*en;\n    }else{\n        acc -> bal = acc -> bal+*en;\n    }\n}\n \n \n \nvoid yyy(BankAcc *acc){\n    acc -> bal = acc -> bal * sim_pow((1+0.1),3);\n}\n \n \nint main(){\n \n    BankAcc myAcc;\n    initAcc(&myAcc, 9981, 2200.0);\n    double amount = 100.0;\n    xxx(&myAcc, &amount);\n    yyy(&myAcc);\n    printf(\"%d and %.2f\", myAcc.accNum, myAcc.bal);\n    return 0;\n \n}"
+      "passage": "#include <stdio.h>\ntypedef struct{\n  int accNum;\n  double bal;\n}\nBankAcc;\ndouble sim_pow(double base, int year){\n  int i;\n  double r = 1.0;\n  for(i=0; i<year; i++){\n    r = r*base;\n  }\n  return r;\n}\nvoid initAcc(BankAcc *acc, int x, double y){\n  acc -> accNum = x;\n  acc -> bal = y;\n}\nvoid xxx(BankAcc *acc, double *en){\n  if (*en > 0 && *en < acc -> bal) {\n    acc -> bal = acc -> bal-*en;\n  }\n  else{\n    acc -> bal = acc -> bal+*en;\n  }\n}\nvoid yyy(BankAcc *acc){\n  acc -> bal = acc -> bal * sim_pow((1+0.1),3);\n}\nint main(){\n  BankAcc myAcc;\n  initAcc(&myAcc, 9981, 2200.0);\n  double amount = 100.0;\n  xxx(&myAcc, &amount);\n  yyy(&myAcc);\n  printf(\"%d and %.2f\", myAcc.accNum, myAcc.bal);\n  return 0;\n}"
     },
     {
       "number": 12,
       "category": "Python",
       "question": "다음 파이썬 코드에 대한 알맞는 출력 값을 작성하시오.",
       "answer": "Seynaau",
-      "passage": "a = [\"Seoul\", \"Kyeonggi\", \"Incheon\", \"Daejun\", \"Daegu\", \"Pusan\"] \nstr = \"S\"\n \nfor i in a:\n    str = str + i[1]\n \nprint(str)"
+      "passage": "a = [\"Seoul\", \"Kyeonggi\", \"Incheon\", \"Daejun\", \"Daegu\", \"Pusan\"]\nstr = \"S\"\n\nfor i in a:\n    str = str + i[1]\n\nprint(str)"
     },
     {
       "number": 13,
@@ -115,7 +115,7 @@
       "category": "Java",
       "question": "다음 Java 코드를 보고 알맞는 출력 값을 작성하시오.",
       "answer": "9",
-      "passage": "class classOne {\n    int a, b;\n \n    public classOne(int a, int b) {\n        this.a = a;\n        this.b = b;\n    }\n \n    public void print() {\n        System.out.println(a + b);\n    }\n \n}\nclass classTwo extends classOne {\n    int po = 3;\n    \n    public classTwo(int i) {\n        super(i, i+1);\n    }\n \n    public void print() {\n        System.out.println(po*po);\n    }\n}\n \npublic class main {  \n    public static void main(String[] args) {\n        classOne one = new classTwo(10);\n        one.print();\n    }\n}"
+      "passage": "class classOne {\n  int a, b;\n  public classOne(int a, int b) {\n    this.a = a;\n    this.b = b;\n  }\n  public void print() {\n    System.out.println(a + b);\n  }\n}\nclass classTwo extends classOne {\n  int po = 3;\n  public classTwo(int i) {\n    super(i, i+1);\n  }\n  public void print() {\n    System.out.println(po*po);\n  }\n}\npublic class main {\n  public static void main(String[] args) {\n    classOne one = new classTwo(10);\n    one.print();\n  }\n}"
     },
     {
       "number": 17,
@@ -129,7 +129,7 @@
       "category": "SQL",
       "question": "아래의 SQL 코드와 테이블을 참고하여 결과 값을 작성하시오.",
       "answer": "1",
-      "passage": "SELECT \n    COUNT(*) \nFROM \n    TABLE \nWHERE \n    EMPNO > 100 \nAND \n    SAL >= 3000 OR EMPNO = 200\n\n[TABLE]\nEMPNO | SAL\n100 | 1000\n200 | 3000\n300 | 1500",
+      "passage": "SELECT\n    COUNT(*)\nFROM\n    TABLE\nWHERE\n    EMPNO > 100\nAND\n    SAL >= 3000 OR EMPNO = 200\n\n[TABLE]\nEMPNO | SAL\n100 | 1000\n200 | 3000\n300 | 1500",
       "image": "silgi/2024_01/q18.png"
     },
     {
@@ -137,7 +137,7 @@
       "category": "C언어",
       "question": "다음 C언어 코드의 알맞는 출력 값을 작성하시오.",
       "answer": "Nd sc 1",
-      "passage": "#include<stdio.h>\n#include<ctype.h>\n \nint main(){\n    char*p = \"It is 8\";\n    char result[100];\n    int i;\n \n    for(i=0; p[i]!='\\0'; i++){\n        if(isupper(p[i]))\n            result[i] = (p[i]-'A'+5)% 25 + 'A';\n        else if(islower(p[i]))\n            result[i] = (p[i]-'a'+10)% 26 + 'a';\n        else if(isdigit(p[i]))\n            result[i] = (p[i]-'0'+3)% 10 + '0';\n        else if(!(isupper(p[i]) || islower(p[i]) || isdigit(p[i])))    \n            result[i] = p[i];\n    }\n \n    result[i] = '\\0';\n    printf(\"%s\\n\",result);\n \n    return 0;\n}"
+      "passage": "#include<stdio.h>\n#include<ctype.h>\nint main(){\n  char*p = \"It is 8\";\n  char result[100];\n  int i;\n  for(i=0; p[i]!='\\0'; i++){\n    if(isupper(p[i]))\n      result[i] = (p[i]-'A'+5)% 25 + 'A';\n    else if(islower(p[i]))\n      result[i] = (p[i]-'a'+10)% 26 + 'a';\n    else if(isdigit(p[i]))\n      result[i] = (p[i]-'0'+3)% 10 + '0';\n    else if(!(isupper(p[i]) || islower(p[i]) || isdigit(p[i])))\n      result[i] = p[i];\n  }\n  result[i] = '\\0';\n  printf(\"%s\\n\",result);\n  return 0;\n}"
     },
     {
       "number": 20,

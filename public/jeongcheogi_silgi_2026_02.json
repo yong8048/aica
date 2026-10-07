@@ -16,7 +16,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "10a20b",
-      "passage": "class A {\n    private int a;\n \n    public A(int a) {\n        this.a = a;\n    }\n \n    void print() {\n        System.out.print(a + \"a\");\n    }\n}\n \nclass B extends A {\n    private int b;\n \n    B(int a, int b) {\n        super(a);\n        this.b = b;\n    }\n \n    void print() {\n        super.print();\n        System.out.print(b + \"b\");\n    }\n}\n \npublic class Main {\n    public static void main(String[] args) {\n        B obj = new B(10, 20);\n        obj.print();\n    }\n}"
+      "passage": "class A {\n  private int a;\n  public A(int a) {\n    this.a = a;\n  }\n  void print() {\n    System.out.print(a + \"a\");\n  }\n}\nclass B extends A {\n  private int b;\n  B(int a, int b) {\n    super(a);\n    this.b = b;\n  }\n  void print() {\n    super.print();\n    System.out.print(b + \"b\");\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    B obj = new B(10, 20);\n    obj.print();\n  }\n}"
     },
     {
       "number": 3,
@@ -36,21 +36,21 @@
       "category": "Python",
       "question": "다음은 파이썬 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "CNNLRPYT",
-      "passage": "class LocationDict:\n    locations = {\n        \"NYC\": \"New York\",\n        \"LON\": \"London\",\n        \"PAR\": \"Paris\",\n        \"TKY\": \"Tokyo\"\n    }\n \ntmpdict = LocationDict()\nstr01 = \"\"\nfor key, location in tmpdict.locations.items():\n    keyk = key[-1]\n    locationk = location[0]\n    str01 += keyk + locationk\n \nprint(str01, end=\"\")"
+      "passage": "class LocationDict:\n    locations = {\n        \"NYC\": \"New York\",\n        \"LON\": \"London\",\n        \"PAR\": \"Paris\",\n        \"TKY\": \"Tokyo\"\n    }\n\ntmpdict = LocationDict()\nstr01 = \"\"\nfor key, location in tmpdict.locations.items():\n    keyk = key[-1]\n    locationk = location[0]\n    str01 += keyk + locationk\n\nprint(str01, end=\"\")"
     },
     {
       "number": 6,
       "category": "Python",
       "question": "다음은 파이썬 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "_THIISING",
-      "passage": "a = \"_THIS_IS_KIM_SPEAKING\"\nb = a[:4]      \nc = a[6:8]     \nd = a[18:]     \ne = b + c + d  \nprint(e)"
+      "passage": "a = \"_THIS_IS_KIM_SPEAKING\"\nb = a[:4]\nc = a[6:8]\nd = a[18:]\ne = b + c + d\nprint(e)"
     },
     {
       "number": 7,
       "category": "C언어",
       "question": "다음은 C언어 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "12",
-      "passage": "#include <stdio.h>\n \ntypedef struct N {\n    int v;\n    struct N* a;\n    struct N* b;\n} N;\n \nint c = 0;\nint ans = 0;\n \nvoid pst(N *n) {\n    if (!n) return;\n    pst(n->a);\n    pst(n->b);\n    if (++c == 3) ans = n->v;\n}\n \nint main() {\n    N ne = {35, 0, 0};\n    N nd = {64, 0, 0};\n    N nc = {53, 0, 0};\n    N nb = {12, &ne, &nc};\n    N na = {21, &nb, &nd};\n \n    pst(&na);\n    printf(\"%d\\n\", ans);\n    return 0;\n}"
+      "passage": "#include <stdio.h>\ntypedef struct N {\n  int v;\n  struct N* a;\n  struct N* b;\n}\nN;\nint c = 0;\nint ans = 0;\nvoid pst(N *n) {\n  if (!n)\n    return;\n  pst(n->a);\n  pst(n->b);\n  if (++c == 3)\n    ans = n->v;\n}\nint main() {\n  N ne = {35, 0, 0};\n  N nd = {64, 0, 0};\n  N nc = {53, 0, 0};\n  N nb = {12, &ne, &nc};\n  N na = {21, &nb, &nd};\n  pst(&na);\n  printf(\"%d\\n\", ans);\n  return 0;\n}"
     },
     {
       "number": 8,
@@ -65,7 +65,7 @@
       "category": "C언어",
       "question": "다음은 C언어 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "1. 50\n2. 50\n3. 2\n4. 8",
-      "passage": "#include <stdio.h>\n \nvoid fn1(int* i) { *i = 50; }\nvoid fn2(int i) { i = 60; }\n \nvoid fn34(int* p) {\n    printf(\"3. %d\\n\", *p);\n    printf(\"4. %d\\n\", *(p + 3));\n}\n \nint main() {\n    int i = 30;\n    int list[] = {2, 4, 6, 8, 10};\n \n    fn1(&i);\n    printf(\"1. %d\\n\", i);\n \n    fn2(i);\n    printf(\"2. %d\\n\", i);\n \n    fn34(list);\n \n    return 0;\n}"
+      "passage": "#include <stdio.h>\nvoid fn1(int* i) {\n  *i = 50;\n}\nvoid fn2(int i) {\n  i = 60;\n}\nvoid fn34(int* p) {\n  printf(\"3. %d\\n\", *p);\n  printf(\"4. %d\\n\", *(p + 3));\n}\nint main() {\n  int i = 30;\n  int list[] = {2, 4, 6, 8, 10};\n  fn1(&i);\n  printf(\"1. %d\\n\", i);\n  fn2(i);\n  printf(\"2. %d\\n\", i);\n  fn34(list);\n  return 0;\n}"
     },
     {
       "number": 10,
@@ -111,7 +111,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "509",
-      "passage": "class A {\n    int a;\n    private int b;\n    protected int c;\n \n    void set(int aa, int bb, int cc) {\n        a = aa;\n        b = bb;\n        c = cc;\n    }\n \n    int hap() { return a + b + c; }\n}\n \nclass B extends A {\n    public int hap() { return a * c; }\n}\n \npublic class Main {\n    public static void main(String[] args) {\n        A aaa = new A();\n        B bbb = new B();\n \n        aaa.set(1, 5, 3);\n        bbb.set(10, 30, 50);\n \n        System.out.print(aaa.hap() + bbb.hap());\n    }\n}"
+      "passage": "class A {\n  int a;\n  private int b;\n  protected int c;\n  void set(int aa, int bb, int cc) {\n    a = aa;\n    b = bb;\n    c = cc;\n  }\n  int hap() {\n    return a + b + c;\n  }\n}\nclass B extends A {\n  public int hap() {\n    return a * c;\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    A aaa = new A();\n    B bbb = new B();\n    aaa.set(1, 5, 3);\n    bbb.set(10, 30, 50);\n    System.out.print(aaa.hap() + bbb.hap());\n  }\n}"
     },
     {
       "number": 16,
@@ -132,7 +132,7 @@
       "category": "C언어",
       "question": "다음은 C언어 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "1",
-      "passage": "#include <stdio.h>\n \nint c(int n) {\n    if (n <= 1) return n;\n    return c(n - 1) + c(n - 3);\n}\n \nint main() {\n    printf(\"%d\", c(5));\n    return 0;\n}"
+      "passage": "#include <stdio.h>\nint c(int n) {\n  if (n <= 1)\n    return n;\n  return c(n - 1) + c(n - 3);\n}\nint main() {\n  printf(\"%d\", c(5));\n  return 0;\n}"
     },
     {
       "number": 19,

@@ -8,21 +8,21 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "OOAAA",
-      "passage": "public class Main{\n  static String[] s = new String[3];\n \n  static void func(String[]s, int size){\n    for(int i=1; i<size; i++){\n      if(s[i-1].equals(s[i])){\n        System.out.print(\"O\");\n      }else{\n        System.out.print(\"N\");\n      }\n    }\n      for (String m : s){\n        System.out.print(m);\n      }\n    }\n  \n \n  public static void main(String[] args){\n    s[0] = \"A\";\n    s[1] = \"A\";\n    s[2] = new String(\"A\");\n \n    func(s, 3);\n  }\n}"
+      "passage": "public class Main{\n  static String[] s = new String[3];\n  static void func(String[]s, int size){\n    for(int i=1; i<size; i++){\n      if(s[i-1].equals(s[i])){\n        System.out.print(\"O\");\n      }\n      else{\n        System.out.print(\"N\");\n      }\n    }\n    for (String m : s){\n      System.out.print(m);\n    }\n  }\n  public static void main(String[] args){\n    s[0] = \"A\";\n    s[1] = \"A\";\n    s[2] = new String(\"A\");\n    func(s, 3);\n  }\n}"
     },
     {
       "number": 2,
       "category": "Python",
       "question": "다음은 파이썬에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "3",
-      "passage": "def func(lst):\n  for i in range(len(lst) //2):\n    lst[i], lst[-i-1] = lst[-i-1], lst[i]\n \nlst = [1,2,3,4,5,6] \nfunc(lst)\nprint(sum(lst[::2]) - sum(lst[1::2]))"
+      "passage": "def func(lst):\n  for i in range(len(lst) //2):\n    lst[i], lst[-i-1] = lst[-i-1], lst[i]\n\nlst = [1,2,3,4,5,6]\nfunc(lst)\nprint(sum(lst[::2]) - sum(lst[1::2]))"
     },
     {
       "number": 3,
       "category": "SQL",
       "question": "아래의 employee테이블과 project테이블을 참고하여 보기의 SQL명령어에 알맞는 출력 값을 작성하시오.",
       "answer": "1",
-      "passage": "SELECT \n    count(*) \nFROM employee AS e JOIN project AS p ON e.project_id = p.project_id \nWHERE p.name IN (\n    SELECT name FROM project p WHERE p.project_id IN (\n        SELECT project_id FROM employee GROUP BY project_id HAVING count(*) < 2\n    )\n);\n\n[employee]\nno | first_name | last_name | project_id\n1 | John | Doe | 10\n2 | Jim | Carry | 20\n3 | Rachel | Redmond | 10\n\n[project]\nproject_id | name\n10 | Alpha\n20 | Beta\n10 | Gamma",
+      "passage": "SELECT\n    count(*)\nFROM employee AS e JOIN project AS p ON e.project_id = p.project_id\nWHERE p.name IN (\n    SELECT name FROM project p WHERE p.project_id IN (\n        SELECT project_id FROM employee GROUP BY project_id HAVING count(*) < 2\n    )\n);\n\n[employee]\nno | first_name | last_name | project_id\n1 | John | Doe | 10\n2 | Jim | Carry | 20\n3 | Rachel | Redmond | 10\n\n[project]\nproject_id | name\n10 | Alpha\n20 | Beta\n10 | Gamma",
       "image": "silgi/2024_03/q03.png"
     },
     {
@@ -51,7 +51,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "20",
-      "passage": "#include <stdio.h>\n \nint func(){\n static int x =0; \n  x+=2; \n  return x;\n}\n \nint main(){\n  int x = 1; \n  int sum=0; \n  for(int i=0;i<4;i++) {\n    x++; \n    sum+=func();\n  } \n  printf(\"%d\", sum);\n \n  return 0;\n}"
+      "passage": "#include <stdio.h>\nint func(){\n  static int x =0;\n  x+=2;\n  return x;\n}\nint main(){\n  int x = 1;\n  int sum=0;\n  for(int i=0;i<4;i++) {\n    x++;\n    sum+=func();\n  }\n  printf(\"%d\", sum);\n  return 0;\n}"
     },
     {
       "number": 8,
@@ -74,21 +74,21 @@
       "category": "Python",
       "question": "다음은 파이썬에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "45",
-      "passage": "def func(value):\n    if type(value) == type(100):\n        return 100\n    elif type(value) == type(\"\"):\n        return len(value) \n    else:\n        return 20\n \n \na = '100.0'\nb = 100.0\nc = (100, 200)\n \nprint(func(a) + func(b) + func(c))"
+      "passage": "def func(value):\n    if type(value) == type(100):\n        return 100\n    elif type(value) == type(\"\"):\n        return len(value)\n    else:\n        return 20\n\n\na = '100.0'\nb = 100.0\nc = (100, 200)\n\nprint(func(a) + func(b) + func(c))"
     },
     {
       "number": 11,
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "52",
-      "passage": "public class Main{\n  public static void main(String[] args){\n    Base a =  new Derivate();\n    Derivate b = new Derivate();\n    \n    System.out.print(a.getX() + a.x + b.getX() + b.x);\n  }\n}\n \n \nclass Base{\n  int x = 3;\n \n  int getX(){\n     return x * 2; \n  }\n}\n \nclass Derivate extends Base{\n  int x = 7;\n  \n  int getX(){\n     return x * 3;\n  }\n}"
+      "passage": "public class Main{\n  public static void main(String[] args){\n    Base a = new Derivate();\n    Derivate b = new Derivate();\n    System.out.print(a.getX() + a.x + b.getX() + b.x);\n  }\n}\nclass Base{\n  int x = 3;\n  int getX(){\n    return x * 2;\n  }\n}\nclass Derivate extends Base{\n  int x = 7;\n  int getX(){\n    return x * 3;\n  }\n}"
     },
     {
       "number": 12,
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "312",
-      "passage": "#include <stdio.h>\n \nstruct Node {\n int value;\n struct Node* next;\n};\n \nvoid func(struct Node* node){\n  while(node != NULL && node->next != NULL){\n     int t = node->value;\n     node->value = node->next->value;\n     node->next->value = t;\n     node = node->next->next;\n  }\n}\n \nint main(){\n  struct Node n1 = {1, NULL};\n  struct Node n2 = {2, NULL};\n  struct Node n3 = {3, NULL};\n  \n  n1.next = &n3;\n  n3.next = &n2;\n \n  func(&n1);  \n \n  struct Node* current = &n1;\n \n  while(current != NULL){\n    printf(\"%d\", current->value);\n    current = current->next;\n }\n \n return 0;\n \n}"
+      "passage": "#include <stdio.h>\nstruct Node {\n  int value;\n  struct Node* next;\n};\nvoid func(struct Node* node){\n  while(node != NULL && node->next != NULL){\n    int t = node->value;\n    node->value = node->next->value;\n    node->next->value = t;\n    node = node->next->next;\n  }\n}\nint main(){\n  struct Node n1 = {1, NULL};\n  struct Node n2 = {2, NULL};\n  struct Node n3 = {3, NULL};\n  n1.next = &n3;\n  n3.next = &n2;\n  func(&n1);\n  struct Node* current = &n1;\n  while(current != NULL){\n    printf(\"%d\", current->value);\n    current = current->next;\n  }\n  return 0;\n}"
     },
     {
       "number": 13,
@@ -117,7 +117,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "1",
-      "passage": "#include <stdio.h>\n \nvoid func(int** arr, int size){\n  for(int i=0; i<size; i++){\n     *(*arr + i) = (*(*arr+i) + i) % size;\n  }\n}\n \nint main(){\n  int arr[] = {3,1, 4, 1, 5};\n  int* p = arr;\n  int** pp = &p;\n  int num = 6;\n  \n  func(pp, 5);  \n  num = arr[2];\n  printf(\"%d\", num);  \n \n  return 0;\n}"
+      "passage": "#include <stdio.h>\nvoid func(int** arr, int size){\n  for(int i=0; i<size; i++){\n    *(*arr + i) = (*(*arr+i) + i) % size;\n  }\n}\nint main(){\n  int arr[] = {3,1, 4, 1, 5};\n  int* p = arr;\n  int** pp = &p;\n  int num = 6;\n  func(pp, 5);\n  num = arr[2];\n  printf(\"%d\", num);\n  return 0;\n}"
     },
     {
       "number": 17,
@@ -131,14 +131,14 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "101",
-      "passage": "public class ExceptionHandling {\n  public static void main(String[] args) {\n      int sum = 0;\n      try {\n          func();\n      } catch (NullPointerException e) {\n          sum = sum + 1;\n      } catch (Exception e) {\n          sum = sum + 10;\n      } finally {\n          sum = sum + 100;\n      }\n      System.out.print(sum);\n  }\n \n  static void func() throws Exception {\n      throw new NullPointerException(); \n  }\n}"
+      "passage": "public class ExceptionHandling {\n  public static void main(String[] args) {\n    int sum = 0;\n    try {\n      func();\n    }\n    catch (NullPointerException e) {\n      sum = sum + 1;\n    }\n    catch (Exception e) {\n      sum = sum + 10;\n    }\n    finally {\n      sum = sum + 100;\n    }\n    System.out.print(sum);\n  }\n  static void func() throws Exception {\n    throw new NullPointerException();\n  }\n}"
     },
     {
       "number": 19,
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "B0",
-      "passage": "class Main {\n \n  public static class Collection<T>{\n    T value;\n \n    public Collection(T t){\n        value = t;\n    }\n \n    public void print(){\n       new Printer().print(value);\n    }\n \n   class Printer{\n      void print(Integer a){\n        System.out.print(\"A\" + a);\n      }\n      void print(Object a){\n        System.out.print(\"B\" + a);\n      } \n      void print(Number a){\n        System.out.print(\"C\" + a);\n      }\n   }\n }\n \n  public static void main(String[] args) {\n      new Collection<>(0).print();\n  }\n  \n}"
+      "passage": "class Main {\n  public static class Collection<T>{\n    T value;\n    public Collection(T t){\n      value = t;\n    }\n    public void print(){\n      new Printer().print(value);\n    }\n    class Printer{\n      void print(Integer a){\n        System.out.print(\"A\" + a);\n      }\n      void print(Object a){\n        System.out.print(\"B\" + a);\n      }\n      void print(Number a){\n        System.out.print(\"C\" + a);\n      }\n    }\n  }\n  public static void main(String[] args) {\n    new Collection<>(0).print();\n  }\n}"
     },
     {
       "number": 20,

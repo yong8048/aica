@@ -8,7 +8,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "106.00",
-      "passage": "#include <stdio.h>\n \ndouble arr1(int p[], int len) {\n    double av = 0;\n    int i;\n    for (i = 0; i < len; i++) {\n        av += (double) p[i];\n    }\n    return av / len;\n}\n \ndouble arr2(int * p, int len) {\n    double av = 0;\n    int i;\n    for (i = 0; i < len; i++) {\n        av += (double)( * (p + i));\n    }\n    return av / len;\n}\n \nint main() {\n    int arr[10] = {\n        80,\n        20,\n        50,\n        55,\n        45,\n        95,\n        55,\n        10,\n        40,\n        80\n    };\n    int len = 10;\n \n    printf(\"%.2f\", arr1(arr, len) + arr2(arr, len));\n \n    return 0;\n}"
+      "passage": "#include <stdio.h>\ndouble arr1(int p[], int len) {\n  double av = 0;\n  int i;\n  for (i = 0; i < len; i++) {\n    av += (double) p[i];\n  }\n  return av / len;\n}\ndouble arr2(int * p, int len) {\n  double av = 0;\n  int i;\n  for (i = 0; i < len; i++) {\n    av += (double)( * (p + i));\n  }\n  return av / len;\n}\nint main() {\n  int arr[10] = {\n  80,\n  20,\n  50,\n  55,\n  45,\n  95,\n  55,\n  10,\n  40,\n  80\n  };\n  int len = 10;\n  printf(\"%.2f\", arr1(arr, len) + arr2(arr, len));\n  return 0;\n}"
     },
     {
       "number": 2,
@@ -51,14 +51,14 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "2",
-      "passage": "class A {\n    String f(Object x) {\n        return \"1\";\n    }\n    \n    String g() {\n        return f(\"a\"); \n    }\n}\n \nclass B extends A {\n    String f(Object x) {\n        return \"2\";\n    }\n    \n    String f(String x) {\n        return \"3\";\n    }\n}\n \npublic class Main {\n    public static void main(String[] args) {\n        A a = new B();\n        System.out.println(a.g());\n    }\n}"
+      "passage": "class A {\n  String f(Object x) {\n    return \"1\";\n  }\n  String g() {\n    return f(\"a\");\n  }\n}\nclass B extends A {\n  String f(Object x) {\n    return \"2\";\n  }\n  String f(String x) {\n    return \"3\";\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    A a = new B();\n    System.out.println(a.g());\n  }\n}"
     },
     {
       "number": 8,
       "category": "Python",
       "question": "아래 파이썬 코드가 있다. 입력값으로 HumanDev를 주었을 때 출력되는 결과를 쓰시오.",
       "answer": "veDamuH",
-      "passage": "i = input()\nx = []\n \nfor word in i.split():\n    x.append(word)\n \ny = ''.join(x)\nz = ''.join(c for c in y[::-1] if c not in 'ong')\n \nprint(z)"
+      "passage": "i = input()\nx = []\n\nfor word in i.split():\n    x.append(word)\n\ny = ''.join(x)\nz = ''.join(c for c in y[::-1] if c not in 'ong')\n\nprint(z)"
     },
     {
       "number": 9,
@@ -86,7 +86,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "20",
-      "passage": "struct fns {\n    int* (*fn)(int*);\n} mine;\n \nint* dummy(int *d) {\n    return d + 1;\n}\n \nint main() {\n    struct fns mine;\n    int n[] = {16, 32};\n    mine.fn = dummy;\n    printf(\"%x\", *mine.fn(n));\n    return 0;\n}"
+      "passage": "struct fns {\n  int* (*fn)(int*);\n}\nmine;\nint* dummy(int *d) {\n  return d + 1;\n}\nint main() {\n  struct fns mine;\n  int n[] = {16, 32};\n  mine.fn = dummy;\n  printf(\"%x\", *mine.fn(n));\n  return 0;\n}"
     },
     {
       "number": 13,
@@ -100,7 +100,7 @@
       "category": "Python",
       "question": "아래 파이썬 코드를 실행했을 때 출력되는 값을 쓰시오.",
       "answer": "10",
-      "passage": "def f(a):\n    m = [[x] for x in a]\n    b = m[:]\n    for i in range(len(b) - 1):\n        b[i+1] += b[i]\n    return sum(len(x) for x in m)\n \nprint(f([1, 2, 3, 4]))"
+      "passage": "def f(a):\n    m = [[x] for x in a]\n    b = m[:]\n    for i in range(len(b) - 1):\n        b[i+1] += b[i]\n    return sum(len(x) for x in m)\n\nprint(f([1, 2, 3, 4]))"
     },
     {
       "number": 15,
@@ -121,7 +121,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "1123",
-      "passage": "public class Main {\n    public static void main(String[] args) {\n        int x1 = 9;\n        int x2 = 2;\n        String x3 = \"3\";\n        System.out.println(x1 + x2 + \"2\" + x3);\n    }\n}"
+      "passage": "public class Main {\n  public static void main(String[] args) {\n    int x1 = 9;\n    int x2 = 2;\n    String x3 = \"3\";\n    System.out.println(x1 + x2 + \"2\" + x3);\n  }\n}"
     },
     {
       "number": 18,

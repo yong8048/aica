@@ -37,7 +37,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "출력1출력5",
-      "passage": "public class Main {\n \n  public static void main(String[] args) {\n \n    int a=5,b=0;\n \n    try{\n      System.out.print(a/b);\n    }catch(ArithmeticException e){\n      System.out.print(\"출력1\");\n    }catch(ArrayIndexOutOfBoundsException e) {\n      System.out.print(\"출력2\");\n    }catch(NumberFormatException e) {\n      System.out.print(\"출력3\");\n    }catch(Exception e){\n      System.out.print(\"출력4\");\n    }finally{\n      System.out.print(\"출력5\");\n    }\n  }\n}"
+      "passage": "public class Main {\n  public static void main(String[] args) {\n    int a=5,b=0;\n    try{\n      System.out.print(a/b);\n    }\n    catch(ArithmeticException e){\n      System.out.print(\"출력1\");\n    }\n    catch(ArrayIndexOutOfBoundsException e) {\n      System.out.print(\"출력2\");\n    }\n    catch(NumberFormatException e) {\n      System.out.print(\"출력3\");\n    }\n    catch(Exception e){\n      System.out.print(\"출력4\");\n    }\n    finally{\n      System.out.print(\"출력5\");\n    }\n  }\n}"
     },
     {
       "number": 6,
@@ -73,14 +73,14 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "4 \nBACDE",
-      "passage": "#include <stdio.h>\nchar Data[5] = {'B', 'A', 'D', 'E'};\nchar c;\n \nint main(){\n    int i, temp, temp2;\n \n    c = 'C';\n    printf(\"%d\\n\", Data[3]-Data[1]);\n \n    for(i=0;i<5;++i){\n        if(Data[i]>c)\n            break;\n    }\n \n    temp = Data[i];\n    Data[i] = c;\n    i++;\n \n    for(;i<5;++i){\n        temp2 = Data[i];\n        Data[i] = temp;\n        temp = temp2;\n    }\n \n    for(i=0;i<5;i++){\n        printf(\"%c\", Data[i]);\n    }\n}"
+      "passage": "#include <stdio.h>\nchar Data[5] = {'B', 'A', 'D', 'E'};\nchar c;\nint main(){\n  int i, temp, temp2;\n  c = 'C';\n  printf(\"%d\\n\", Data[3]-Data[1]);\n  for(i=0;i<5;++i){\n    if(Data[i]>c)\n      break;\n  }\n  temp = Data[i];\n  Data[i] = c;\n  i++;\n  for(;i<5;++i){\n    temp2 = Data[i];\n    Data[i] = temp;\n    temp = temp2;\n  }\n  for(i=0;i<5;i++){\n    printf(\"%c\", Data[i]);\n  }\n}"
     },
     {
       "number": 11,
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "13",
-      "passage": "#include <stdio.h>\n#include <stdlib.h>\n \nvoid set(int** arr, int* data, int rows, int cols) {\n    for (int i = 0; i < rows * cols; ++i) {\n        arr[((i + 1) / rows) % rows][(i + 1) % cols] = data[i];\n    }\n}\n \nint main() {\n    int rows = 3, cols = 3, sum = 0;\n    int data[] = {5, 2, 7, 4, 1, 8, 3, 6, 9}; \n    int** arr;\n    arr = (int**) malloc(sizeof(int*) * rows);\n    for (int i = 0; i < cols; i++) {\n        arr[i] = (int*) malloc(sizeof(int) * cols);\n    }\n \n    set(arr, data, rows, cols);\n \n    for (int i = 0; i < rows * cols; i++) {\n        sum += arr[i / rows][i % cols] * (i % 2 == 0 ? 1 : -1);\n    }\n \n    for(int i=0; i<rows; i++) {\n        free(arr[i]);\n    }\n    free(arr);\n \n    printf(\"%d\", sum);\n}"
+      "passage": "#include <stdio.h>\n#include <stdlib.h>\nvoid set(int** arr, int* data, int rows, int cols) {\n  for (int i = 0; i < rows * cols; ++i) {\n    arr[((i + 1) / rows) % rows][(i + 1) % cols] = data[i];\n  }\n}\nint main() {\n  int rows = 3, cols = 3, sum = 0;\n  int data[] = {5, 2, 7, 4, 1, 8, 3, 6, 9};\n  int** arr;\n  arr = (int**) malloc(sizeof(int*) * rows);\n  for (int i = 0; i < cols; i++) {\n    arr[i] = (int*) malloc(sizeof(int) * cols);\n  }\n  set(arr, data, rows, cols);\n  for (int i = 0; i < rows * cols; i++) {\n    sum += arr[i / rows][i % cols] * (i % 2 == 0 ? 1 : -1);\n  }\n  for(int i=0; i<rows; i++) {\n    free(arr[i]);\n  }\n  free(arr);\n  printf(\"%d\", sum);\n}"
     },
     {
       "number": 12,
@@ -93,7 +93,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "54",
-      "passage": "public class Main {\n    public static void main(String[] args) {\n        new Child();\n        System.out.println(Parent.total);\n    }\n}\n \n \nclass Parent {\n    static int total = 0;\n    int v = 1;\n \n    public Parent() {\n        total += (++v);\n        show();    \n    }\n \n    public void show() {\n        total += total;\n    }\n}\n \n \nclass Child extends Parent {\n    int v = 10;\n \n    public Child() {\n        v += 2;\n        total += v++;\n        show();\n    }\n \n    @Override\n    public void show() {\n        total += total * 2;\n    }\n}"
+      "passage": "public class Main {\n  public static void main(String[] args) {\n    new Child();\n    System.out.println(Parent.total);\n  }\n}\nclass Parent {\n  static int total = 0;\n  int v = 1;\n  public Parent() {\n    total += (++v);\n    show();\n  }\n  public void show() {\n    total += total;\n  }\n}\nclass Child extends Parent {\n  int v = 10;\n  public Child() {\n    v += 2;\n    total += v++;\n    show();\n  }\n  @Override\n  public void show() {\n    total += total * 2;\n  }\n}"
     },
     {
       "number": 14,
@@ -116,35 +116,35 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "20",
-      "passage": "public class Main {\n \n    public static void main(String[] args) {\n        int[] data = {3, 5, 8, 12, 17};\n        System.out.println(func(data, 0, data.length - 1));\n    }\n \n    static int func(int[] a, int st, int end) {\n        if (st >= end) return 0;\n        int mid = (st + end) / 2;\n        return a[mid] + Math.max(func(a, st, mid), func(a, mid + 1, end));\n    } \n \n}"
+      "passage": "public class Main {\n  public static void main(String[] args) {\n    int[] data = {3, 5, 8, 12, 17};\n    System.out.println(func(data, 0, data.length - 1));\n  }\n  static int func(int[] a, int st, int end) {\n    if (st >= end)\n      return 0;\n    int mid = (st + end) / 2;\n    return a[mid] + Math.max(func(a, st, mid), func(a, mid + 1, end));\n  }\n}"
     },
     {
       "number": 17,
       "category": "Python",
       "question": "다음은 파이썬에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "13",
-      "passage": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.children = []\n \ndef tree(li):\n    nodes = [Node(i) for i in li]\n    for i in range(1, len(li)):\n        nodes[(i - 1) // 2].children.append(nodes[i])\n    return nodes[0]\n \ndef calc(node, level=0):\n    if node is None:\n        return 0\n    return (node.value if level % 2 == 1 else 0) + sum(calc(n, level + 1) for n in node.children)\n \nli = [3, 5, 8, 12, 15, 18, 21]\n \nroot = tree(li)\n \nprint(calc(root))"
+      "passage": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.children = []\n\ndef tree(li):\n    nodes = [Node(i) for i in li]\n    for i in range(1, len(li)):\n        nodes[(i - 1) // 2].children.append(nodes[i])\n    return nodes[0]\n\ndef calc(node, level=0):\n    if node is None:\n        return 0\n    return (node.value if level % 2 == 1 else 0) + sum(calc(n, level + 1) for n in node.children)\n\nli = [3, 5, 8, 12, 15, 18, 21]\n\nroot = tree(li)\n\nprint(calc(root))"
     },
     {
       "number": 18,
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "35421",
-      "passage": "#include <stdio.h>   \n#include <stdlib.h>  \n \ntypedef struct Data {\n    int value;\n    struct Data *next;\n} Data;\n \nData* insert(Data* head, int value) {\n    Data* new_node = (Data*)malloc(sizeof(Data));\n    new_node->value = value;\n    new_node->next = head;\n    return new_node;\n}\n \nData* reconnect(Data* head, int value) {\n    if (head == NULL || head->value == value) return head;\n    Data *prev = NULL, *curr = head;\n    while (curr != NULL && curr->value != value) {\n        prev = curr;\n        curr = curr->next;\n    }\n \n    if (curr != NULL && prev != NULL) {\n        prev->next = curr->next;\n        curr->next = head;\n        head = curr;\n    }\n    return head;\n}\n \nint main() {\n \n    Data *head = NULL, *curr;\n    for (int i = 1; i <= 5; i++)\n        head = insert(head, i);\n    head = reconnect(head, 3);\n    for (curr = head; curr != NULL; curr = curr->next)\n        printf(\"%d\", curr->value);\n    return 0; \n}"
+      "passage": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Data {\n  int value;\n  struct Data *next;\n}\nData;\nData* insert(Data* head, int value) {\n  Data* new_node = (Data*)malloc(sizeof(Data));\n  new_node->value = value;\n  new_node->next = head;\n  return new_node;\n}\nData* reconnect(Data* head, int value) {\n  if (head == NULL || head->value == value)\n    return head;\n  Data *prev = NULL, *curr = head;\n  while (curr != NULL && curr->value != value) {\n    prev = curr;\n    curr = curr->next;\n  }\n  if (curr != NULL && prev != NULL) {\n    prev->next = curr->next;\n    curr->next = head;\n    head = curr;\n  }\n  return head;\n}\nint main() {\n  Data *head = NULL, *curr;\n  for (int i = 1; i <= 5; i++)\n    head = insert(head, i);\n  head = reconnect(head, 3);\n  for (curr = head; curr != NULL; curr = curr->next)\n    printf(\"%d\", curr->value);\n  return 0;\n}"
     },
     {
       "number": 19,
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "908",
-      "passage": "#include <stdio.h>\n \ntypedef struct student {\n    char* name;\n    int score[3];\n} Student;\n \nint dec(int enc) {\n    return enc & 0xA5;\n}\n \nint sum(Student* p) {\n    return dec(p->score[0]) + dec(p->score[1]) + dec(p->score[2]);\n}\n \nint main() {\n    Student s[2] = { \"Kim\", {0xA0, 0xA5, 0xDB}, \"Lee\", {0xA0, 0xED, 0x81} };\n    Student* p = s;\n    int result = 0;\n \n    for (int i = 0; i < 2; i++) {\n        result += sum(&s[i]);\n    }\n    printf(\"%d\", result);\n    return 0;\n}"
+      "passage": "#include <stdio.h>\ntypedef struct student {\n  char* name;\n  int score[3];\n}\nStudent;\nint dec(int enc) {\n  return enc & 0xA5;\n}\nint sum(Student* p) {\n  return dec(p->score[0]) + dec(p->score[1]) + dec(p->score[2]);\n}\nint main() {\n  Student s[2] = { \"Kim\", {0xA0, 0xA5, 0xDB}, \"Lee\", {0xA0, 0xED, 0x81} };\n  Student* p = s;\n  int result = 0;\n  for (int i = 0; i < 2; i++) {\n    result += sum(&s[i]);\n  }\n  printf(\"%d\", result);\n  return 0;\n}"
     },
     {
       "number": 20,
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "4",
-      "passage": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(calc(\"5\"));\n  }\n \n  static int calc(int value) {\n    if (value <= 1) return value;\n    return calc(value - 1) + calc(value - 2);\n  }\n \n  static int calc(String str) {\n    int value = Integer.valueOf(str);\n    if (value <= 1) return value;\n    return calc(value - 1) + calc(value - 3);\n  }\n}"
+      "passage": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(calc(\"5\"));\n  }\n  static int calc(int value) {\n    if (value <= 1)\n      return value;\n    return calc(value - 1) + calc(value - 2);\n  }\n  static int calc(String str) {\n    int value = Integer.valueOf(str);\n    if (value <= 1)\n      return value;\n    return calc(value - 1) + calc(value - 3);\n  }\n}"
     }
   ]
 }

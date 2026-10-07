@@ -8,7 +8,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "NNN",
-      "passage": "class Main {\n    public static void main(String[] args) {\n        int[] a = new int[]{1, 2, 3, 4};\n        int[] b = new int[]{1, 2, 3, 4};\n        int[] c = new int[]{1, 2, 3};\n        \n        check(a, b);\n        check(a, c); \n        check(b, c); \n    }\n \n    public static void check(int[] a, int[] b) {\n        if (a==b) {\n            System.out.print(\"O\");\n        }else{\n            System.out.print(\"N\");\n        }\n        \n    }\n}"
+      "passage": "class Main {\n  public static void main(String[] args) {\n    int[] a = new int[]{\n      1, 2, 3, 4\n    };\n    int[] b = new int[]{\n      1, 2, 3, 4\n    };\n    int[] c = new int[]{\n      1, 2, 3\n    };\n    check(a, b);\n    check(a, c);\n    check(b, c);\n  }\n  public static void check(int[] a, int[] b) {\n    if (a==b) {\n      System.out.print(\"O\");\n    }\n    else{\n      System.out.print(\"N\");\n    }\n  }\n}"
     },
     {
       "number": 2,
@@ -44,7 +44,7 @@
       "category": "Python",
       "question": "다음은 Python에 대한 문제이다. 아래 코드를 읽고 알맞는 출력 값을 작성하시오.",
       "answer": "ab3ca3",
-      "passage": "def fnCalculation(x,y):\n    result = 0;\n    for i in range(len(x)):\n     temp = x[i:i+len(y)] \n     if temp == y:\n       result += 1;\n    return result\n \na = \"abdcabcabca\"\np1 = \"ab\";\np2 = \"ca\";\n \nout = f\"ab{fnCalculation(a,p1)}ca{fnCalculation(a,p2)}\"\nprint(out)"
+      "passage": "def fnCalculation(x,y):\n    result = 0;\n    for i in range(len(x)):\n     temp = x[i:i+len(y)]\n     if temp == y:\n       result += 1;\n    return result\n\na = \"abdcabcabca\"\np1 = \"ab\";\np2 = \"ca\";\n\nout = f\"ab{fnCalculation(a,p1)}ca{fnCalculation(a,p2)}\"\nprint(out)"
     },
     {
       "number": 7,
@@ -94,21 +94,21 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "21",
-      "passage": "#include <stdio.h>\n \nint main() {\n    int arr[3][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n    int* parr[2] = {arr[1], arr[2]};\n    printf(\"%d\", parr[1][1] + *(parr[1]+2) + **parr);\n    \n    return 0;\n}"
+      "passage": "#include <stdio.h>\nint main() {\n  int arr[3][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n  int* parr[2] = {arr[1], arr[2]};\n  printf(\"%d\", parr[1][1] + *(parr[1]+2) + **parr);\n  return 0;\n}"
     },
     {
       "number": 14,
       "category": "Java",
       "question": "다음은 Java 언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "25, 20",
-      "passage": "class Main {\n    public static void main(String[] args) {\n        int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n        ODDNumber OE = new ODDNumber();\n        System.out.print(OE.sum(a, true) + \", \" + OE.sum(a, false));\n    }\n}\n \ninterface Number {\n    int sum(int[] a, boolean odd);\n}\n \nclass ODDNumber implements Number {\n    public int sum(int[] a, boolean odd) {\n        int result = 0;\n        for(int i=0; i < a.length; i++){\n            if((odd && a[i] % 2 != 0) || (!odd && a[i] % 2 == 0))\n                result += a[i];\n        }        \n        return result;\n    }    \n}"
+      "passage": "class Main {\n  public static void main(String[] args) {\n    int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n    ODDNumber OE = new ODDNumber();\n    System.out.print(OE.sum(a, true) + \", \" + OE.sum(a, false));\n  }\n}\ninterface Number {\n  int sum(int[] a, boolean odd);\n}\nclass ODDNumber implements Number {\n  public int sum(int[] a, boolean odd) {\n    int result = 0;\n    for(int i=0; i < a.length; i++){\n      if((odd && a[i] % 2 != 0) || (!odd && a[i] % 2 == 0))\n        result += a[i];\n    }\n    return result;\n  }\n}"
     },
     {
       "number": 15,
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "10",
-      "passage": "#include <stdio.h>\n#include <string.h>\n \nvoid sumFn(char* d, const char* s) {\n \n    while (*s) {\n        *d = *s;\n        d++;\n        s++;\n    }\n    *d = '\\0'; \n}\n \nint main() {\n   const char* str1 = \"first\";\n    char str2[50] = \"teststring\";  \n    int result=0;\n    sumFn(str2, str1);\n \n    for (int i = 0; str2[i] != '\\0'; i++) {\n        result += i;\n    }\n    printf(\"%d\", result);\n    \n    return 0;\n}"
+      "passage": "#include <stdio.h>\n#include <string.h>\nvoid sumFn(char* d, const char* s) {\n  while (*s) {\n    *d = *s;\n    d++;\n    s++;\n  }\n  *d = '\\0';\n}\nint main() {\n  const char* str1 = \"first\";\n  char str2[50] = \"teststring\";\n  int result=0;\n  sumFn(str2, str1);\n  for (int i = 0; str2[i] != '\\0'; i++) {\n    result += i;\n  }\n  printf(\"%d\", result);\n  return 0;\n}"
     },
     {
       "number": 16,
@@ -122,28 +122,28 @@
       "category": "Java",
       "question": "다음은 Java에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "dcba",
-      "passage": "class Main {\n    public static void main(String[] args) {\n        String str = \"abacabcd\";\n        boolean[] seen = new boolean[256];\n        System.out.print(calculFn(str, str.length()-1, seen));\n    }\n \n    public static String calculFn(String str, int index, boolean[] seen) {\n        if(index < 0) return \"\";\n        char c = str.charAt(index);\n        String result = calculFn(str, index-1, seen);\n        if(!seen[c]) {\n            seen[c] = true;\n            return c + result;\n        }\n        return result;\n    }\n}"
+      "passage": "class Main {\n  public static void main(String[] args) {\n    String str = \"abacabcd\";\n    boolean[] seen = new boolean[256];\n    System.out.print(calculFn(str, str.length()-1, seen));\n  }\n  public static String calculFn(String str, int index, boolean[] seen) {\n    if(index < 0)\n      return \"\";\n    char c = str.charAt(index);\n    String result = calculFn(str, index-1, seen);\n    if(!seen[c]) {\n      seen[c] = true;\n      return c + result;\n    }\n    return result;\n  }\n}"
     },
     {
       "number": 18,
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "-13",
-      "passage": "#include <stdio.h>\n \nvoid swap(int a, int b) {\n    int t = a;\n    a = b;\n    b = t;\n}\n \nint main() {\n    \n    int a = 11;\n    int b = 19;\n    swap(a, b);\n    \n    switch(a) {\n        case 1:\n            b += 1;\n        case 11:\n            b += 2;\n        default:\n            b += 3;\n        break;\n    }\n    \n    printf(\"%d\", a-b);\n}"
+      "passage": "#include <stdio.h>\nvoid swap(int a, int b) {\n  int t = a;\n  a = b;\n  b = t;\n}\nint main() {\n  int a = 11;\n  int b = 19;\n  swap(a, b);\n  switch(a) {\n    case 1:\n      b += 1;\n    case 11:\n      b += 2;\n    default:\n      b += 3;\n      break;\n  }\n  printf(\"%d\", a-b);\n}"
     },
     {
       "number": 19,
       "category": "C언어",
       "question": "다음은 C언어의 구조체에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "20",
-      "passage": "#include <stdio.h>\n \nstruct node {\n    int n1;\n    struct node *n2;\n};\n \nint main() {\n \n    struct node a = {10, NULL};\n    struct node b = {20, NULL};\n    struct node c = {30, NULL};\n \n    struct node *head = &a;\n    a.n2 = &b;\n    b.n2 = &c;\n \n    printf(\"%d\\n\", head->n2->n1);\n \n    return 0;\n}"
+      "passage": "#include <stdio.h>\nstruct node {\n  int n1;\n  struct node *n2;\n};\nint main() {\n  struct node a = {10, NULL};\n  struct node b = {20, NULL};\n  struct node c = {30, NULL};\n  struct node *head = &a;\n  a.n2 = &b;\n  b.n2 = &c;\n  printf(\"%d\\n\", head->n2->n1);\n  return 0;\n}"
     },
     {
       "number": 20,
       "category": "Java",
       "question": "다음은 Java에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "S",
-      "passage": "class Main {\n    public static void main(String[] args) {\n        String str = \"ITISTESTSTRING\";\n        String[] result = str.split(\"T\");\n        System.out.print(result[3]);\n    }\n}"
+      "passage": "class Main {\n  public static void main(String[] args) {\n    String str = \"ITISTESTSTRING\";\n    String[] result = str.split(\"T\");\n    System.out.print(result[3]);\n  }\n}"
     }
   ]
 }

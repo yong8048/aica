@@ -36,7 +36,7 @@
       "category": "Java",
       "question": "다음은 Java의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "BB",
-      "passage": "public class Main {\n    public static void change(String[] data, String s){\n        data[0] = s;\n        s = \"Z\";\n    }\n    \n    public static void main(String[] args) {\n        String data[] = { \"A\" };\n        String s = \"B\";\n        \n        change(data, s);\n        System.out.print(data[0] + s);\n    }\n}"
+      "passage": "public class Main {\n  public static void change(String[] data, String s){\n    data[0] = s;\n    s = \"Z\";\n  }\n  public static void main(String[] args) {\n    String data[] = { \"A\" };\n    String s = \"B\";\n    change(data, s);\n    System.out.print(data[0] + s);\n  }\n}"
     },
     {
       "number": 6,
@@ -64,14 +64,14 @@
       "category": "Java",
       "question": "다음은 Java언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "19",
-      "passage": "public class Main {\n \n    static interface F {\n        int apply(int x) throws Exception;\n    }\n \n    public static int run(F f) {\n        try {\n            return f.apply(3);\n        } catch (Exception e) {\n            return 7;\n        }\n    }\n \n    public static void main(String[] args) {\n \n        F f = (x) -> {\n            if (x > 2) {\n                throw new Exception();\n            }\n            return x * 2;\n        };\n \n        System.out.print(run(f) + run((int n) -> n + 9));\n    }\n \n}"
+      "passage": "public class Main {\n  static interface F {\n    int apply(int x) throws Exception;\n  }\n  public static int run(F f) {\n    try {\n      return f.apply(3);\n    }\n    catch (Exception e) {\n      return 7;\n    }\n  }\n  public static void main(String[] args) {\n    F f = (x) -> {\n      if (x > 2) {\n        throw new Exception();\n      }\n      return x * 2;\n    };\n    System.out.print(run(f) + run((int n) -> n + 9));\n  }\n}"
     },
     {
       "number": 10,
       "category": "Java",
       "question": "다음은 Java언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "5P",
-      "passage": "public class Main{\n \n    public static class Parent {\n \n        public int x(int i) { return i + 2; }\n        public static String id() { return \"P\";}\n        \n    }\n \n    public static class Child extends Parent {\n        \n        public int x(int i) { return i + 3; }\n        public String x(String s) { return s + \"R\"; }\n        public static String id() { return \"C\"; }\n        \n    }\n \n    public static void main(String[] args) {\n \n        Parent ref = new Child();\n        System.out.println(ref.x(2) + ref.id());\n        \n    }\n    \n}"
+      "passage": "public class Main{\n  public static class Parent {\n    public int x(int i) {\n      return i + 2;\n    }\n    public static String id() {\n      return \"P\";\n    }\n  }\n  public static class Child extends Parent {\n    public int x(int i) {\n      return i + 3;\n    }\n    public String x(String s) {\n      return s + \"R\";\n    }\n    public static String id() {\n      return \"C\";\n    }\n  }\n  public static void main(String[] args) {\n    Parent ref = new Child();\n    System.out.println(ref.x(2) + ref.id());\n  }\n}"
     },
     {
       "number": 11,
@@ -86,7 +86,7 @@
       "category": "C언어",
       "question": "다음은 C언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "2 그리고 3",
-      "passage": "#include <stdio.h>\n#define SIZE 3\n \ntypedef struct {\n    int a[SIZE];\n    int front;\n    int rear;\n} Queue;\n \nvoid enq(Queue* q, int val){\n    q->a[q->rear] = val; \n    q->rear = (q->rear + 1) % SIZE;\n}\n \nint deq(Queue* q) {\n    int val = q->a[q->front];\n    q->front = (q->front + 1) % SIZE;\n    return val;\n}\n \nint main() {\n    Queue q = {{0}, 0, 0};\n \n    enq(&q,1); enq(&q,2); deq(&q); enq(&q, 3);\n    \n    int first = deq(&q);\n    int second = deq(&q);\n    printf(\"%d 그리고 %d\", first, second);\n    \n    return 0;\n}"
+      "passage": "#include <stdio.h>\n#define SIZE 3\ntypedef struct {\n  int a[SIZE];\n  int front;\n  int rear;\n}\nQueue;\nvoid enq(Queue* q, int val){\n  q->a[q->rear] = val;\n  q->rear = (q->rear + 1) % SIZE;\n}\nint deq(Queue* q) {\n  int val = q->a[q->front];\n  q->front = (q->front + 1) % SIZE;\n  return val;\n}\nint main() {\n  Queue q = {{0}, 0, 0};\n  enq(&q,1);\n  enq(&q,2);\n  deq(&q);\n  enq(&q, 3);\n  int first = deq(&q);\n  int second = deq(&q);\n  printf(\"%d 그리고 %d\", first, second);\n  return 0;\n}"
     },
     {
       "number": 13,
@@ -100,35 +100,35 @@
       "category": "C언어",
       "question": "다음은 C언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "5 그리고 6",
-      "passage": "#include <stdio.h>\n \nstruct dat {\n    int x;\n    int y;\n};\n \nint main() {\n    struct dat a[] = {{1, 2}, {3, 4}, {5, 6}};\n    struct dat* ptr = a;\n    struct dat** pptr = &ptr;\n \n    (*pptr)[1] = (*pptr)[2];\n    printf(\"%d 그리고 %d\", a[1].x, a[1].y);\n \n    return 0;\n}"
+      "passage": "#include <stdio.h>\nstruct dat {\n  int x;\n  int y;\n};\nint main() {\n  struct dat a[] = {{1, 2}, {3, 4}, {5, 6}};\n  struct dat* ptr = a;\n  struct dat** pptr = &ptr;\n  (*pptr)[1] = (*pptr)[2];\n  printf(\"%d 그리고 %d\", a[1].x, a[1].y);\n  return 0;\n}"
     },
     {
       "number": 15,
       "category": "Java",
       "question": "다음은 Java언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "1a3b3",
-      "passage": "public class Main{\n    public static class BO {\n        public int v;\n        public BO(int v) {\n            this.v = v;\n        }\n    }\n    public static void main(String[] args) {\n        BO a = new BO(1);\n        BO b = new BO(2);\n        BO c = new BO(3);\n        BO[] arr = {a, b, c};\n        BO t = arr[0];\n        arr[0] = arr[2];\n        arr[2] = t;\n        arr[1].v = arr[0].v;\n        System.out.println(a.v + \"a\" + b.v + \"b\" + c.v);\n    }\n}"
+      "passage": "public class Main{\n  public static class BO {\n    public int v;\n    public BO(int v) {\n      this.v = v;\n    }\n  }\n  public static void main(String[] args) {\n    BO a = new BO(1);\n    BO b = new BO(2);\n    BO c = new BO(3);\n    BO[] arr = {a, b, c};\n    BO t = arr[0];\n    arr[0] = arr[2];\n    arr[2] = t;\n    arr[1].v = arr[0].v;\n    System.out.println(a.v + \"a\" + b.v + \"b\" + c.v);\n  }\n}"
     },
     {
       "number": 16,
       "category": "C언어",
       "question": "다음은 C언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "3 1 2",
-      "passage": "#include <stdio.h>\n#include <stdlib.h>\n \nstruct node {\n    int p;\n    struct node* n;\n};\n \nint main() {\n    struct node a = {1, NULL};\n    struct node b = {2, NULL};\n    struct node c = {3, NULL};\n \n    a.n = &b; b.n = &c; c.n = NULL;\n    c.n = &a; a.n = &b; b.n = NULL;\n    struct node* head = &c;\n    printf(\"%d %d %d\", head->p, head->n->p, head->n->n->p);\n    return 0;\n}"
+      "passage": "#include <stdio.h>\n#include <stdlib.h>\nstruct node {\n  int p;\n  struct node* n;\n};\nint main() {\n  struct node a = {1, NULL};\n  struct node b = {2, NULL};\n  struct node c = {3, NULL};\n  a.n = &b;\n  b.n = &c;\n  c.n = NULL;\n  c.n = &a;\n  a.n = &b;\n  b.n = NULL;\n  struct node* head = &c;\n  printf(\"%d %d %d\", head->p, head->n->p, head->n->n->p);\n  return 0;\n}"
     },
     {
       "number": 17,
       "category": "Python",
       "question": "다음은 Pyhon언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "2",
-      "passage": "lst = [1,2,3]\ndst = {i : i* 2 for i in lst}\ns = set(dst.values())\nlst[0] = 99 \ndst[2]=7\ns.add(99)\nprint(len(s & set(dst.values())))"
+      "passage": "lst = [1,2,3]\ndst = {i : i* 2 for i in lst}\ns = set(dst.values())\nlst[0] = 99\ndst[2]=7\ns.add(99)\nprint(len(s & set(dst.values())))"
     },
     {
       "number": 18,
       "category": "C언어",
       "question": "다음은 C언어의 문제이다. 아래 코드를 보고 알맞는 출력값을 작성하시오.",
       "answer": "TSEB",
-      "passage": "#include <stdio.h>\n#include <stdlib.h>\n \nstruct node {\n    char c;\n    struct node* p;\n};\n \nstruct node* func(char* s) {\n    struct node* h = NULL, *n;\n    \n    while(*s) {\n        n = malloc(sizeof(struct node));\n        n->c = *s++;\n        n->p = h;\n        h = n;\n    }\n    \n    return h;\n}\n \nint main() {\n    struct node* n = func(\"BEST\");\n    \n    while(n) {\n        putchar(n->c);\n        struct node* t = n;\n        n = n->p;\n        free(t);\n    }\n    \n    return 0;\n}"
+      "passage": "#include <stdio.h>\n#include <stdlib.h>\nstruct node {\n  char c;\n  struct node* p;\n};\nstruct node* func(char* s) {\n  struct node* h = NULL, *n;\n  while(*s) {\n    n = malloc(sizeof(struct node));\n    n->c = *s++;\n    n->p = h;\n    h = n;\n  }\n  return h;\n}\nint main() {\n  struct node* n = func(\"BEST\");\n  while(n) {\n    putchar(n->c);\n    struct node* t = n;\n    n = n->p;\n    free(t);\n  }\n  return 0;\n}"
     },
     {
       "number": 19,

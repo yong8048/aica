@@ -212,9 +212,10 @@
   line-height: 1.55;
   letter-spacing: 0;
   color: #cfe0f0;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  tab-size: 2;
+  white-space: pre;
+  overflow-x: auto;
+  word-break: normal;
+  tab-size: 4;
 }
 
 .rich > * + * {
