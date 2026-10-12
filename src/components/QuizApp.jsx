@@ -42,6 +42,7 @@ import {
   isSilgiId,
   loadSilgiRound,
   loadSilgiSample,
+  loadSilgiSubject,
   loadWrongSilgiQuestions,
 } from "../utils/jeongcheogiSilgi.js";
 
@@ -59,7 +60,7 @@ function countWrong(mode) {
 
 function homeTagline(mode) {
   if (mode === "jeongcheogi") return "전체 · 회차별(100문제) · 오답 복습";
-  if (mode === "silgi") return "정답 확인 후 스스로 채점 · 오답 복습";
+  if (mode === "silgi") return "과목별 · 회차별 · 오답 복습";
   return "전체 · 통합시험 회차 · 연습 회차 · 오답 복습";
 }
 
@@ -376,6 +377,14 @@ export default function QuizApp() {
     return startQuiz(loadSilgiSample);
   }, [startQuiz]);
 
+  const handleStartSilgiSubject = useCallback(
+    (subjectId) => {
+      setSilgiSession((n) => n + 1);
+      return startQuiz(() => loadSilgiSubject(subjectId));
+    },
+    [startQuiz]
+  );
+
   const handleStartSilgiRound = useCallback(
     (slug) => {
       setSilgiSession((n) => n + 1);
@@ -655,6 +664,7 @@ export default function QuizApp() {
           {!loading && examMode === "silgi" && (
             <SilgiHomeScreen
               wrongCount={wrongCount}
+              onStartSubject={handleStartSilgiSubject}
               onStartRound={handleStartSilgiRound}
               onStartSample={handleStartSilgi}
               onStartWrong={handleStartSilgiWrong}

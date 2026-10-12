@@ -2,6 +2,44 @@ import { loadWrongIds } from "./wrongAnswers.js";
 
 export const ID_PREFIX = "silgi";
 
+export const SILGI_SUBJECTS = [
+  { id: "language", label: "프로그래밍 언어" },
+  { id: "database", label: "데이터베이스" },
+  { id: "infra", label: "IT 인프라와 시스템" },
+  { id: "engineering", label: "소프트웨어 공학" },
+];
+
+const CATEGORY_TO_SUBJECT = {
+  Java: "language",
+  Python: "language",
+  C언어: "language",
+  SQL: "database",
+  데이터베이스: "database",
+  네트워크: "infra",
+  운영체제: "infra",
+  정보보안: "infra",
+  정보통신: "infra",
+  "소프트웨어 공학": "engineering",
+  "소프트웨어 설계": "engineering",
+};
+
+// 자동 분류가 '정보처리'로 남은 문항. 문제 내용 기준으로 대과목에 넣는다.
+const QUESTION_SUBJECT = {
+  "2024_01-20": "engineering",
+  "2024_02-7": "infra",
+  "2024_02-8": "infra",
+  "2024_02-9": "engineering",
+  "2025_01-3": "infra",
+  "2025_02-20": "database",
+  "2026_01-5": "infra",
+};
+
+export function silgiSubjectOf(question) {
+  const byQuestion = QUESTION_SUBJECT[`${question.round}-${question.number}`];
+  if (byQuestion) return byQuestion;
+  return CATEGORY_TO_SUBJECT[question.category] ?? "engineering";
+}
+
 export const SILGI_ROUNDS = [
   { slug: "2024_01", file: "jeongcheogi_silgi_2024_01.json" },
   { slug: "2024_02", file: "jeongcheogi_silgi_2024_02.json" },
@@ -70,6 +108,22 @@ export async function loadSilgiSample() {
   const { questions } = await loadSilgiFile("jeongcheogi_silgi_sample.json", "sample");
   return {
     title: `정보처리기사 실기 예시 (${questions.length}문제)`,
+    questions,
+  };
+}
+
+export async function loadSilgiSubject(subjectId) {
+  const subject = SILGI_SUBJECTS.find((item) => item.id === subjectId);
+  if (!subject) throw new Error("과목을 찾을 수 없습니다.");
+  const results = await Promise.all(SILGI_ROUNDS.map((round) => fetchJson(round.file)));
+  const questions = results.flatMap((data) =>
+    (data.questions ?? [])
+      .map((q) => normalizeSilgiQuestion(q, data.slug))
+      .filter((q) => silgiSubjectOf(q) === subjectId)
+  );
+  if (!questions.length) throw new Error("문항이 없습니다.");
+  return {
+    title: `정보처리기사 실기 ${subject.label} (${questions.length}문제)`,
     questions,
   };
 }

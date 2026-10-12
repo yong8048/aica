@@ -616,6 +616,12 @@
   gap: 0.45rem;
 }
 
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
 @media (max-width: 420px) {
   .round-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

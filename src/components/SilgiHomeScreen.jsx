@@ -1,14 +1,32 @@
-import { SILGI_ROUNDS, silgiRoundLabel } from "../utils/jeongcheogiSilgi.js";
+import { SILGI_ROUNDS, SILGI_SUBJECTS, silgiRoundLabel } from "../utils/jeongcheogiSilgi.js";
 
 export default function SilgiHomeScreen({
   wrongCount,
   onStartRound,
+  onStartSubject,
   onStartSample,
   onStartWrong,
   onClearWrong,
 }) {
   return (
     <div className="home">
+      <section className="home-section">
+        <h2 className="home-heading">과목</h2>
+        <p className="home-desc">여덟 회차에서 같은 과목만 모아 풉니다.</p>
+        <div className="subject-grid" role="list">
+          {SILGI_SUBJECTS.map((subject) => (
+            <button
+              key={subject.id}
+              type="button"
+              className="round-btn"
+              onClick={() => onStartSubject(subject.id)}
+            >
+              <span className="round-btn-label">{subject.label}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
       <section className="home-section">
         <h2 className="home-heading">회차</h2>
         <p className="home-desc">
