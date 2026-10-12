@@ -49,6 +49,7 @@ export const SILGI_ROUNDS = [
   { slug: "2025_03", file: "jeongcheogi_silgi_2025_03.json" },
   { slug: "2026_01", file: "jeongcheogi_silgi_2026_01.json" },
   { slug: "2026_02", file: "jeongcheogi_silgi_2026_02.json" },
+  { slug: "example", file: "jeongcheogi_silgi_example.json" },
 ];
 
 const SILGI_FILES = ["jeongcheogi_silgi_sample.json", ...SILGI_ROUNDS.map((round) => round.file)];
@@ -72,7 +73,7 @@ export function isSilgiId(id) {
 }
 
 export function silgiRoundLabel(slug) {
-  if (slug === "sample") return "예시";
+  if (slug === "sample" || slug === "example") return "예시";
   const [year, round] = String(slug ?? "").split("_");
   if (!year || !round) return String(slug ?? "");
   return `${year}년 ${Number(round)}회`;

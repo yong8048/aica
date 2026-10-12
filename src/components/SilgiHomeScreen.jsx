@@ -12,7 +12,7 @@ export default function SilgiHomeScreen({
     <div className="home">
       <section className="home-section">
         <h2 className="home-heading">과목</h2>
-        <p className="home-desc">여덟 회차에서 같은 과목만 모아 풉니다.</p>
+        <p className="home-desc">등록된 회차에서 같은 과목만 모아 풉니다.</p>
         <div className="subject-grid" role="list">
           {SILGI_SUBJECTS.map((subject) => (
             <button
