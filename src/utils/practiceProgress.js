@@ -126,3 +126,23 @@ export function clearSilgiSampleProgress() {
   data.sample = null;
   saveSilgiAll(data);
 }
+
+function completedSilgiState(totalQuestions) {
+  return {
+    completed: true,
+    totalQuestions,
+    currentIndex: Math.max(0, totalQuestions - 1),
+  };
+}
+
+export function completeSilgiRoundProgress(slug, totalQuestions) {
+  saveSilgiRoundProgress(slug, completedSilgiState(totalQuestions));
+}
+
+export function completeSilgiSubjectProgress(subjectId, totalQuestions) {
+  saveSilgiSubjectProgress(subjectId, completedSilgiState(totalQuestions));
+}
+
+export function completeSilgiSampleProgress(totalQuestions) {
+  saveSilgiSampleProgress(completedSilgiState(totalQuestions));
+}

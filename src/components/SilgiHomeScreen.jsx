@@ -2,13 +2,24 @@ import { SILGI_ROUNDS, SILGI_SUBJECTS, silgiRoundLabel } from "../utils/jeongche
 
 function progressLabel(progress) {
   if (!progress) return null;
+  if (progress.completed) return "완료";
   return `${progress.currentIndex + 1}/${progress.totalQuestions}`;
+}
+
+function progressClass(progress) {
+  if (progress?.completed) return " is-complete";
+  if (progress) return " has-progress";
+  return "";
 }
 
 function confirmResume(label, progress) {
   return window.confirm(
     `${label} ${progress.currentIndex + 1}번 문제부터 이어서 풀까요?\n\n취소하면 처음부터 시작합니다.`
   );
+}
+
+function confirmRestart(label) {
+  return window.confirm(`${label}, 이미 끝까지 풀었습니다. 처음부터 다시 풀까요?`);
 }
 
 export default function SilgiHomeScreen({
@@ -27,6 +38,10 @@ export default function SilgiHomeScreen({
 }) {
   const handleSubjectSelect = (subject) => {
     const progress = subjectProgress[subject.id];
+    if (progress?.completed) {
+      if (confirmRestart(subject.label)) onStartSubject(subject.id);
+      return;
+    }
     if (progress && confirmResume(subject.label, progress)) {
       onResumeSubject(subject.id);
       return;
@@ -36,7 +51,12 @@ export default function SilgiHomeScreen({
 
   const handleRoundSelect = (slug) => {
     const progress = roundProgress[slug];
-    if (progress && confirmResume(silgiRoundLabel(slug), progress)) {
+    const label = silgiRoundLabel(slug);
+    if (progress?.completed) {
+      if (confirmRestart(label)) onStartRound(slug);
+      return;
+    }
+    if (progress && confirmResume(label, progress)) {
       onResumeRound(slug);
       return;
     }
@@ -44,6 +64,10 @@ export default function SilgiHomeScreen({
   };
 
   const handleSampleSelect = () => {
+    if (sampleProgress?.completed) {
+      if (confirmRestart("예시")) onStartSample();
+      return;
+    }
     if (sampleProgress && confirmResume("예시", sampleProgress)) {
       onResumeSample();
       return;
@@ -63,7 +87,7 @@ export default function SilgiHomeScreen({
               <button
                 key={subject.id}
                 type="button"
-                className={`round-btn${progress ? " has-progress" : ""}`}
+                className={`round-btn${progressClass(progress)}`}
                 onClick={() => handleSubjectSelect(subject)}
               >
                 <span className="round-btn-label">{subject.label}</span>
@@ -86,7 +110,7 @@ export default function SilgiHomeScreen({
               <button
                 key={round.slug}
                 type="button"
-                className={`round-btn${progress ? " has-progress" : ""}`}
+                className={`round-btn${progressClass(progress)}`}
                 onClick={() => handleRoundSelect(round.slug)}
               >
                 <span className="round-btn-label">{silgiRoundLabel(round.slug)}</span>
@@ -100,10 +124,16 @@ export default function SilgiHomeScreen({
       <section className="home-section">
         <h2 className="home-heading">예시 문제</h2>
         <p className="home-desc">동작 확인용 예시 3문제입니다.</p>
-        <button type="button" className="btn btn-ghost home-action" onClick={handleSampleSelect}>
-          {sampleProgress
-            ? `예시 이어하기 (${progressLabel(sampleProgress)})`
-            : "예시 3문제 시작"}
+        <button
+          type="button"
+          className={`btn btn-ghost home-action${sampleProgress?.completed ? " is-complete" : ""}`}
+          onClick={handleSampleSelect}
+        >
+          {sampleProgress?.completed
+            ? "예시 완료"
+            : sampleProgress
+              ? `예시 이어하기 (${progressLabel(sampleProgress)})`
+              : "예시 3문제 시작"}
         </button>
       </section>
 

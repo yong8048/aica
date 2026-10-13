@@ -87,7 +87,7 @@ export default function SilgiQuiz({
     if (!grade) return;
     if (isLast) {
       setFinished(true);
-      onFinished?.();
+      onFinished?.(total);
       return;
     }
     setCurrentIndex((index) => Math.min(total - 1, index + 1));

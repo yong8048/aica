@@ -39,6 +39,9 @@ import {
   clearSilgiRoundProgress,
   clearSilgiSampleProgress,
   clearSilgiSubjectProgress,
+  completeSilgiRoundProgress,
+  completeSilgiSampleProgress,
+  completeSilgiSubjectProgress,
   getSilgiAllProgress,
   getSilgiRoundProgress,
   getSilgiSampleProgress,
@@ -216,15 +219,16 @@ export default function QuizApp() {
     }
   }, []);
 
-  const clearSilgiSessionProgress = useCallback(() => {
+  const completeSilgiSessionProgress = useCallback((totalQuestions) => {
     const session = silgiSessionRef.current;
-    if (!session || session.type === "wrong") return;
+    const total = Number(totalQuestions);
+    if (!session || session.type === "wrong" || !Number.isInteger(total) || total < 1) return;
     if (session.type === "round" && session.key) {
-      clearSilgiRoundProgress(session.key);
+      completeSilgiRoundProgress(session.key, total);
     } else if (session.type === "subject" && session.key) {
-      clearSilgiSubjectProgress(session.key);
+      completeSilgiSubjectProgress(session.key, total);
     } else if (session.type === "sample") {
-      clearSilgiSampleProgress();
+      completeSilgiSampleProgress(total);
     }
   }, []);
 
@@ -816,8 +820,8 @@ export default function QuizApp() {
         onMarked={() => refreshWrongCount("silgi")}
         initialProgress={silgiResumeRef.current}
         onProgress={saveSilgiSessionProgress}
-        onFinished={() => {
-          clearSilgiSessionProgress();
+        onFinished={(totalQuestions) => {
+          completeSilgiSessionProgress(totalQuestions);
           refreshSilgiProgress();
         }}
       />

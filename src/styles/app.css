@@ -652,6 +652,23 @@
   background: color-mix(in srgb, var(--accent) 8%, var(--bg));
 }
 
+.round-btn.is-complete,
+.home-action.is-complete {
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
+.round-btn.is-complete .round-btn-progress,
+.home-action.is-complete {
+  color: var(--success);
+}
+
+.round-btn.is-complete:hover,
+.home-action.is-complete:hover {
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
 .round-btn-label {
   line-height: 1.2;
 }
