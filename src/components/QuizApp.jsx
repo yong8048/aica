@@ -36,6 +36,16 @@ import {
   getJeongcheogiRoundProgress,
   saveJeongcheogiFullProgress,
   saveJeongcheogiRoundProgress,
+  clearSilgiRoundProgress,
+  clearSilgiSampleProgress,
+  clearSilgiSubjectProgress,
+  getSilgiAllProgress,
+  getSilgiRoundProgress,
+  getSilgiSampleProgress,
+  getSilgiSubjectProgress,
+  saveSilgiRoundProgress,
+  saveSilgiSampleProgress,
+  saveSilgiSubjectProgress,
 } from "../utils/practiceProgress.js";
 import {
   countSilgiWrong,
@@ -116,13 +126,20 @@ export default function QuizApp() {
     full: getJeongcheogiFullProgress(),
     rounds: getJeongcheogiAllRoundProgress(),
   }));
+  const [silgiProgress, setSilgiProgress] = useState(() => getSilgiAllProgress());
   const jeongcheogiSessionRef = useRef(null);
+  const silgiSessionRef = useRef(null);
+  const silgiResumeRef = useRef(null);
 
   const refreshJeongcheogiProgress = useCallback(() => {
     setJeongcheogiProgress({
       full: getJeongcheogiFullProgress(),
       rounds: getJeongcheogiAllRoundProgress(),
     });
+  }, []);
+
+  const refreshSilgiProgress = useCallback(() => {
+    setSilgiProgress(getSilgiAllProgress());
   }, []);
 
   const setTestMode = useCallback((value) => {
@@ -185,6 +202,50 @@ export default function QuizApp() {
     } else if (session.type === "round" && session.slug) {
       clearJeongcheogiRoundProgress(session.slug);
     }
+  }, []);
+
+  const saveSilgiSessionProgress = useCallback((state) => {
+    const session = silgiSessionRef.current;
+    if (!session || session.type === "wrong") return;
+    if (session.type === "round" && session.key) {
+      saveSilgiRoundProgress(session.key, state);
+    } else if (session.type === "subject" && session.key) {
+      saveSilgiSubjectProgress(session.key, state);
+    } else if (session.type === "sample") {
+      saveSilgiSampleProgress(state);
+    }
+  }, []);
+
+  const clearSilgiSessionProgress = useCallback(() => {
+    const session = silgiSessionRef.current;
+    if (!session || session.type === "wrong") return;
+    if (session.type === "round" && session.key) {
+      clearSilgiRoundProgress(session.key);
+    } else if (session.type === "subject" && session.key) {
+      clearSilgiSubjectProgress(session.key);
+    } else if (session.type === "sample") {
+      clearSilgiSampleProgress();
+    }
+  }, []);
+
+  const beginSilgiSession = useCallback((type, key = null, resume = false) => {
+    silgiSessionRef.current = { type, key };
+    if (resume) {
+      silgiResumeRef.current =
+        type === "round"
+          ? getSilgiRoundProgress(key)
+          : type === "subject"
+            ? getSilgiSubjectProgress(key)
+            : type === "sample"
+              ? getSilgiSampleProgress()
+              : null;
+    } else {
+      silgiResumeRef.current = null;
+      if (type === "round" && key) clearSilgiRoundProgress(key);
+      else if (type === "subject" && key) clearSilgiSubjectProgress(key);
+      else if (type === "sample") clearSilgiSampleProgress();
+    }
+    setSilgiSession((n) => n + 1);
   }, []);
 
   const startJeongcheogiQuiz = useCallback(
@@ -295,12 +356,15 @@ export default function QuizApp() {
       });
     }
     jeongcheogiSessionRef.current = null;
+    silgiSessionRef.current = null;
+    silgiResumeRef.current = null;
     setView("home");
     setLoadError(null);
     setFinished(false);
     resetQuizState();
     setQuestions([]);
     refreshJeongcheogiProgress();
+    refreshSilgiProgress();
   }, [
     view,
     examMode,
@@ -313,6 +377,7 @@ export default function QuizApp() {
     resetQuizState,
     saveJeongcheogiSessionProgress,
     refreshJeongcheogiProgress,
+    refreshSilgiProgress,
   ]);
 
   const handleStartFull = useCallback(() => startQuiz(loadFullExam), [startQuiz]);
@@ -373,28 +438,49 @@ export default function QuizApp() {
   }, [resetQuizState]);
 
   const handleStartSilgi = useCallback(() => {
-    setSilgiSession((n) => n + 1);
+    beginSilgiSession("sample");
     return startQuiz(loadSilgiSample);
-  }, [startQuiz]);
+  }, [beginSilgiSession, startQuiz]);
+
+  const handleResumeSilgi = useCallback(() => {
+    beginSilgiSession("sample", null, true);
+    return startQuiz(loadSilgiSample);
+  }, [beginSilgiSession, startQuiz]);
 
   const handleStartSilgiSubject = useCallback(
     (subjectId) => {
-      setSilgiSession((n) => n + 1);
+      beginSilgiSession("subject", subjectId);
       return startQuiz(() => loadSilgiSubject(subjectId));
     },
-    [startQuiz]
+    [beginSilgiSession, startQuiz]
+  );
+
+  const handleResumeSilgiSubject = useCallback(
+    (subjectId) => {
+      beginSilgiSession("subject", subjectId, true);
+      return startQuiz(() => loadSilgiSubject(subjectId));
+    },
+    [beginSilgiSession, startQuiz]
   );
 
   const handleStartSilgiRound = useCallback(
     (slug) => {
-      setSilgiSession((n) => n + 1);
+      beginSilgiSession("round", slug);
       return startQuiz(() => loadSilgiRound(slug));
     },
-    [startQuiz]
+    [beginSilgiSession, startQuiz]
+  );
+
+  const handleResumeSilgiRound = useCallback(
+    (slug) => {
+      beginSilgiSession("round", slug, true);
+      return startQuiz(() => loadSilgiRound(slug));
+    },
+    [beginSilgiSession, startQuiz]
   );
 
   const handleStartSilgiWrong = useCallback(() => {
-    setSilgiSession((n) => n + 1);
+    beginSilgiSession("wrong");
     return startQuiz(async () => {
       const result = await loadWrongSilgiQuestions();
       if (!result.questions.length) {
@@ -402,7 +488,7 @@ export default function QuizApp() {
       }
       return result;
     });
-  }, [startQuiz]);
+  }, [beginSilgiSession, startQuiz]);
 
   const handleClearWrong = useCallback(async () => {
     if (!window.confirm("저장된 오답 기록을 삭제할까요? (로그인 중이면 클라우드도 삭제됩니다)")) return;
@@ -421,8 +507,9 @@ export default function QuizApp() {
     if (view === "home") {
       refreshWrongCount();
       if (examMode === "jeongcheogi") refreshJeongcheogiProgress();
+      if (examMode === "silgi") refreshSilgiProgress();
     }
-  }, [view, examMode, refreshWrongCount, refreshJeongcheogiProgress]);
+  }, [view, examMode, refreshWrongCount, refreshJeongcheogiProgress, refreshSilgiProgress]);
 
   useEffect(() => {
     if (view !== "quiz" || examMode !== "jeongcheogi" || finished || !questions.length) return;
@@ -664,9 +751,15 @@ export default function QuizApp() {
           {!loading && examMode === "silgi" && (
             <SilgiHomeScreen
               wrongCount={wrongCount}
+              roundProgress={silgiProgress.rounds}
+              subjectProgress={silgiProgress.subjects}
+              sampleProgress={silgiProgress.sample}
               onStartSubject={handleStartSilgiSubject}
+              onResumeSubject={handleResumeSilgiSubject}
               onStartRound={handleStartSilgiRound}
+              onResumeRound={handleResumeSilgiRound}
               onStartSample={handleStartSilgi}
+              onResumeSample={handleResumeSilgi}
               onStartWrong={handleStartSilgiWrong}
               onClearWrong={handleClearWrong}
             />
@@ -721,6 +814,12 @@ export default function QuizApp() {
         onHome={goHome}
         onReviewWrong={handleStartSilgiWrong}
         onMarked={() => refreshWrongCount("silgi")}
+        initialProgress={silgiResumeRef.current}
+        onProgress={saveSilgiSessionProgress}
+        onFinished={() => {
+          clearSilgiSessionProgress();
+          refreshSilgiProgress();
+        }}
       />
     );
   }

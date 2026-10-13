@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import RichContent from "./RichContent.jsx";
 import { markCorrect, markWrong } from "../utils/quiz.js";
 import { silgiRoundLabel } from "../utils/jeongcheogiSilgi.js";
@@ -11,11 +11,23 @@ export default function SilgiQuiz({
   onHome,
   onReviewWrong,
   onMarked,
+  initialProgress,
+  onProgress,
+  onFinished,
 }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [revealedMap, setRevealedMap] = useState({});
-  const [grades, setGrades] = useState({});
-  const [sessionStats, setSessionStats] = useState({ correct: 0, wrong: 0 });
+  const restored =
+    initialProgress &&
+    Number.isInteger(initialProgress.currentIndex) &&
+    initialProgress.currentIndex >= 0 &&
+    initialProgress.currentIndex < questions.length
+      ? initialProgress
+      : null;
+  const [currentIndex, setCurrentIndex] = useState(restored?.currentIndex ?? 0);
+  const [revealedMap, setRevealedMap] = useState(restored?.revealedMap ?? {});
+  const [grades, setGrades] = useState(restored?.grades ?? {});
+  const [sessionStats, setSessionStats] = useState(
+    restored?.sessionStats ?? { correct: 0, wrong: 0 }
+  );
   const [finished, setFinished] = useState(false);
 
   const total = questions.length;
@@ -24,6 +36,17 @@ export default function SilgiQuiz({
   const grade = grades[currentIndex] ?? null;
   const isLast = currentIndex >= total - 1;
   const progressPct = total ? ((currentIndex + 1) / total) * 100 : 0;
+
+  useEffect(() => {
+    if (finished) return;
+    onProgress?.({
+      currentIndex,
+      revealedMap,
+      grades,
+      sessionStats,
+      totalQuestions: total,
+    });
+  }, [finished, currentIndex, revealedMap, grades, sessionStats, total, onProgress]);
 
   const handleReveal = useCallback(() => {
     setRevealedMap((prev) => ({ ...prev, [currentIndex]: true }));
@@ -64,10 +87,11 @@ export default function SilgiQuiz({
     if (!grade) return;
     if (isLast) {
       setFinished(true);
+      onFinished?.();
       return;
     }
     setCurrentIndex((index) => Math.min(total - 1, index + 1));
-  }, [grade, isLast, total]);
+  }, [grade, isLast, total, onFinished]);
 
   return (
     <div className="layout">

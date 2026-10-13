@@ -53,3 +53,76 @@ export function clearJeongcheogiRoundProgress(slug) {
   delete data.rounds[slug];
   saveAll(data);
 }
+
+export const SILGI_PROGRESS_KEY = "aica-silgi-practice-progress";
+
+function loadSilgiAll() {
+  try {
+    const raw = localStorage.getItem(SILGI_PROGRESS_KEY);
+    if (!raw) return { rounds: {}, subjects: {}, sample: null };
+    const parsed = JSON.parse(raw);
+    return {
+      rounds: parsed.rounds ?? {},
+      subjects: parsed.subjects ?? {},
+      sample: parsed.sample ?? null,
+    };
+  } catch {
+    return { rounds: {}, subjects: {}, sample: null };
+  }
+}
+
+function saveSilgiAll(data) {
+  localStorage.setItem(SILGI_PROGRESS_KEY, JSON.stringify(data));
+}
+
+export function getSilgiAllProgress() {
+  return loadSilgiAll();
+}
+
+export function getSilgiRoundProgress(slug) {
+  return loadSilgiAll().rounds[slug] ?? null;
+}
+
+export function getSilgiSubjectProgress(subjectId) {
+  return loadSilgiAll().subjects[subjectId] ?? null;
+}
+
+export function getSilgiSampleProgress() {
+  return loadSilgiAll().sample;
+}
+
+export function saveSilgiRoundProgress(slug, state) {
+  const data = loadSilgiAll();
+  data.rounds[slug] = { ...state, updatedAt: Date.now() };
+  saveSilgiAll(data);
+}
+
+export function saveSilgiSubjectProgress(subjectId, state) {
+  const data = loadSilgiAll();
+  data.subjects[subjectId] = { ...state, updatedAt: Date.now() };
+  saveSilgiAll(data);
+}
+
+export function saveSilgiSampleProgress(state) {
+  const data = loadSilgiAll();
+  data.sample = { ...state, updatedAt: Date.now() };
+  saveSilgiAll(data);
+}
+
+export function clearSilgiRoundProgress(slug) {
+  const data = loadSilgiAll();
+  delete data.rounds[slug];
+  saveSilgiAll(data);
+}
+
+export function clearSilgiSubjectProgress(subjectId) {
+  const data = loadSilgiAll();
+  delete data.subjects[subjectId];
+  saveSilgiAll(data);
+}
+
+export function clearSilgiSampleProgress() {
+  const data = loadSilgiAll();
+  data.sample = null;
+  saveSilgiAll(data);
+}
