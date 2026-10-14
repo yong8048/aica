@@ -35,6 +35,7 @@ export default function SilgiHomeScreen({
   onResumeSample,
   onStartWrong,
   onClearWrong,
+  onOpenGof,
 }) {
   const handleSubjectSelect = (subject) => {
     const progress = subjectProgress[subject.id];
@@ -77,6 +78,14 @@ export default function SilgiHomeScreen({
 
   return (
     <div className="home">
+      <section className="home-section">
+        <h2 className="home-heading">개념 정리</h2>
+        <p className="home-desc">생성 5, 구조 7, 행위 11을 표와 실기 문장으로 봅니다.</p>
+        <button type="button" className="btn btn-ghost home-action" onClick={onOpenGof}>
+          GoF 디자인 패턴
+        </button>
+      </section>
+
       <section className="home-section">
         <h2 className="home-heading">과목</h2>
         <p className="home-desc">등록된 회차에서 같은 과목만 모아 풉니다.</p>

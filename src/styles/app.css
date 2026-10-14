@@ -1178,3 +1178,89 @@
     flex: 1;
   }
 }
+
+.gof {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+}
+
+.gof-intro {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.gof-heading {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+}
+
+.gof-table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.gof-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.gof-table th,
+.gof-table td {
+  padding: 0.45rem 0.55rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  font-weight: 400;
+}
+
+.gof-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.gof-table tbody tr:last-child th,
+.gof-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.gof-cat {
+  width: 2.4rem;
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.gof-pattern {
+  width: 7.2rem;
+  font-weight: 700;
+}
+
+.gof-en {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.gof-exam {
+  min-width: 16rem;
+}
+
+.gof-blank {
+  font-weight: 700;
+  color: var(--accent);
+}
