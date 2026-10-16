@@ -80,7 +80,7 @@ export default function LanguageStudy({ onBack }) {
             <p className="study-lead">
               같은 규칙은 대표 문제만 코드를 줄였다. 회차는 2024년 1회부터 2026년 2회 복원이다.
             </p>
-            <div className="coverage-list">
+            <div className="lang-problem-list">
               {lang.problems.map((problem) => (
                 <article key={problem.title} className="coverage-card">
                   <h3 className="lang-problem-title">{problem.title}</h3>
