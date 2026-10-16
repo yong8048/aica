@@ -3,6 +3,7 @@ import "../styles/app.css";
 import HomeScreen from "./HomeScreen.jsx";
 import JeongcheogiHomeScreen from "./JeongcheogiHomeScreen.jsx";
 import GofStudy from "./GofStudy.jsx";
+import LanguageStudy from "./LanguageStudy.jsx";
 import SoftwareTestingStudy from "./SoftwareTestingStudy.jsx";
 import SilgiHomeScreen from "./SilgiHomeScreen.jsx";
 import SilgiQuiz from "./SilgiQuiz.jsx";
@@ -715,6 +716,10 @@ export default function QuizApp() {
     return <SoftwareTestingStudy onBack={goHome} />;
   }
 
+  if (view === "language") {
+    return <LanguageStudy onBack={goHome} />;
+  }
+
   if (view === "home") {
     return (
       <div className="layout layout-home">
@@ -778,6 +783,7 @@ export default function QuizApp() {
               onClearWrong={handleClearWrong}
               onOpenGof={() => setView("gof")}
               onOpenTesting={() => setView("testing")}
+              onOpenLanguage={() => setView("language")}
             />
           )}
           {!loading && examMode === "aica" && (

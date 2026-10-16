@@ -37,6 +37,7 @@ export default function SilgiHomeScreen({
   onClearWrong,
   onOpenGof,
   onOpenTesting,
+  onOpenLanguage,
 }) {
   const handleSubjectSelect = (subject) => {
     const progress = subjectProgress[subject.id];
@@ -88,6 +89,9 @@ export default function SilgiHomeScreen({
           </button>
           <button type="button" className="btn btn-ghost" onClick={onOpenTesting}>
             소프트웨어 테스트 기법
+          </button>
+          <button type="button" className="btn btn-ghost" onClick={onOpenLanguage}>
+            C · Java · Python
           </button>
         </div>
       </section>

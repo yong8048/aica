@@ -561,6 +561,40 @@
   border-color: var(--accent);
 }
 
+.lang-tab-count {
+  font-weight: 500;
+}
+
+.mode-tab-btn.is-active .lang-tab-count {
+  font-weight: 700;
+}
+
+.lang-rounds {
+  white-space: nowrap;
+}
+
+.lang-problem-title {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.lang-meta {
+  margin: 0.15rem 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.lang-answer {
+  margin: 0.45rem 0 0;
+  font-size: 0.8rem;
+}
+
+.lang-answer span {
+  color: var(--accent);
+  font-weight: 800;
+}
+
 .question-image {
   display: block;
   max-width: 100%;
@@ -602,7 +636,7 @@
 
 .concept-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
   gap: 0.45rem;
 }
 
