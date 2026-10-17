@@ -73,27 +73,32 @@ export default function LanguageStudy({ onBack }) {
 
             <section>
               <h3 className="lang-kicker">{SECTIONS[0][1]}</h3>
-              <p className="study-lead">{lesson.summary}</p>
+              <p className="lang-hook">{lesson.summary}</p>
+              {lesson.analogy && (
+                <p className="lang-analogy">
+                  <strong>쉽게 말하면</strong> {lesson.analogy}
+                </p>
+              )}
               {lesson.table && (
                 <div className="gof-table-wrap">
                   <table className="gof-table">
                     <thead>
                       <tr>
-                        {lesson.table.headers.map((header) => (
-                          <th key={header}>{header}</th>
+                        {lesson.table.headers.map((header, index) => (
+                          <th key={index}>{header}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
-                      {lesson.table.rows.map((row) => (
-                        <tr key={row[0]}>
+                      {lesson.table.rows.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
                           {row.map((cell, index) =>
                             index === 0 ? (
-                              <th key={cell} scope="row" className="gof-pattern">
+                              <th key={index} scope="row" className="gof-pattern">
                                 {cell}
                               </th>
                             ) : (
-                              <td key={cell}>{cell}</td>
+                              <td key={index}>{cell}</td>
                             )
                           )}
                         </tr>
@@ -116,10 +121,11 @@ export default function LanguageStudy({ onBack }) {
             <section>
               <h3 className="lang-kicker">{SECTIONS[2][1]}</h3>
               <ol className="lang-steps">
-                {lesson.steps.map((step) => (
-                  <li key={step.n}>
-                    <strong>{step.n}</strong>
-                    <p>{step.body}</p>
+                {lesson.steps.map((step, index) => (
+                  <li key={index}>
+                    <code className="lang-at">{step.at}</code>
+                    <p className="lang-say">{step.say}</p>
+                    {step.mem && <pre className="lang-mem">{step.mem}</pre>}
                     {step.trap && <p className="lang-trap">★ {step.trap}</p>}
                   </li>
                 ))}

@@ -598,22 +598,74 @@
   line-height: 1.35;
 }
 
+.lang-hook {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.lang-analogy {
+  margin: 0 0 0.6rem;
+  padding: 0.55rem 0.7rem;
+  color: var(--muted);
+  background: var(--surface);
+  border-left: 2px solid var(--muted);
+  border-radius: var(--radius-sm);
+  line-height: 1.6;
+}
+
+.lang-analogy strong {
+  margin-right: 0.3rem;
+  color: var(--text);
+}
+
 .lang-steps {
   margin: 0;
   padding-left: 1.2rem;
 }
 
 .lang-steps li + li {
-  margin-top: 0.7rem;
+  margin-top: 0.95rem;
 }
 
-.lang-steps p {
-  margin: 0.2rem 0 0;
+.lang-at {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.12rem 0.4rem;
+  color: var(--accent);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.lang-say {
+  margin: 0.35rem 0 0;
+  line-height: 1.65;
+}
+
+.lang-mem {
+  margin: 0.35rem 0 0;
+  padding: 0.45rem 0.65rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .lang-trap {
+  margin: 0.4rem 0 0;
   color: var(--danger);
   font-weight: 700;
+  line-height: 1.55;
 }
 
 .lang-final {
