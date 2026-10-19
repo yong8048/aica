@@ -91,7 +91,7 @@ export default function SilgiHomeScreen({
             소프트웨어 테스트 기법
           </button>
           <button type="button" className="btn btn-ghost" onClick={onOpenLanguage}>
-            C · Java · Python
+            C · Java · Python · SQL
           </button>
         </div>
       </section>

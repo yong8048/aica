@@ -28,7 +28,7 @@ export default function LanguageStudy({ onBack }) {
           <button type="button" className="back-btn" onClick={onBack} aria-label="실기 메뉴로 돌아가기">
             ←
           </button>
-          <h1 className="title">C · Java · Python</h1>
+          <h1 className="title">C · Java · Python · SQL</h1>
           <span className="title-sep" aria-hidden="true">
             ·
           </span>
