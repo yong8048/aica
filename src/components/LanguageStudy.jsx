@@ -111,9 +111,9 @@ export default function LanguageStudy({ onBack }) {
 
             <section>
               <h3 className="lang-kicker">{SECTIONS[1][1]}</h3>
-              <div className="study-code" aria-label={`${lesson.title} 코드`}>
+              <div className="study-code lang-code" aria-label={`${lesson.title} 코드`}>
                 {lesson.code.map((line, index) => (
-                  <span key={`${lesson.id}-${index}`}>{line}</span>
+                  <span key={`${lesson.id}-${index}`}>{line || " "}</span>
                 ))}
               </div>
             </section>
