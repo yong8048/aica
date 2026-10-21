@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { isSupabaseConfigured, redirectUrl, supabase } from "../lib/supabase.js";
-import { syncSilgiProgress } from "../utils/practiceProgress.js";
 import { syncWrongAnswers } from "../utils/wrongAnswers.js";
 
 function parseLoginPayload(raw) {
@@ -73,7 +72,6 @@ export default function SyncAuth({ onSync }) {
       setMessage("");
       try {
         await syncWrongAnswers();
-        await syncSilgiProgress();
         if (!cancelled) onSync?.();
       } catch (e) {
         console.error(e);
@@ -94,16 +92,17 @@ export default function SyncAuth({ onSync }) {
     function onVisible() {
       if (document.visibilityState !== "visible") return;
       void syncWrongAnswers()
-        .then(() => syncSilgiProgress())
         .then(() => onSync?.())
         .catch((err) => console.error(err));
     }
 
     document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("focus", onVisible);
+    const timer = window.setInterval(onVisible, 8000);
     return () => {
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("focus", onVisible);
+      window.clearInterval(timer);
     };
   }, [user, onSync]);
 
@@ -215,7 +214,7 @@ export default function SyncAuth({ onSync }) {
   return (
     <div className="sync-bar">
       <p className="sync-desc">
-        같은 이메일로 로그인하면 PC와 폰에서 틀린 문제와 정보처리기사 실기 진행이 같게 보입니다.
+        같은 이메일로 로그인하면 PC와 폰에서 틀린 문제와 회차별로 푼 위치가 같게 보입니다.
       </p>
       <div className="sync-actions">
         {googleEnabled && (

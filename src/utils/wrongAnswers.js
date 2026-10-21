@@ -1,4 +1,5 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase.js";
+import { applyPracticeSnapshot, setPracticePersistHook } from "./practiceProgress.js";
 
 export const WRONG_STORAGE_KEY = "aica-wrong-questions";
 const META_KEY = "aica_wrong";
@@ -145,35 +146,45 @@ async function writeTable(userId, state) {
 
 let persistChain = Promise.resolve();
 
-function queueCloudPersist() {
-  persistChain = persistChain.then(() => persistCloud(loadState())).catch((err) => {
-    console.error("오답 클라우드 저장 실패:", err);
-  });
-}
-
-async function persistCloud(state) {
-  if (!isSupabaseConfigured || !supabase) return;
+async function pushAccount(state) {
+  if (!isSupabaseConfigured || !supabase) return null;
   const user = await getSessionUser();
-  if (!user) return;
+  if (!user) return null;
 
-  const merged = mergeStates(metaStateOf(user), state);
+  const { practice, unchanged } = applyPracticeSnapshot(user);
+  const merged = mergeStates(metaStateOf(user), state ?? loadState());
   saveState(merged);
 
+  const remoteWrong = metaStateOf(user);
+  if (unchanged && JSON.stringify(merged) === JSON.stringify(remoteWrong)) {
+    return activeIdsFrom(merged).size;
+  }
+
   const { error: metaError } = await supabase.auth.updateUser({
-    data: { [META_KEY]: merged },
+    data: {
+      [META_KEY]: { ...merged, practice },
+      aica_practice: practice,
+      aica_silgi_progress: practice.silgi,
+    },
   });
-  if (metaError) console.error("오답 메타데이터 저장 실패:", metaError);
+  if (metaError) console.error("계정 진행 저장 실패:", metaError);
 
   try {
     await writeTable(user.id, merged);
   } catch (err) {
     console.error("오답 테이블 저장 실패:", err);
   }
+  return activeIdsFrom(merged).size;
+}
+
+function queueCloudPersist() {
+  persistChain = persistChain.then(() => pushAccount(loadState())).catch((err) => {
+    console.error("오답 클라우드 저장 실패:", err);
+  });
 }
 
 export async function syncWrongAnswers() {
   if (!isSupabaseConfigured || !supabase) return loadWrongIds().size;
-
   const user = await getSessionUser();
   if (!user) return loadWrongIds().size;
 
@@ -183,19 +194,16 @@ export async function syncWrongAnswers() {
   const merged = mergeStates(local, meta, table);
   saveState(merged);
 
-  const { error: metaError } = await supabase.auth.updateUser({
-    data: { [META_KEY]: merged },
+  persistChain = persistChain.then(() => pushAccount(loadState())).catch((err) => {
+    console.error("계정 동기화 실패:", err);
   });
-  if (metaError) console.error("오답 동기화 실패:", metaError);
-
-  try {
-    await writeTable(user.id, merged);
-  } catch (err) {
-    console.error("오답 테이블 동기화 실패:", err);
-  }
-
-  return activeIdsFrom(merged).size;
+  await persistChain;
+  return activeIdsFrom(loadState()).size;
 }
+
+setPracticePersistHook(() => {
+  queueCloudPersist();
+});
 
 export function markWrong(id) {
   const state = loadState();

@@ -1,5 +1,3 @@
-import { isSupabaseConfigured, supabase } from "../lib/supabase.js";
-
 export const JEONGCHEOGI_PROGRESS_KEY = "aica-jeongcheogi-practice-progress";
 
 function loadAll() {
@@ -16,44 +14,49 @@ function loadAll() {
   }
 }
 
-function saveAll(data) {
+function writeAll(data) {
   localStorage.setItem(JEONGCHEOGI_PROGRESS_KEY, JSON.stringify(data));
 }
 
+function saveAll(data, options) {
+  writeAll(data);
+  queuePracticePersist(options);
+}
+
 export function getJeongcheogiFullProgress() {
-  return loadAll().full;
+  return visibleEntry(loadAll().full);
 }
 
 export function getJeongcheogiRoundProgress(slug) {
-  return loadAll().rounds[slug] ?? null;
+  return visibleEntry(loadAll().rounds[slug]);
 }
 
 export function getJeongcheogiAllRoundProgress() {
-  return loadAll().rounds;
+  return visibleMap(loadAll().rounds);
 }
 
 export function saveJeongcheogiFullProgress(state) {
   const data = loadAll();
-  data.full = { ...state, updatedAt: Date.now() };
+  data.full = stampProgress(data.full, state);
   saveAll(data);
 }
 
 export function saveJeongcheogiRoundProgress(slug, state) {
   const data = loadAll();
-  data.rounds[slug] = { ...state, updatedAt: Date.now() };
+  data.rounds[slug] = stampProgress(data.rounds[slug], state);
   saveAll(data);
 }
 
 export function clearJeongcheogiFullProgress() {
   const data = loadAll();
-  data.full = null;
-  saveAll(data);
+  data.full = tombstone();
+  saveAll(data, { immediate: true });
 }
 
 export function clearJeongcheogiRoundProgress(slug) {
   const data = loadAll();
-  delete data.rounds[slug];
-  saveAll(data);
+  data.rounds[slug] = tombstone();
+  saveAll(data, { immediate: true });
 }
 
 export const SILGI_PROGRESS_KEY = "aica-silgi-practice-progress";
@@ -83,14 +86,16 @@ function writeSilgiAll(data) {
   localStorage.setItem(SILGI_PROGRESS_KEY, JSON.stringify(data));
 }
 
-function saveSilgiAll(data, { immediate = false } = {}) {
+function saveSilgiAll(data, options) {
   writeSilgiAll(data);
-  queueSilgiCloudPersist({ immediate });
+  queuePracticePersist(options);
 }
 
 function visibleEntry(entry) {
   if (!entry || entry.deleted) return null;
-  return entry;
+  const reachedIndex = Math.max(Number(entry.currentIndex) || 0, Number(entry.reachedIndex) || 0);
+  if (entry.completed) return entry;
+  return { ...entry, currentIndex: reachedIndex, reachedIndex };
 }
 
 function visibleMap(map) {
@@ -125,24 +130,46 @@ export function getSilgiSampleProgress() {
 
 export function saveSilgiRoundProgress(slug, state, options) {
   const data = loadSilgiAll();
-  data.rounds[slug] = { ...state, updatedAt: Date.now() };
+  data.rounds[slug] = stampProgress(data.rounds[slug], state);
   saveSilgiAll(data, options);
 }
 
 export function saveSilgiSubjectProgress(subjectId, state, options) {
   const data = loadSilgiAll();
-  data.subjects[subjectId] = { ...state, updatedAt: Date.now() };
+  data.subjects[subjectId] = stampProgress(data.subjects[subjectId], state);
   saveSilgiAll(data, options);
 }
 
 export function saveSilgiSampleProgress(state, options) {
   const data = loadSilgiAll();
-  data.sample = { ...state, updatedAt: Date.now() };
+  data.sample = stampProgress(data.sample, state);
   saveSilgiAll(data, options);
 }
 
 function tombstone() {
   return { deleted: true, updatedAt: Date.now() };
+}
+
+function stampProgress(prev, state) {
+  const now = Date.now();
+  if (prev?.deleted) {
+    return {
+      ...state,
+      updatedAt: now,
+      clearedAt: Number(prev.updatedAt) || now,
+      reachedIndex: Number(state.currentIndex) || 0,
+    };
+  }
+  const reachedIndex = Math.max(
+    Number(prev?.reachedIndex) || 0,
+    Number(prev?.currentIndex) || 0,
+    Number(state?.reachedIndex) || 0,
+    Number(state?.currentIndex) || 0
+  );
+  const clearedAt = Math.max(Number(prev?.clearedAt) || 0, Number(state?.clearedAt) || 0);
+  const next = { ...state, updatedAt: now, reachedIndex };
+  if (clearedAt) next.clearedAt = clearedAt;
+  return next;
 }
 
 export function clearSilgiRoundProgress(slug) {
@@ -194,34 +221,43 @@ function richness(entry) {
   return (entry.completed ? 1_000_000 : 0) + (Number(entry.currentIndex) || 0) * 1000 + grades + revealed;
 }
 
-function sameSpot(a, b) {
-  return (
-    Boolean(a?.completed) === Boolean(b?.completed) &&
-    (Number(a?.currentIndex) || 0) === (Number(b?.currentIndex) || 0)
-  );
+function progressRank(entry) {
+  if (!entry || entry.deleted) return -1;
+  if (entry.completed) return 1_000_000 + (Number(entry.totalQuestions) || 0);
+  return Math.max(Number(entry.currentIndex) || 0, Number(entry.reachedIndex) || 0);
 }
 
 function mergeEntry(a, b) {
   if (!a) return b ?? null;
   if (!b) return a;
-  const ta = entryTime(a);
-  const tb = entryTime(b);
-  const winner = ta === tb ? (richness(a) >= richness(b) ? a : b) : ta > tb ? a : b;
-  const loser = winner === a ? b : a;
-  if (
-    !winner.deleted &&
-    !loser.deleted &&
-    sameSpot(winner, loser) &&
-    richness(loser) > richness(winner)
-  ) {
-    return {
-      ...loser,
-      updatedAt: entryTime(winner) || entryTime(loser),
-      totalQuestions: Number(winner.totalQuestions) || loser.totalQuestions,
-      sessionStats: winner.sessionStats ?? loser.sessionStats,
-    };
-  }
-  return winner;
+  const aClear = Number(a.clearedAt) || (a.deleted ? entryTime(a) : 0);
+  const bClear = Number(b.clearedAt) || (b.deleted ? entryTime(b) : 0);
+  if (a.deleted && aClear >= Math.max(entryTime(b), bClear)) return a;
+  if (b.deleted && bClear >= Math.max(entryTime(a), aClear)) return b;
+  if (a.deleted) return b;
+  if (b.deleted) return a;
+  if (aClear > entryTime(b) && aClear >= bClear) return a;
+  if (bClear > entryTime(a) && bClear >= aClear) return b;
+
+  const winner = progressRank(a) >= progressRank(b) ? a : b;
+  const reachedIndex = Math.max(
+    Math.max(Number(a.currentIndex) || 0, Number(a.reachedIndex) || 0),
+    Math.max(Number(b.currentIndex) || 0, Number(b.reachedIndex) || 0)
+  );
+  const clearedAt = Math.max(aClear, bClear);
+  const next = {
+    ...winner,
+    updatedAt: Math.max(entryTime(a), entryTime(b)),
+    reachedIndex,
+  };
+  if (!winner.completed) next.currentIndex = reachedIndex;
+  if (clearedAt) next.clearedAt = clearedAt;
+  const richer = richness(a) >= richness(b) ? a : b;
+  if (richer.grades) next.grades = richer.grades;
+  if (richer.revealedMap) next.revealedMap = richer.revealedMap;
+  if (richer.answers) next.answers = richer.answers;
+  if (richer.sessionStats) next.sessionStats = richer.sessionStats;
+  return next;
 }
 
 function mergeMaps(a = {}, b = {}) {
@@ -254,10 +290,13 @@ function compactEntry(entry) {
   if (entry.deleted) return { deleted: true, updatedAt: entryTime(entry) };
   const compact = {
     currentIndex: Number(entry.currentIndex) || 0,
+    reachedIndex: Math.max(Number(entry.currentIndex) || 0, Number(entry.reachedIndex) || 0),
     totalQuestions: Number(entry.totalQuestions) || 0,
     updatedAt: entryTime(entry),
   };
   if (entry.completed) compact.completed = true;
+  const clearedAt = Number(entry.clearedAt) || 0;
+  if (clearedAt) compact.clearedAt = clearedAt;
   const sessionStats = compactStats(entry.sessionStats);
   if (sessionStats) compact.sessionStats = sessionStats;
   return compact;
@@ -265,8 +304,8 @@ function compactEntry(entry) {
 
 function compactMap(map) {
   const out = {};
-  for (const [key, entry] of Object.entries(map ?? {})) {
-    const compact = compactEntry(entry);
+  for (const key of Object.keys(map ?? {}).sort()) {
+    const compact = compactEntry(map[key]);
     if (compact) out[key] = compact;
   }
   return out;
@@ -285,10 +324,13 @@ function normalizeCloudEntry(entry) {
   if (entry.deleted) return { deleted: true, updatedAt: entryTime(entry) };
   const normalized = {
     currentIndex: Number(entry.currentIndex) || 0,
+    reachedIndex: Math.max(Number(entry.currentIndex) || 0, Number(entry.reachedIndex) || 0),
     totalQuestions: Number(entry.totalQuestions) || 0,
     updatedAt: entryTime(entry),
   };
   if (entry.completed) normalized.completed = true;
+  const clearedAt = Number(entry.clearedAt) || 0;
+  if (clearedAt) normalized.clearedAt = clearedAt;
   const sessionStats = compactStats(entry.sessionStats);
   if (sessionStats) normalized.sessionStats = sessionStats;
   return normalized;
@@ -304,13 +346,41 @@ function normalizeCloudMap(map) {
   return out;
 }
 
-function cloudStateOf(user) {
-  const raw = user?.user_metadata?.[SILGI_PROGRESS_META_KEY];
-  if (!raw || typeof raw !== "object") return emptySilgi();
+function normalizeSilgiCloud(raw) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return emptySilgi();
   return {
     rounds: normalizeCloudMap(raw.rounds),
     subjects: normalizeCloudMap(raw.subjects),
     sample: normalizeCloudEntry(raw.sample),
+  };
+}
+
+function normalizeJeongCloud(raw) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return { full: null, rounds: {} };
+  return {
+    full: normalizeCloudEntry(raw.full),
+    rounds: normalizeCloudMap(raw.rounds),
+  };
+}
+
+function remotePracticeOf(user) {
+  const meta = user?.user_metadata ?? {};
+  const bundled = meta.aica_practice;
+  const nested = meta.aica_wrong?.practice;
+  const legacySilgi = meta[SILGI_PROGRESS_META_KEY];
+  return mergePractice(
+    mergePractice(normalizePractice(bundled), normalizePractice(nested)),
+    { silgi: normalizeSilgiCloud(legacySilgi), jeongcheogi: { full: null, rounds: {} } }
+  );
+}
+
+function normalizePractice(raw) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+    return { silgi: emptySilgi(), jeongcheogi: { full: null, rounds: {} } };
+  }
+  return {
+    silgi: normalizeSilgiCloud(raw.silgi),
+    jeongcheogi: normalizeJeongCloud(raw.jeongcheogi),
   };
 }
 
@@ -331,85 +401,63 @@ function writeSilgiOwner(userId) {
   }
 }
 
-async function getSessionUser() {
-  if (!supabase) return null;
-  const { data } = await supabase.auth.getUser();
-  return data.user ?? null;
+function loadPractice() {
+  return { silgi: loadSilgiAll(), jeongcheogi: loadAll() };
 }
 
-let silgiPersistTimer = null;
-let silgiPersistChain = Promise.resolve();
-
-function enqueueSilgiPersist() {
-  silgiPersistChain = silgiPersistChain.then(() => persistSilgiCloud()).catch((err) => {
-    console.error("실기 진행 클라우드 저장 실패:", err);
-  });
+function mergePractice(local, remote) {
+  return {
+    silgi: mergeSilgi(local?.silgi, remote?.silgi),
+    jeongcheogi: {
+      full: mergeEntry(local?.jeongcheogi?.full, remote?.jeongcheogi?.full),
+      rounds: mergeMaps(local?.jeongcheogi?.rounds, remote?.jeongcheogi?.rounds),
+    },
+  };
 }
 
-function queueSilgiCloudPersist({ immediate = false } = {}) {
-  if (silgiPersistTimer) {
-    clearTimeout(silgiPersistTimer);
-    silgiPersistTimer = null;
+function compactPractice(data) {
+  return {
+    silgi: compactSilgi(data?.silgi),
+    jeongcheogi: {
+      full: compactEntry(data?.jeongcheogi?.full),
+      rounds: compactMap(data?.jeongcheogi?.rounds),
+    },
+  };
+}
+
+export function applyPracticeSnapshot(user) {
+  const remote = remotePracticeOf(user);
+  const owner = readSilgiOwner();
+  const local = user && owner && owner !== user.id ? { silgi: emptySilgi(), jeongcheogi: { full: null, rounds: {} } } : loadPractice();
+  const merged = mergePractice(local, remote);
+  writeSilgiAll(merged.silgi);
+  writeAll(merged.jeongcheogi);
+  if (user?.id) writeSilgiOwner(user.id);
+  const practice = compactPractice(merged);
+  return {
+    practice,
+    unchanged: JSON.stringify(practice) === JSON.stringify(compactPractice(remote)),
+  };
+}
+
+let practicePersistHook = () => {};
+let practiceTimer = null;
+
+export function setPracticePersistHook(fn) {
+  practicePersistHook = fn;
+}
+
+function queuePracticePersist({ immediate = false } = {}) {
+  if (practiceTimer) {
+    clearTimeout(practiceTimer);
+    practiceTimer = null;
   }
   if (immediate) {
-    enqueueSilgiPersist();
+    practicePersistHook();
     return;
   }
-  silgiPersistTimer = setTimeout(() => {
-    silgiPersistTimer = null;
-    enqueueSilgiPersist();
+  practiceTimer = setTimeout(() => {
+    practiceTimer = null;
+    practicePersistHook();
   }, 800);
-}
-
-function flushSilgiCloudPersist() {
-  if (silgiPersistTimer) {
-    clearTimeout(silgiPersistTimer);
-    silgiPersistTimer = null;
-    enqueueSilgiPersist();
-  }
-  return silgiPersistChain;
-}
-
-async function persistSilgiCloud() {
-  if (!isSupabaseConfigured || !supabase) return;
-  const user = await getSessionUser();
-  if (!user) return;
-  const owner = readSilgiOwner();
-  if (owner && owner !== user.id) return;
-
-  const merged = mergeSilgi(loadSilgiAll(), cloudStateOf(user));
-  writeSilgiAll(merged);
-  writeSilgiOwner(user.id);
-
-  const cloud = compactSilgi(merged);
-  const remote = compactSilgi(cloudStateOf(user));
-  if (JSON.stringify(cloud) === JSON.stringify(remote)) return;
-
-  const { error } = await supabase.auth.updateUser({
-    data: { [SILGI_PROGRESS_META_KEY]: cloud },
-  });
-  if (error) console.error("실기 진행 저장 실패:", error);
-}
-
-export async function syncSilgiProgress() {
-  if (!isSupabaseConfigured || !supabase) return;
-  await flushSilgiCloudPersist();
-
-  const user = await getSessionUser();
-  if (!user) return;
-
-  const owner = readSilgiOwner();
-  const local = !owner || owner === user.id ? loadSilgiAll() : emptySilgi();
-  const remote = cloudStateOf(user);
-  const merged = mergeSilgi(local, remote);
-  writeSilgiAll(merged);
-  writeSilgiOwner(user.id);
-
-  const cloud = compactSilgi(merged);
-  if (JSON.stringify(cloud) === JSON.stringify(compactSilgi(remote))) return;
-
-  const { error } = await supabase.auth.updateUser({
-    data: { [SILGI_PROGRESS_META_KEY]: cloud },
-  });
-  if (error) console.error("실기 진행 동기화 실패:", error);
 }

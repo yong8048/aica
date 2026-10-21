@@ -166,8 +166,9 @@ export default function QuizApp() {
 
   const handleCloudSync = useCallback(() => {
     refreshWrongCount();
+    refreshJeongcheogiProgress();
     refreshSilgiProgress();
-  }, [refreshWrongCount, refreshSilgiProgress]);
+  }, [refreshWrongCount, refreshJeongcheogiProgress, refreshSilgiProgress]);
 
   const handleSwitchMode = useCallback(
     (mode) => {
