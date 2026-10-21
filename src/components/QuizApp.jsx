@@ -164,6 +164,11 @@ export default function QuizApp() {
     [examMode]
   );
 
+  const handleCloudSync = useCallback(() => {
+    refreshWrongCount();
+    refreshSilgiProgress();
+  }, [refreshWrongCount, refreshSilgiProgress]);
+
   const handleSwitchMode = useCallback(
     (mode) => {
       if (mode === examMode) return;
@@ -745,7 +750,7 @@ export default function QuizApp() {
               </span>
             </label>
           )}
-          <SyncAuth onSync={refreshWrongCount} />
+          <SyncAuth onSync={handleCloudSync} />
         </header>
         <main className="main main-home">
           {loading && <p className="muted center">문제를 불러오는 중…</p>}
