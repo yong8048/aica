@@ -95,6 +95,7 @@
       "category": "SQL",
       "question": "다음 <A>, <B> 테이블과 SQL문을 참고하여, SQL문을 실행했을 때 출력되는 RESULT 값을 구하시오.",
       "answer": "3",
+      "explanation": "각 행은 자기 x보다 작은 행의 id로 B의 y 평균을 구한다. x가 10인 행은 비교 대상이 없어 빠지고, 20, 30, 40은 그 평균보다 커서 3이다.",
       "passage": "[표] <A>\nid | x\n1 | 10\n2 | 20\n3 | 30\n4 | 40\n\n[표] <B>\nid | y\n1 | 5\n1 | 15\n2 | 20\n3 | 35\n5 | 50\n\n[SQL문]\nSELECT COUNT(*) AS RESULT\nFROM A\nWHERE x > (\n  SELECT AVG(y)\n  FROM B\n  WHERE B.id IN (\n    SELECT A2.id\n    FROM A AS A2\n    WHERE A2.x < A.x\n  )\n);",
       "image": "silgi/2026_02/q13.png"
     },
@@ -103,6 +104,7 @@
       "category": "SQL",
       "question": "다음 <A>, <B> 테이블과 SQL문을 참고하여, SQL문을 실행했을 때 출력되는 결과값을 구하시오.",
       "answer": "2",
+      "explanation": "RIGHT JOIN은 오른쪽 테이블 B의 행을 남긴다. B의 id 3과 4는 A에 없어서 A.id가 NULL인 행이 2개다.",
       "passage": "[A]\nid | v\n1 | 10\n1 | 20\n2 | 30\n\n[B]\nid | w\n1 | 100\n3 | 300\n4 | 400\n\nSELECT COUNT(*)\nFROM A\nRIGHT OUTER JOIN B ON A.id = B.id\nWHERE A.id IS NULL;",
       "image": "silgi/2026_02/q14.png"
     },
@@ -118,6 +120,7 @@
       "category": "네트워크",
       "question": "다음은 IP 주소 서브네팅(Subnetting)에 대한 설명이다. 물음에 답하시오.",
       "answer": "28",
+      "explanation": "원래 /27을 같은 크기의 두 망으로 나누면 주소가 16개씩이다. 16개는 호스트 비트 4개라 프리픽스 길이는 32에서 4를 뺀 28이다.",
       "passage": "10.0.0.0/27 네트워크를 동일한 크기의 2개 서브넷으로 분할하였다.\n\n- 첫 번째 서브넷: 10.0.0.0 ~ 10.0.0.15\n\n- 두 번째 서브넷: 10.0.0.16 ~ 10.0.0.31\n\n이때 10.0.0.1이 속한 서브넷의 프리픽스 길이(비트 수)를 구하시오."
     },
     {
@@ -147,6 +150,7 @@
       "category": "데이터베이스",
       "question": "아래 표에서 나타나고 있는 정규형을 작성하시오.",
       "answer": "제 3정규형",
+      "explanation": "강사번호가 강좌명을 결정하지만, 강좌명은 후보키에 들어 있는 속성이라 제3정규형 조건은 깨지지 않는다. 그 결정자가 슈퍼키는 아니라서 BCNF는 아니고, 지금 만족하는 가장 높은 단계는 제3정규형이다.",
       "passage": "고객아이디 | 강좌명 | 강사번호\napple | 영어회화 | P001\nbanana | 기초토익 | P002\ncarrot | 영어회화 | P001\ncarrot | 기초토익 | P004\norange | 영어회화 | P003\norange | 기초토익 | P004",
       "image": "silgi/2026_02/q20.png"
     }

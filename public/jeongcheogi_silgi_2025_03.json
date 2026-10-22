@@ -108,7 +108,8 @@
       "category": "C언어",
       "question": "다음은 C코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "passage": "#include <stdio.h>\n\nint main() {\n    int x = 7, y = 4, z;\n    z = y % 3 < 3 ? 2 : 1;\n    z = z & z >> 1;\n    z = x > 5 && z <= 3 ? z * x : z / x;\n    printf(\"%d\", z);\n    return 0;\n}",
-      "answer": "0"
+      "answer": "0",
+      "explanation": "4를 3으로 나눈 나머지는 1이고, 1이 3보다 작아서 z는 2가 된다. 이어서 2와 그 오른쪽 시프트 1을 AND하면 0이 되고, 0에 무엇을 곱해도 0이다."
     },
     {
       "number": 16,
@@ -145,7 +146,8 @@
       "question": "다음은 SQL에 관한 문제이다. 아래 A테이블을 참고하여 쿼리의 결과를 작성하시오.",
       "image": "silgi/2025_03/q20.png",
       "passage": "[A테이블]\ncol1 | col2\n2    | null\n3    | 6\n2    | 3\nnull | 3\n4    | 5\n\nSELECT count(col2) FROM A WHERE col1 IN (2, 3) OR col2 IN (3, 5)",
-      "answer": "4"
+      "answer": "4",
+      "explanation": "count(col2)는 NULL을 세지 않는다. 조건에 걸리는 행은 다섯이지만 첫 행의 col2가 NULL이라 빠지고 4가 된다."
     }
   ]
 }

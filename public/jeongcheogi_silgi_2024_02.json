@@ -65,6 +65,7 @@
       "category": "정보처리",
       "question": "아래 내용을 확인하고 보기에서 알맞는 답을 고르시오.",
       "answer": "ㅂ. 순차적 (sequential)",
+      "explanation": "실행 순서만 맞으면 절차적 응집도이다. 한 기능의 출력이 다음 기능의 입력이 되면 순차적 응집도이다. 지문 두 번째 문장이 그 조건이라 순차적이다.",
       "passage": "실행 순서가 밀접한 관계를 갖는 기능을 모아 모듈로 구성한다.\n한 모듈 내부의 한 기능 요소에 의한 출력 자료가 다음 기능 원소의 입력 자료로서 제공되는 형태이다.\n\n보기\n\nㄱ.  기능적(functional)           ㄴ.  우연적(Coincidental)          ㄷ.  통신적(Communication)       ㄹ.  절차적(Procedural)         ㅁ.  시간적(Temporal)           ㅂ.  순차적(sequential)              ㅅ.    논리적(Logical)"
     },
     {
@@ -79,6 +80,7 @@
       "category": "네트워크",
       "question": "아래 그림을 바탕으로 RIP을 구성하여 최단 경로 비용을 계산하여 흐름에 맞게 작성하시오.",
       "answer": "A → D  → C   → F",
+      "explanation": "RIP는 링크 비용이 아니라 홉 수로 고른다. A→D→C→F는 3홉이고, 비용 합이 더 작은 A→D→C→E→F는 4홉이라 선택되지 않는다.",
       "passage": "예제\n\nA  →\n\n라우터 연결 비용\nA-B 2, A-D 1, B-D 2\nD-C 2, C-E 1, C-F 5, E-F 2",
       "image": "silgi/2024_02/q11.png"
     },

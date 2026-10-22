@@ -51,6 +51,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "2",
+      "explanation": "A.g() 안의 f(\"a\")는 컴파일될 때 인자 없는 쪽이 아니라 A의 f(Object)로 묶인다. 실제 객체는 B라서 그 메서드를 덮어쓴 B.f(Object)가 2를 반환한다. B.f(String)은 같은 이름이라도 매개변수가 다른 오버로드라 호출되지 않는다.",
       "passage": "class A {\n  String f(Object x) {\n    return \"1\";\n  }\n  String g() {\n    return f(\"a\");\n  }\n}\nclass B extends A {\n  String f(Object x) {\n    return \"2\";\n  }\n  String f(String x) {\n    return \"3\";\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    A a = new B();\n    System.out.println(a.g());\n  }\n}"
     },
     {
