@@ -8,6 +8,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "NNN",
+      "explanation": "new로 만든 배열은 내용이 같아도 서로 다른 객체이다. a==b는 참조 비교라 세 번 모두 N이다.",
       "passage": "class Main {\n  public static void main(String[] args) {\n    int[] a = new int[]{\n      1, 2, 3, 4\n    };\n    int[] b = new int[]{\n      1, 2, 3, 4\n    };\n    int[] c = new int[]{\n      1, 2, 3\n    };\n    check(a, b);\n    check(a, c);\n    check(b, c);\n  }\n  public static void check(int[] a, int[] b) {\n    if (a==b) {\n      System.out.print(\"O\");\n    }\n    else{\n      System.out.print(\"N\");\n    }\n  }\n}"
     },
     {
@@ -15,6 +16,7 @@
       "category": "데이터베이스",
       "question": "다음 문제에서 설명하는 용어를 작성하시오.",
       "answer": "반정규화",
+      "explanation": "성능을 위해 일부러 데이터를 중복하거나 테이블을 합치는 기법은 반정규화이다.",
       "passage": "데이터를 중복시켜 성능을 향상시키기 위한 기법으로 데이터를 중복 저장하거나\n\n테이블을 합치는 등으로 성능을 향상시키지만 데이터 무결성이 저하될 수 있는 기법"
     },
     {
@@ -22,6 +24,7 @@
       "category": "SQL",
       "question": "다음은 SQL에 관한 문제이다. 아래 SQL 구문의 빈칸을 작성하시오.",
       "answer": "① : VALUES \n② : SELECT\n③ : FROM\n④ : SET",
+      "explanation": "값을 직접 넣는 INSERT는 VALUES, 다른 테이블에서 골라 넣는 INSERT는 SELECT를 쓴다. 전체 조회는 FROM, 기존 행 수정은 SET이다.",
       "passage": "테이블\n\n사원 [사원번호(PK), 이름, 나이, 부서]\n\n부서 [사원번호(PK), 이름, 주소, 나이]\n\n신입 사원이 들어와서 사원 테이블에 추가\n\nINSERT INTO 사원 (사원번호, 이름, 주소, 부서)   [      ①     ] (32431, '정실기', '서울', '영업');\n\n위에 신입사원을 검색하면서 부서 테이블에 추가\n\nINSERT INTO 부서 (사원번호, 이름, 나이, 부서)\n\n[    ②     ] 사원번호, 이름, 나이, 23 FROM 사원 WHERE 이름 = '정실기';\n\n전체 사원 테이블 조회\n\nSELECT  *   [    ③   ]   사원;\n\n퇴사로 인해 부서에 해당하는 값을 '퇴사'로 변경\n\nUPDATE 사원   [      ④     ]   부서  =  '퇴사'  WHERE 사원번호  = 32431;"
     },
     {
@@ -29,6 +32,7 @@
       "category": "데이터베이스",
       "question": "다음 릴레이션의 Cardinality와 Degree를 작성하시오.",
       "answer": "① : 5\n② : 4",
+      "explanation": "행이 5개라 카디널리티는 5이고, 열인 이름·나이·A·B가 4개라 차수는 4이다.",
       "passage": "Cardinality : (  ①  )\n\nDegree      : (  ②  )\n\n이름 | 나이 | A | B\n김ㅇㅇ | 23 | 1 | 5\n박ㅇㅇ | 25 | 2 | 3\n고ㅇㅇ | 42 | 3 | 8\n최ㅇㅇ | 20 | 2 | 9\n이ㅇㅇ | 25 | 1 | 2",
       "image": "silgi/2024_02/q04.png"
     },
@@ -37,6 +41,7 @@
       "category": "네트워크",
       "question": "다음은 프로토콜에 대한 내용이다. 아래 내용을 읽고 알맞는 답을 작성하시오.",
       "answer": "IPSec",
+      "explanation": "네트워크 계층에서 IP 패킷을 암호화하고 AH와 ESP를 쓰는 VPN 표준은 IPSec이다.",
       "passage": "- Network layer에서 IP패킷을 암호화하고 인증하는 등의 보안을 위한 표준이다.\n\n- 기업에서 사설 인터넷망으로 사용할 수 있는 VPN을 구현하는데 사용되는 프로토콜이다.\n- AH(Authentication Header)와 ESP(Encapsulating Security Payload)라는 두 가지 보안 프로토콜을 사용한다."
     },
     {
@@ -44,6 +49,7 @@
       "category": "Python",
       "question": "다음은 Python에 대한 문제이다. 아래 코드를 읽고 알맞는 출력 값을 작성하시오.",
       "answer": "ab3ca3",
+      "explanation": "ab는 0, 4, 7번에서 세 번, ca는 3, 6, 9번에서 세 번 나온다. 형식 문자열에 넣으면 ab3ca3이다.",
       "passage": "def fnCalculation(x,y):\n    result = 0;\n    for i in range(len(x)):\n     temp = x[i:i+len(y)]\n     if temp == y:\n       result += 1;\n    return result\n\na = \"abdcabcabca\"\np1 = \"ab\";\np2 = \"ca\";\n\nout = f\"ab{fnCalculation(a,p1)}ca{fnCalculation(a,p2)}\"\nprint(out)"
     },
     {
@@ -51,6 +57,7 @@
       "category": "정보처리",
       "question": "아래 설명하는 내용을 확인하여 알맞는 알고리즘을 작성하시오.",
       "answer": "AES",
+      "explanation": "DES를 대체하려고 만든 128비트 블록의 대칭키 알고리즘은 AES이다.",
       "passage": "- 대칭키 알고리즘으로 1997년 NIST(미국 국립기술표준원)에서 DES를 대체하기 위해 생성되었다.\n- 128비트, 192비트 또는 256비트의 가변 키 크기와 128비트의 고정 블록 크기를 사용한다.\n- 높은 안전성과 효율성, 속도 등으로 인해 DES 대신 전 세계적으로 많이 사용되고 있다."
     },
     {
@@ -58,6 +65,7 @@
       "category": "정보처리",
       "question": "패킷 교환 방식 중에 연결형과 비연결형에 해당하는 방식을 작성하시오.",
       "answer": "① 가상회선\n② 데이터그램",
+      "explanation": "패킷 교환에서 연결을 먼저 맺는 방식은 가상회선, 연결 없이 패킷마다 경로를 정하는 방식은 데이터그램이다.",
       "passage": "① 연결형 교환 방식\n\n② 비연결형 교환 방식"
     },
     {
@@ -65,6 +73,7 @@
       "category": "정보처리",
       "question": "아래 내용을 확인하고 보기에서 알맞는 답을 고르시오.",
       "answer": "ㅂ. 순차적 (sequential)",
+      "explanation": "실행 순서만 맞으면 절차적 응집도이다. 한 기능의 출력이 다음 기능의 입력이 되면 순차적 응집도이다. 지문 두 번째 문장이 그 조건이라 순차적이다.",
       "passage": "실행 순서가 밀접한 관계를 갖는 기능을 모아 모듈로 구성한다.\n한 모듈 내부의 한 기능 요소에 의한 출력 자료가 다음 기능 원소의 입력 자료로서 제공되는 형태이다.\n\n보기\n\nㄱ.  기능적(functional)           ㄴ.  우연적(Coincidental)          ㄷ.  통신적(Communication)       ㄹ.  절차적(Procedural)         ㅁ.  시간적(Temporal)           ㅂ.  순차적(sequential)              ㅅ.    논리적(Logical)"
     },
     {
@@ -72,6 +81,7 @@
       "category": "운영체제",
       "question": "아래는 디자인 패턴에 관한 설명이다. 아래 설명을 읽고 보기에서 알맞는 용어를 작성하시오.",
       "answer": "Iterator",
+      "explanation": "컬렉션 안을 드러내지 않고 순서대로 꺼내게 하는 행위 패턴은 이터레이터이다.",
       "passage": "- 컬렉션 객체의 내부 구조를 노출하지 않고 순차적으로 접근할 수 있게 하는 패턴이다. \n- 이 패턴은 객체의 내부 표현 방식에 독립적으로 요소에 접근할 수 있도록 해준다\n- 반복 프로세스를 캡슐화하여 클라이언트 코드에서는 컬렉션의 구체적인 구현에 종속되지 않도록 한다.\n\n보기\n\n생성패턴 | 구조패턴 | 행위패턴\nSingleton | Adapter | Iterator\nFactory Method | Bridge | Visitor\nAbstract Factory | Composite | Observer"
     },
     {
@@ -79,6 +89,7 @@
       "category": "네트워크",
       "question": "아래 그림을 바탕으로 RIP을 구성하여 최단 경로 비용을 계산하여 흐름에 맞게 작성하시오.",
       "answer": "A → D  → C   → F",
+      "explanation": "RIP는 링크 비용이 아니라 홉 수로 고른다. A→D→C→F는 3홉이고, 비용 합이 더 작은 A→D→C→E→F는 4홉이라 선택되지 않는다.",
       "passage": "예제\n\nA  →\n\n라우터 연결 비용\nA-B 2, A-D 1, B-D 2\nD-C 2, C-E 1, C-F 5, E-F 2",
       "image": "silgi/2024_02/q11.png"
     },
@@ -87,6 +98,7 @@
       "category": "운영체제",
       "question": "아래의 표를 확인하여 SRT 스케줄링의 평균 대기시간을 계산하여 작성하시오.",
       "answer": "6.5",
+      "explanation": "1초에 B가 A를 선점하고, B가 끝나면 남은 시간이 짧은 D가 A보다 먼저 실행된다. 대기시간은 A 9, B 0, C 15, D 2라 평균 6.5이다.",
       "passage": "프로세스 | 도착 시간 | 서비스 시간\nA | 0 | 8\nB | 1 | 4\nC | 2 | 9\nD | 3 | 5"
     },
     {
@@ -94,6 +106,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "21",
+      "explanation": "parr[1]은 {7, 8, 9}를 가리킨다. 8과 9, 그리고 parr[0]의 첫 값 4를 더하면 21이다.",
       "passage": "#include <stdio.h>\nint main() {\n  int arr[3][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n  int* parr[2] = {arr[1], arr[2]};\n  printf(\"%d\", parr[1][1] + *(parr[1]+2) + **parr);\n  return 0;\n}"
     },
     {
@@ -101,6 +114,7 @@
       "category": "Java",
       "question": "다음은 Java 언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "25, 20",
+      "explanation": "홀수 1+3+5+7+9는 25, 짝수 2+4+6+8은 20이다.",
       "passage": "class Main {\n  public static void main(String[] args) {\n    int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n    ODDNumber OE = new ODDNumber();\n    System.out.print(OE.sum(a, true) + \", \" + OE.sum(a, false));\n  }\n}\ninterface Number {\n  int sum(int[] a, boolean odd);\n}\nclass ODDNumber implements Number {\n  public int sum(int[] a, boolean odd) {\n    int result = 0;\n    for(int i=0; i < a.length; i++){\n      if((odd && a[i] % 2 != 0) || (!odd && a[i] % 2 == 0))\n        result += a[i];\n    }\n    return result;\n  }\n}"
     },
     {
@@ -108,6 +122,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "10",
+      "explanation": "first가 teststring 앞에 덮어써져 길이가 5가 된다. 인덱스 0부터 4까지의 합은 10이다.",
       "passage": "#include <stdio.h>\n#include <string.h>\nvoid sumFn(char* d, const char* s) {\n  while (*s) {\n    *d = *s;\n    d++;\n    s++;\n  }\n  *d = '\\0';\n}\nint main() {\n  const char* str1 = \"first\";\n  char str2[50] = \"teststring\";\n  int result=0;\n  sumFn(str2, str1);\n  for (int i = 0; str2[i] != '\\0'; i++) {\n    result += i;\n  }\n  printf(\"%d\", result);\n  return 0;\n}"
     },
     {
@@ -115,6 +130,7 @@
       "category": "소프트웨어 공학",
       "question": "아래는 소프트웨어 설계에 대한 내용이다. 내용을 읽고 괄호안에 알맞는 답을 작성하시오.",
       "answer": "제어  or  Control",
+      "explanation": "다른 모듈의 처리 흐름을 제어 신호로 좌우하는 결합도는 제어 결합도이다.",
       "passage": "- 어떤 모듈이 다른 모듈 내부의 논리적인 흐름을 제어하기 위해, 제어를 통신하거나 제어 요소를 전달하는 결합도이다.\n- 한 모듈이 다른 모듈의 상세한 처리 절차를 알고 있어 이를 통제하는 경우나 처리 기능이 두 모듈에 분리되어 설계된 경우에 발생한다.\n\n(              ) Coupling"
     },
     {
@@ -122,6 +138,7 @@
       "category": "Java",
       "question": "다음은 Java에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "dcba",
+      "explanation": "문자열 끝에서부터 처음 보는 문자만 앞에 붙인다. d, c, b, a 순으로 처음 나오므로 dcba이다.",
       "passage": "class Main {\n  public static void main(String[] args) {\n    String str = \"abacabcd\";\n    boolean[] seen = new boolean[256];\n    System.out.print(calculFn(str, str.length()-1, seen));\n  }\n  public static String calculFn(String str, int index, boolean[] seen) {\n    if(index < 0)\n      return \"\";\n    char c = str.charAt(index);\n    String result = calculFn(str, index-1, seen);\n    if(!seen[c]) {\n      seen[c] = true;\n      return c + result;\n    }\n    return result;\n  }\n}"
     },
     {
@@ -129,6 +146,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "-13",
+      "explanation": "swap은 값만 받아 a, b를 바꾸지 못한다. a는 11이라 case 11과 default가 이어져 b는 24가 되고, 11-24는 -13이다.",
       "passage": "#include <stdio.h>\nvoid swap(int a, int b) {\n  int t = a;\n  a = b;\n  b = t;\n}\nint main() {\n  int a = 11;\n  int b = 19;\n  swap(a, b);\n  switch(a) {\n    case 1:\n      b += 1;\n    case 11:\n      b += 2;\n    default:\n      b += 3;\n      break;\n  }\n  printf(\"%d\", a-b);\n}"
     },
     {
@@ -136,6 +154,7 @@
       "category": "C언어",
       "question": "다음은 C언어의 구조체에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "20",
+      "explanation": "head는 a이고 a 다음은 b이다. b의 n1이 출력되므로 20이다.",
       "passage": "#include <stdio.h>\nstruct node {\n  int n1;\n  struct node *n2;\n};\nint main() {\n  struct node a = {10, NULL};\n  struct node b = {20, NULL};\n  struct node c = {30, NULL};\n  struct node *head = &a;\n  a.n2 = &b;\n  b.n2 = &c;\n  printf(\"%d\\n\", head->n2->n1);\n  return 0;\n}"
     },
     {
@@ -143,6 +162,7 @@
       "category": "Java",
       "question": "다음은 Java에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력 값을 작성하시오.",
       "answer": "S",
+      "explanation": "T로 나누면 I, IS, ES, S, RING이다. 앞에서부터 0번이므로 3번은 S이다.",
       "passage": "class Main {\n  public static void main(String[] args) {\n    String str = \"ITISTESTSTRING\";\n    String[] result = str.split(\"T\");\n    System.out.print(result[3]);\n  }\n}"
     }
   ]

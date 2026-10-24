@@ -8,6 +8,7 @@
       "category": "네트워크",
       "question": "다음은 네트워크 보완에 관련된 문제이다. 괄호안에 알맞는 용어를 작성하시오.",
       "answer": "세션 하이재킹",
+      "explanation": "이미 성립한 세션의 시퀀스 번호를 빼앗아 통신을 가로채는 공격은 세션 하이재킹이다.",
       "passage": "(   )은/는 '세션을 가로채다.' 라는 의미로 다른 사람의 세션 상태를 훔치거나 도용하여 액세스하는 해킹 기법이다.\n\nTCP (   )은/는 TCP의 3-way 핸드셰이크가 완료된 후에 공격자가 시퀀스 번호 등을 조작하여 정상적인 세션을 가로채고 인증 없이 통신을 탈취하는 공격 공격이다."
     },
     {
@@ -15,6 +16,7 @@
       "category": "데이터베이스",
       "question": "다음은 제약조건과 관련된 문제이다. 괄호안에 알맞는 용어를 보기에 골라 작성하시오.",
       "answer": "ㄱ. 도메인\nㄴ. 개체\nㄷ. 참조",
+      "explanation": "속성마다 값이 속할 범위를 정하면 도메인 무결성이다. 기본키의 유일성과 NULL 금지는 개체 무결성, 외래키가 부모 키를 가리키는 규칙은 참조 무결성이다.",
       "passage": "[보기]\n\n개체, 참조, 도메인\n\n구분 | (ㄱ) 무결성 제약조건 | (ㄴ) 무결성 제약조건 | (ㄷ) 무결성 제약조건\n제약 대상 | 속성 | 투플 | 속성과 투플\nNULL 값 | - | 기본키 | 외래키\n릴레이션 내 제약조건의 개수 | 속성의 개수와 동일 | 1개 | 0~여러 개\n기타 | 투플 삽입/수정 시 제약사항 우선 확인 | 투플 삽입/수정 시 제약사항 우선 확인 | 투플 삽입/수정 시 제약사항 우선 확인 / 부모 릴레이션의 투플 수정·삭제 시 제약사항 우선 확인",
       "image": "silgi/2025_01/q02.png"
     },
@@ -23,6 +25,7 @@
       "category": "정보처리",
       "question": "아래의 내용에서 설명 글의 괄호안의 용어를 영문 약자로 작성하시오.",
       "answer": "CRC",
+      "explanation": "다항식으로 나눈 나머지를 붙여 전송 오류를 찾는 검출 코드는 CRC이다.",
       "passage": "(        ) 은/는 3글자의 영어 약자로 이루어진 오류 기법으로 데이터를 전송하거나 저장할 때 데이터의 오류를 감지하는 데 사용되는 오류 검출 코드이다.\n\n(        ) 은/는 데이터에 체크섬을 추가하여 데이터를 전송하거나 저장한 후, 수신 또는 읽을 때 이 체크섬을 다시 계산하여 데이터가 변경되었는지 확인하는 기법이다.\n\n(        ) 은/는 데이터 전송의 안정성을 높이는 데 중요한 역할을 한다.\n\n데이터는 이진수(0과 1)로 표현되며 정해진 다항식(x&sup3; + x + 1)을 기반으로 데이터를 2진수 나눗셈하고나머지를 (       ) 값으로 삼는다."
     },
     {
@@ -30,6 +33,7 @@
       "category": "정보보안",
       "question": "다음은 악성코드 관련된 문제이다. 아래 내용을 확인하여 보기에 골라 작성하시오.\n\n사용자가 원치 않는 소프트웨어를 구매하도록 조작하기 위해 사회 공학을 사용하여 충격, 불안 또는 위협에 대한 인식을 유발하는 악성 소프트웨어의 한 형태이다.\n\n‘겁을 주다’라는 영어 단어에서 유래한 것으로 공포를 이용하여 피해자를 속여 대가를 지불 하거나 특정 행동을 유도하는 랜섬웨어이다.\n\n가짜 바이러스 경고나 시스템 문제를 표시하여 사용자가 돈을 지불하거나 특정 소프트웨어를 설치하도록 속이는 방식으로 작동한다.",
       "answer": "ㄹ. 스캐어 웨어",
+      "explanation": "가짜 경고로 겁을 주어 결제를 유도하는 악성코드는 스캐어웨어이다.",
       "passage": "보기\n\nㄱ. 컴포넌트 웨어  ㄴ. 유즈웨어  ㄷ. 셔블웨어  ㄹ. 스캐어 웨어  ㅁ. 안티 스파이 웨어  ㅂ. 네트웨어  ㅅ. 그룹웨어  ㅇ. 애드웨어"
     },
     {
@@ -37,6 +41,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "출력1출력5",
+      "explanation": "5를 0으로 나누면 ArithmeticException이라 출력1이 찍힌다. finally는 예외가 나도 실행되므로 출력5가 이어진다.",
       "passage": "public class Main {\n  public static void main(String[] args) {\n    int a=5,b=0;\n    try{\n      System.out.print(a/b);\n    }\n    catch(ArithmeticException e){\n      System.out.print(\"출력1\");\n    }\n    catch(ArrayIndexOutOfBoundsException e) {\n      System.out.print(\"출력2\");\n    }\n    catch(NumberFormatException e) {\n      System.out.print(\"출력3\");\n    }\n    catch(Exception e){\n      System.out.print(\"출력4\");\n    }\n    finally{\n      System.out.print(\"출력5\");\n    }\n  }\n}"
     },
     {
@@ -44,6 +49,7 @@
       "category": "네트워크",
       "question": "아래 내용은 ARP/RARP에 대한 설명이다. 각 설명에 해당하는 것을 작성하시오.",
       "answer": "(1) ARP\n(2) RARP",
+      "explanation": "IP 주소로 MAC 주소를 찾는 프로토콜은 ARP, 반대로 MAC 주소로 IP 주소를 찾는 프로토콜은 RARP이다.",
       "passage": "( 1 ) 은/는 네트워크상에서 IP 주소를 MAC 주소로 변환하는 프로토콜이고,\n\n( 2 ) 은/는 MAC 주소를 IP 주소로 변환하는 프로토콜이다."
     },
     {
@@ -51,6 +57,7 @@
       "category": "SQL",
       "question": "다음은 SQL 문제이다. 아래 두 테이블을 참고하여 보기에 쿼리 실행 결과를 작성하시오.",
       "answer": "name  |  incentives  \n이순신 | 1000",
+      "explanation": "두 테이블은 id가 같은 행만 남고, incentives가 500 이상인 행만 통과한다. 이순신의 1000만 조건에 맞다.",
       "passage": "[보기]\n\nSELECT name, incentive FROM emp, sal WHERE emp.id = sal.id and incentives >= 500\n\n[emp]\nid | name\n1001 | 김철수\n1002 | 홍길동\n1004 | 강감찬\n1008 | 이순신\n\n[sal]\nid | incentives\n1002 | 300\n1004 | 300\n1008 | 1000\n1009 | 500",
       "image": "silgi/2025_01/q07.png"
     },
@@ -59,6 +66,7 @@
       "category": "데이터베이스",
       "question": "아래는 데이터베이스에 관련된 설명이다. 알맞는 용어를 보기에서 골라 괄호를 작성하시오.\n\n1. 릴레이션에서 속성의 개수를 의미 : ( 1 )\n\n2. 릴레이션에서 튜플의 개수를 의미 : ( 2 )\n\n3. 한 릴레이션의 속상이 다른 릴레이션의 기본 키를 참조할 때, 참조하는 속성을 의미 : ( 3 )\n\n4. 특정 속성에 대해 입력될 수 있는 값의 유형이나 범위를 의미하고 무결성을 보장하는 기준 : ( 4 )",
       "answer": "(1) ㄷ\n(2) ㅁ\n(3) ㅅ\n(4) ㄱ",
+      "explanation": "속성의 개수는 차수(degree), 튜플의 개수는 카디널리티이다. 다른 기본키를 가리키는 속성은 외래키, 값이 들어갈 수 있는 범위는 도메인이다.",
       "passage": "[보기]\n\nㄱ. domain   ㄴ. primary   ㄷ. degree    ㄹ. candidate   ㅁ. cardinality   ㅂ. attribute   ㅅ. foreign"
     },
     {
@@ -66,6 +74,7 @@
       "category": "네트워크",
       "question": "IP 주소가 192.168.35.10, 서브넷 255.255.252.0인 PC에서 브로드캐스팅으로 다른 IP로 정보를 전달한다고 할 때 수신할 수 있는 알맞는 IP를 보기에서 골라 모두 작성하시오.",
       "answer": "ㄱ,ㄴ,ㄷ,ㄹ,ㅁ",
+      "explanation": "255.255.252.0은 /22라 네트워크가 192.168.32.0부터 192.168.35.255까지다. 보기의 다섯 주소가 모두 이 범위 안이다.",
       "passage": "[보기]\n\nㄱ. 192.168.34.1 \nㄴ. 192.168.32.19\nㄷ. 192.168.35.200\nㄹ. 192.168.33.138\nㅁ. 192.168.35.50"
     },
     {
@@ -73,6 +82,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "4 \nBACDE",
+      "explanation": "E와 A의 문자 코드 차이는 4이다. C보다 큰 첫 문자는 D라 그 자리에 C가 들어가고, 뒤의 D와 E가 한 칸씩 밀려 BACDE가 된다.",
       "passage": "#include <stdio.h>\nchar Data[5] = {'B', 'A', 'D', 'E'};\nchar c;\nint main(){\n  int i, temp, temp2;\n  c = 'C';\n  printf(\"%d\\n\", Data[3]-Data[1]);\n  for(i=0;i<5;++i){\n    if(Data[i]>c)\n      break;\n  }\n  temp = Data[i];\n  Data[i] = c;\n  i++;\n  for(;i<5;++i){\n    temp2 = Data[i];\n    Data[i] = temp;\n    temp = temp2;\n  }\n  for(i=0;i<5;i++){\n    printf(\"%c\", Data[i]);\n  }\n}"
     },
     {
@@ -80,19 +90,22 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "13",
+      "explanation": "data를 규칙대로 3×3에 채운 뒤, 행 우선으로 읽으며 짝수 인덱스는 더하고 홀수 인덱스는 뺀다. 그 결과가 13이다.",
       "passage": "#include <stdio.h>\n#include <stdlib.h>\nvoid set(int** arr, int* data, int rows, int cols) {\n  for (int i = 0; i < rows * cols; ++i) {\n    arr[((i + 1) / rows) % rows][(i + 1) % cols] = data[i];\n  }\n}\nint main() {\n  int rows = 3, cols = 3, sum = 0;\n  int data[] = {5, 2, 7, 4, 1, 8, 3, 6, 9};\n  int** arr;\n  arr = (int**) malloc(sizeof(int*) * rows);\n  for (int i = 0; i < cols; i++) {\n    arr[i] = (int*) malloc(sizeof(int) * cols);\n  }\n  set(arr, data, rows, cols);\n  for (int i = 0; i < rows * cols; i++) {\n    sum += arr[i / rows][i % cols] * (i % 2 == 0 ? 1 : -1);\n  }\n  for(int i=0; i<rows; i++) {\n    free(arr[i]);\n  }\n  free(arr);\n  printf(\"%d\", sum);\n}"
     },
     {
       "number": 12,
       "category": "소프트웨어 공학",
       "question": "다음은 결합도와 관련된 내용이다. 보기에 알맞는 답을 골라 작성하시오.\n\n(1) 다른 모듈 내부에 있는 변수나 기능을 다른 모듈에서 사용하는 경우의 결합도\n\n(2) 모듈 간의 인터페이스로 배열이나 오브젝트, 자료구조 등이 전달되는 경우의 결합도\n\n(3) 파라미터가 아닌 모듈 밖에 선언되어 있는 전역 변수를 참조하고 전역 변수를 갱신하는 식으로 상호작용하는 경우의 결합도\n\n[보기]\n\nㄱ. 자료 결합도  ㄴ. 스탬프 결합도 ㄷ. 제어 결합도  ㄹ. 공통 결합도  ㅁ. 내용 결합도  ㅂ. 외부 결합도",
-      "answer": "(1) ㅁ \n(2) ㄴ \n(3) ㄹ"
+      "answer": "(1) ㅁ \n(2) ㄴ \n(3) ㄹ",
+      "explanation": "다른 모듈 내부를 직접 건드리면 내용 결합도, 배열이나 구조체 전체를 넘기면 스탬프 결합도, 전역 변수로 주고받으면 공통 결합도이다."
     },
     {
       "number": 13,
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "54",
+      "explanation": "부모 생성자에서 ++v로 total이 2가 된 뒤, 자식이 덮어쓴 show()가 total을 세 배로 만들어 6이 된다. 자식 생성자에서 12를 더해 18이 되고 show()가 다시 세 배로 만들어 54이다.",
       "passage": "public class Main {\n  public static void main(String[] args) {\n    new Child();\n    System.out.println(Parent.total);\n  }\n}\nclass Parent {\n  static int total = 0;\n  int v = 1;\n  public Parent() {\n    total += (++v);\n    show();\n  }\n  public void show() {\n    total += total;\n  }\n}\nclass Child extends Parent {\n  int v = 10;\n  public Child() {\n    v += 2;\n    total += v++;\n    show();\n  }\n  @Override\n  public void show() {\n    total += total * 2;\n  }\n}"
     },
     {
@@ -100,6 +113,7 @@
       "category": "소프트웨어 공학",
       "question": "아래는 디자인 패턴에 대한 설명이다. 알맞는 답을 보기에 골라 작성하시오. \n\n서로 다른 인터페이스를 가진 클래스들을 연결해 사용 가능하게 한다.\n\n기존 클래스(Adaptee)를 원하는 인터페이스(Target)에 맞게 변환하는 어댑터(Adapter)를 만든다.\n\n기존 클래스를 감싸서(wrapper) 인터페이스를 변환해주는 역할을 한다.",
       "answer": "Adapter",
+      "explanation": "기존 클래스의 인터페이스를 호출하는 쪽에 맞게 감싸는 구조 패턴은 어댑터이다.",
       "passage": "생성 | 구조 | 행위\nSingleton | Adapter | Strategy\nFactory Method | Bridge | Template Method\nAbstract Factory | Composite | Observer\nBuilder | Decorator | State\nPrototype | Facade | Command",
       "image": "silgi/2025_01/q14.png"
     },
@@ -108,6 +122,7 @@
       "category": "소프트웨어 공학",
       "question": "문장(Statement) 커버리지 테스트를 수행하려고 한다. 코드를 아래의 제어 흐름도 빈칸에 연결되도록 작성하고 문장 커버리지 순서대로 작성하시오.",
       "answer": "(1) int a = 0\n(2) a < m || b[a] < x\n(3) b[a] < 0\n(4) b[a] = -b[a];\n(5) a++;\n(6) return 1;\n(7) ③ → ④ → ⑤ → ② → ⑥",
+      "explanation": "빈칸은 코드의 선언, while 조건, if 조건, 절댓값 대입, a 증가, return과 같다. 문장 커버리지는 루프 본문 ③④⑤를 한 번 지난 뒤 조건이 거짓이 되어 ⑥으로 나가야 모든 문장을 지난다.",
       "passage": "int Main(int b[], int m, int x) {\n    int a = 0;\n    while (a < m || b[a] < x) {\n        if (b[a] < 0)\n            b[a] = -b[a];\n        a++;\n    }\n    return 1;\n}\n\n[흐름도]\n\n1. (    ①    )    2. (    ②    )    3. (    ③    )    4. (    ④    )    5. (    ⑤    )  6. (    ⑥    )\n\n문장 커버리지 순서 1 → 2  → (          ⑦           )\n\n순서도\n1 → 2(마름모)\n2의 왼쪽 → 6\n2의 아래 → 3(마름모) → 4 → 5\n2의 오른쪽 선은 5 아래에서 올라와 2로 되돌아온다\n3의 왼쪽 선은 5 아래에서 올라와 3으로 되돌아온다",
       "image": "silgi/2025_01/q15.png"
     },
@@ -116,6 +131,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "20",
+      "explanation": "가운데 값 8에, 왼쪽 구간에서 구한 8과 오른쪽 구간에서 구한 12 중 큰 12를 더한다. 8+12는 20이다.",
       "passage": "public class Main {\n  public static void main(String[] args) {\n    int[] data = {3, 5, 8, 12, 17};\n    System.out.println(func(data, 0, data.length - 1));\n  }\n  static int func(int[] a, int st, int end) {\n    if (st >= end)\n      return 0;\n    int mid = (st + end) / 2;\n    return a[mid] + Math.max(func(a, st, mid), func(a, mid + 1, end));\n  }\n}"
     },
     {
@@ -123,6 +139,7 @@
       "category": "Python",
       "question": "다음은 파이썬에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "13",
+      "explanation": "배열은 루트 3 아래 5와 8이 오는 트리로 묶인다. 홀수 레벨만 더하므로 5+8=13이다.",
       "passage": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.children = []\n\ndef tree(li):\n    nodes = [Node(i) for i in li]\n    for i in range(1, len(li)):\n        nodes[(i - 1) // 2].children.append(nodes[i])\n    return nodes[0]\n\ndef calc(node, level=0):\n    if node is None:\n        return 0\n    return (node.value if level % 2 == 1 else 0) + sum(calc(n, level + 1) for n in node.children)\n\nli = [3, 5, 8, 12, 15, 18, 21]\n\nroot = tree(li)\n\nprint(calc(root))"
     },
     {
@@ -130,6 +147,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "35421",
+      "explanation": "1부터 5를 앞에 넣어 5→4→3→2→1이 된다. 값이 3인 노드를 떼어 맨 앞에 붙이면 3→5→4→2→1이라 35421이다.",
       "passage": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Data {\n  int value;\n  struct Data *next;\n}\nData;\nData* insert(Data* head, int value) {\n  Data* new_node = (Data*)malloc(sizeof(Data));\n  new_node->value = value;\n  new_node->next = head;\n  return new_node;\n}\nData* reconnect(Data* head, int value) {\n  if (head == NULL || head->value == value)\n    return head;\n  Data *prev = NULL, *curr = head;\n  while (curr != NULL && curr->value != value) {\n    prev = curr;\n    curr = curr->next;\n  }\n  if (curr != NULL && prev != NULL) {\n    prev->next = curr->next;\n    curr->next = head;\n    head = curr;\n  }\n  return head;\n}\nint main() {\n  Data *head = NULL, *curr;\n  for (int i = 1; i <= 5; i++)\n    head = insert(head, i);\n  head = reconnect(head, 3);\n  for (curr = head; curr != NULL; curr = curr->next)\n    printf(\"%d\", curr->value);\n  return 0;\n}"
     },
     {
@@ -137,6 +155,7 @@
       "category": "C언어",
       "question": "다음은 C언어에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "908",
+      "explanation": "각 점수는 0xA5와 AND한 뒤 더한다. Kim과 Lee가 각각 454이고 합은 908이다.",
       "passage": "#include <stdio.h>\ntypedef struct student {\n  char* name;\n  int score[3];\n}\nStudent;\nint dec(int enc) {\n  return enc & 0xA5;\n}\nint sum(Student* p) {\n  return dec(p->score[0]) + dec(p->score[1]) + dec(p->score[2]);\n}\nint main() {\n  Student s[2] = { \"Kim\", {0xA0, 0xA5, 0xDB}, \"Lee\", {0xA0, 0xED, 0x81} };\n  Student* p = s;\n  int result = 0;\n  for (int i = 0; i < 2; i++) {\n    result += sum(&s[i]);\n  }\n  printf(\"%d\", result);\n  return 0;\n}"
     },
     {
@@ -144,6 +163,7 @@
       "category": "Java",
       "question": "다음은 Java 코드에 대한 문제이다. 아래 코드를 확인하여 알맞는 출력값을 작성하시오.",
       "answer": "4",
+      "explanation": "문자열 5는 calc(int) 두 번으로 이어진다. calc(4)는 3, calc(2)는 1이라 합은 4이다. 인자가 있는 쪽이 아니라 정수 재귀가 호출된다.",
       "passage": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(calc(\"5\"));\n  }\n  static int calc(int value) {\n    if (value <= 1)\n      return value;\n    return calc(value - 1) + calc(value - 2);\n  }\n  static int calc(String str) {\n    int value = Integer.valueOf(str);\n    if (value <= 1)\n      return value;\n    return calc(value - 1) + calc(value - 3);\n  }\n}"
     }
   ]
