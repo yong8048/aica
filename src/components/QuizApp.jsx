@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "../styles/app.css";
 import HomeScreen from "./HomeScreen.jsx";
 import JeongcheogiHomeScreen from "./JeongcheogiHomeScreen.jsx";
+import AppliedSwStudy from "./AppliedSwStudy.jsx";
 import GofStudy from "./GofStudy.jsx";
 import LanguageStudy from "./LanguageStudy.jsx";
 import SoftwareTestingStudy from "./SoftwareTestingStudy.jsx";
@@ -726,6 +727,10 @@ export default function QuizApp() {
     return <LanguageStudy onBack={goHome} />;
   }
 
+  if (view === "applied") {
+    return <AppliedSwStudy onBack={goHome} />;
+  }
+
   if (view === "home") {
     return (
       <div className="layout layout-home">
@@ -790,6 +795,7 @@ export default function QuizApp() {
               onOpenGof={() => setView("gof")}
               onOpenTesting={() => setView("testing")}
               onOpenLanguage={() => setView("language")}
+              onOpenApplied={() => setView("applied")}
             />
           )}
           {!loading && examMode === "aica" && (

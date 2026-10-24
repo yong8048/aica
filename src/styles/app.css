@@ -1658,6 +1658,30 @@
   font-weight: 800;
 }
 
+.study-memory p {
+  margin: 0;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.applied-table-wrap {
+  margin-top: 0.7rem;
+}
+
+.applied-table-wrap .gof-table {
+  min-width: 48rem;
+}
+
+.applied-table-wrap .gof-table th,
+.applied-table-wrap .gof-table td {
+  min-width: 7.5rem;
+}
+
+.applied-table-wrap .gof-pattern {
+  width: auto;
+  white-space: nowrap;
+}
+
 .study-caution {
   padding-left: 0.65rem;
   border-left: 2px solid var(--muted);
